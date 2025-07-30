@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkjf56v3yfohb"]
+
+[ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://ball.png" id="1_1odxm"]
+[ext_resource type="Script" uid="uid://b3744nngua0ne" path="res://planet.gd" id="1_a75xc"]
+[ext_resource type="Script" uid="uid://c05xnwc01yac0" path="res://gravity_area.gd" id="2_mtr83"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a75xc"]
+friction = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aqk2v"]
+radius = 158.11388
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1odxm"]
+radius = 482.00415
+
+[node name="Planet" type="AnimatableBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_a75xc")
+script = ExtResource("1_a75xc")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_1odxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_aqk2v")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_mtr83")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1odxm")
+debug_color = Color(0.5647059, 0.56078434, 0, 0.12941177)
