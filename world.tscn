@@ -1,50 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://debprahfmmn1a"]
+[gd_scene load_steps=3 format=3 uid="uid://debprahfmmn1a"]
 
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://planet.tscn" id="1_fj7yv"]
-[ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://player.gd" id="2_tlwt5"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
-friction = 0.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fj7yv"]
-size = Vector2(38, 26)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_tlwt5"]
-radius = 19.026299
+[ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://player.tscn" id="2_fj7yv"]
 
 [node name="World" type="Node2D"]
 
-[node name="Planet" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
-position = Vector2(243, 421)
+[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
+position = Vector2(727, 574)
+scale = Vector2(0.48, 0.48)
 orbit_enabled = true
 orbit_planet = NodePath("../Planet2")
 
-[node name="Planet2" parent="." instance=ExtResource("1_fj7yv")]
-position = Vector2(944, 236)
-orbit_speed = 2.0
+[node name="Planet" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
+position = Vector2(122, 414)
+orbit_enabled = true
+orbit_planet = NodePath("../Planet4")
+orbit_speed = 0.001
 
-[node name="Player" type="RigidBody2D" parent="."]
-position = Vector2(634, 125)
-physics_material_override = SubResource("PhysicsMaterial_fj7yv")
-gravity_scale = 0.0
-lock_rotation = true
-script = ExtResource("2_tlwt5")
+[node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
+position = Vector2(1028, 603)
+orbit_enabled = true
+orbit_planet = NodePath("../Planet4")
+orbit_speed = 0.001
 
-[node name="Polygon2D" type="Polygon2D" parent="Player"]
-position = Vector2(-2, 16)
-polygon = PackedVector2Array(-21, 0, 28, 0, 15, -34, 3, -42, -13, -32)
+[node name="Planet4" parent="." instance=ExtResource("1_fj7yv")]
+position = Vector2(798, 1674)
+scale = Vector2(4.23341, 4.23341)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_fj7yv")
-
-[node name="Area2D" type="Area2D" parent="Player"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
-shape = SubResource("CircleShape2D_tlwt5")
-debug_color = Color(0.47843137, 0.5882354, 0, 0.30588236)
-
-[node name="RayCast2D" type="RayCast2D" parent="Player"]
-target_position = Vector2(0, 17)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Player" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(1290, 341)
