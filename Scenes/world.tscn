@@ -42,20 +42,20 @@ position = Vector2(896, 512)
 scale = Vector2(2, 2)
 texture = ExtResource("9_0fj1v")
 
-[node name="Planet3" parent="." instance=ExtResource("1_fj7yv")]
-position = Vector2(727, 574)
+[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
+position = Vector2(3055, -696)
 scale = Vector2(0.48, 0.48)
+orbit_enabled = true
+orbit_planet = NodePath("../Planet")
 
-[node name="PackageDepot" parent="Planet3" instance=ExtResource("2_fo5ed")]
-position = Vector2(1141.67, 1183.33)
-rotation = 0.785398
-scale = Vector2(2.08333, 2.08333)
-
-[node name="Planet" parent="." instance=ExtResource("1_fj7yv")]
-position = Vector2(122, 414)
+[node name="Planet" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
+position = Vector2(3524, -531)
+orbit_enabled = true
+orbit_planet = NodePath("../Planet4")
+orbit_speed = 0.004
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
-position = Vector2(1938, 485)
+position = Vector2(2108, 497)
 orbit_enabled = true
 orbit_planet = NodePath("../Planet4")
 
@@ -63,6 +63,11 @@ orbit_planet = NodePath("../Planet4")
 position = Vector2(798, 1674)
 scale = Vector2(4.23341, 4.23341)
 refills_fuel = true
+
+[node name="PackageDepot" parent="Planet4" instance=ExtResource("2_fo5ed")]
+position = Vector2(112.675, -125.667)
+rotation = 0.785398
+scale = Vector2(0.236216, 0.236216)
 
 [node name="Player" parent="." instance=ExtResource("2_fj7yv")]
 position = Vector2(798, 956)
@@ -75,18 +80,18 @@ position = Vector2(211, 1213)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="FuelBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 616.0
-offset_top = 16.0
-offset_right = 1121.0
-offset_bottom = 78.0
+offset_left = 659.0
+offset_top = 867.0
+offset_right = 1164.0
+offset_bottom = 929.0
 show_percentage = false
 
 [node name="Minimap" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("6_o06y3")]
-position = Vector2(1039, 86)
+position = Vector2(1641, 89)
 player = NodePath("../../Player")
 
 [node name="DialogBox" parent="CanvasLayer" instance=ExtResource("8_k7acu")]
-position = Vector2(578, 86)
+position = Vector2(935, 99)
 
 [node name="Packages" type="Node2D" parent="."]
 
@@ -102,4 +107,5 @@ position = Vector2(1983, 983)
 path_line = NodePath("../Line2D")
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(1910, 993, 1565, 772, 1068, 603, 879, 477, 580, 465, 429, 577, 262, 768, 71, 954, -17, 1147, -66, 1447, -94, 1810, 259, 2427, 680, 2646, 1230, 2549, 1601, 2163, 1734, 1827, 1756, 1349, 1743, 1169, 1824, 1053)
+visible = false
+points = PackedVector2Array(1910, 863, 1781, 620, 1791, 462, 1785, 308, 1723, 201, 1599, 143, 1463, 177, 1310, 292, 1101, 458, 853, 526, 600, 600, 420, 709, 188, 1028, 70, 1309, 13, 1514, -43, 1654, -167, 1743, -423, 1910, -604, 2177, -680, 2375, -658, 2477, -460, 2523, -210, 2534, 216, 2519, 668, 2469, 991, 2462, 1420, 2428, 1735, 2169, 1989, 2033, 2236, 1934, 2351, 1828, 2493, 1635, 2475, 1493, 2305, 1378, 2135, 1286)
