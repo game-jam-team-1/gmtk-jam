@@ -21,7 +21,7 @@ scale = Vector2(2.08333, 2.08333)
 position = Vector2(122, 414)
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
-position = Vector2(1028, 603)
+position = Vector2(1938, 485)
 orbit_enabled = true
 orbit_planet = NodePath("../Planet4")
 
