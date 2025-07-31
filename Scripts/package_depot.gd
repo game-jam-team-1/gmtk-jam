@@ -1,0 +1,2 @@
+class_name PackageDepot
+extends AnimatableBody2D

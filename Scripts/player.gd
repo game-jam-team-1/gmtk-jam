@@ -3,16 +3,14 @@ extends RigidBody2D
 
 const JUMP_FORCE: float = 1000
 const HIGH_JUMP_FORCE: float = 2000
-const JUST_JUMP_GRACE_PERIOD = 0.15
+const JUST_JUMP_GRACE_PERIOD: float = 0.15
 
 const WALK_SPEED: float = 300
-
 const THRUSTER_FORCE: float = 40
 const THRUSTER_MAX_VELOCITY: float = 500
 
 var target_gravity_velocity: Vector2 = Vector2.ZERO
 var gravity_velocity: Vector2 = Vector2.ZERO
-
 var strafe_velocity: Vector2 = Vector2.ZERO
 var jump_velocity: Vector2 = Vector2.ZERO
 var thruster_velocity: Vector2 = Vector2.ZERO
@@ -20,15 +18,21 @@ var thruster_velocity: Vector2 = Vector2.ZERO
 var closest_gravity_area: GravityArea
 
 var just_jumped: bool = false
+
 var just_jumped_time: float = 0.0
 
+var collected_packages: int = 0
+var deposited_packages: int = 0
 
-@onready var gravity_detection_area: Area2D = $"Area2D"
+@onready var gravity_detection_area: Area2D = $"GravityDetectionArea"
+@onready var large_detection_area: Area2D = $"LargeDetectionArea"
+
 @onready var ground_raycast: RayCast2D = $"RayCast2D"
 
 
 func _physics_process(delta: float) -> void:
 	_process_gravity_area()
+	_process_packages()
 	
 	# Count down the jump buffer
 	if just_jumped_time > 0:
@@ -104,14 +108,52 @@ func _process_gravity_area() -> void:
 	if closest_gravity_area != null:
 		current_gravity_dist = global_position.distance_to(closest_gravity_area.global_position)
 	
+	var detected_area: bool = false
 	for area in areas:
 		if area is not GravityArea:
-			return
+			continue
+		
+		detected_area = true
 		
 		area = area as GravityArea
 		
 		if area.global_position.distance_to(global_position) < current_gravity_dist:
 			closest_gravity_area = area
+	
+	if !detected_area:
+		closest_gravity_area = null
+
+
+func _process_packages() -> void:
+	var closest_package: Package
+	var package_depot: PackageDepot
+	for area in large_detection_area.get_overlapping_areas():
+		if area.name == "PackageArea" && !closest_package:
+			closest_package = area.get_parent()
+		if area.name == "PackageDepotArea":
+			package_depot = area.get_parent()
+	
+	if Input.is_action_just_pressed("interact") && package_depot:
+		collected_packages = 0
+		
+	$OnePackage.visible = false
+	$TwoPackages.visible = false
+	$ThreePackages.visible = false
+	
+	if collected_packages == 1:
+		$OnePackage.visible = true
+	if collected_packages == 2:
+		$TwoPackages.visible = true
+	if collected_packages == 3:
+		$ThreePackages.visible = true
+	
+	if !closest_package:
+		return
+	
+	if Input.is_action_just_pressed("interact") && collected_packages < 3:
+		collected_packages += 1
+		closest_package.queue_free()
+		print("Collected Package -- New count: " + str(collected_packages))
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:

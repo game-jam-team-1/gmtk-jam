@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3ef480rpsots"]
+
+[ext_resource type="Script" uid="uid://qxp202mrxxit" path="res://Scripts/package_depot.gd" id="1_05x3l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05x3l"]
+size = Vector2(429, 157)
+
+[node name="PackageDepot" type="AnimatableBody2D"]
+script = ExtResource("1_05x3l")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.61339, 0.61339, 0.61339, 1)
+polygon = PackedVector2Array(0, 81, 248, 81, 240, -166, 141, -58, -95, -58, -191, -159, -196, 78)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 81, 248, 81, 240, -166, 141, -58, -95, -58, -191, -159, -196, 78)
+
+[node name="PackageDepotArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PackageDepotArea"]
+position = Vector2(23.5, -68.5)
+shape = SubResource("RectangleShape2D_05x3l")
