@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg1gbjos1jh51"]
+
+[ext_resource type="Script" uid="uid://bx8brxggoonli" path="res://Scripts/minimap.gd" id="1_tkls4"]
+
+[node name="Minimap" type="Node2D"]
+script = ExtResource("1_tkls4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+color = Color(0.70377, 0.343599, 0.416056, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -65.0
+offset_top = -65.0
+offset_right = 65.0
+offset_bottom = 65.0
+color = Color(0.385316, 0.161456, 0.208834, 1)

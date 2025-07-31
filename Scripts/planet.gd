@@ -6,6 +6,8 @@ extends AnimatableBody2D
 @export var orbit_planet: Planet
 @export var orbit_speed: float = 0.01
 
+@onready var radius = $CollisionShape2D.shape.radius * scale.x
+
 
 var previous_position: Vector2
 
