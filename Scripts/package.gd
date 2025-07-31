@@ -8,12 +8,12 @@ extends RigidBody2D
 
 @onready var animation: AnimationPlayer = $"AnimationPlayer"
 
-@onready var world: World = get_parent().get_parent()
+#@onready var world: World = get_parent().get_parent()
 
 func _ready() -> void:
 	visible = false
 	$CollisionShape2D.disabled = true
-	world.new_round.connect(_new_round)
+	#world.new_round.connect(_new_round)
 
 func _physics_process(delta: float) -> void:
 	if !visible:

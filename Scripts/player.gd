@@ -14,8 +14,16 @@ var sending_packages_to_depot: bool = false
 @onready var gravity_detection_area: Area2D = $"GravityDetectionArea"
 @onready var large_detection_area: Area2D = $"LargeDetectionArea"
 
+@onready var ground_raycast: RayCast2D = $"RayCast2D"
+@onready var fuel_bar: ProgressBar = $"../CanvasLayer/FuelBar"
+
 @onready var player_movement: PlayerMovement = $"PlayerMovement"
 @onready var player_animation: PlayerAnimation = $"PlayerAnimation"
+
+
+func _ready() -> void:
+	Global.Player = self
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -29,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	
 	for body in get_colliding_bodies():
 		if body.has_method("kills_on_collision"):
-			queue_free()
+			die()
 
 
 func _process_packages() -> void:
@@ -100,4 +108,4 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 
 func die():
-	queue_free()
+	print("you died")
