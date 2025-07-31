@@ -165,6 +165,7 @@ func _process_packages() -> void:
 		sending_packages_to_depot = true
 		sending_package_depot = package_depot
 		collected_packages = 0
+		get_parent().package_collected()
 		
 	$OnePackage.visible = false
 	$TwoPackages.visible = false
@@ -196,7 +197,8 @@ func _setup_send_package_to_depot_animation() -> void:
 		icon_node = $ThreePackages
 	for node in icon_node.get_children():
 		var duplicated = node.duplicate()
-		add_child(duplicated)
+		get_parent().add_child(duplicated)
+		duplicated.global_position = node.global_position
 		duplicated_balls.append(duplicated)
 
 func _process_package_animations() -> void:
