@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://debprahfmmn1a"]
+[gd_scene load_steps=8 format=3 uid="uid://debprahfmmn1a"]
 
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="1_fj7yv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c3ef480rpsots" path="res://Scenes/package_depot.tscn" id="2_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://60gkfls6gjjg" path="res://Scenes/crawler_enemy.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="4_8j60k"]
+[ext_resource type="PackedScene" uid="uid://dg1gbjos1jh51" path="res://Scenes/minimap.tscn" id="6_o06y3"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_5ukr8")
@@ -50,6 +51,10 @@ offset_top = 16.0
 offset_right = 1121.0
 offset_bottom = 78.0
 show_percentage = false
+
+[node name="Minimap" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("6_o06y3")]
+position = Vector2(1039, 86)
+player = NodePath("../../Player")
 
 [node name="Packages" type="Node2D" parent="."]
 
