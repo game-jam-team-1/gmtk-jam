@@ -2,6 +2,7 @@ class_name Planet
 extends AnimatableBody2D
 
 @export var orbit_enabled: bool = false
+@export var refills_fuel: bool = false
 @export var orbit_planet: Planet
 @export var orbit_speed: float = 0.01
 

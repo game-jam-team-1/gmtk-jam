@@ -70,3 +70,6 @@ func flip():
 	clockwise = !clockwise
 	direction = -direction
 	scale.x = -scale.x
+
+func kills_on_collision() -> bool:
+	return true
