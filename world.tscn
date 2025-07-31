@@ -1,31 +1,25 @@
 [gd_scene load_steps=3 format=3 uid="uid://debprahfmmn1a"]
 
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://planet.tscn" id="1_fj7yv"]
-[ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://player.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="2_fj7yv"]
 
 [node name="World" type="Node2D"]
 
-[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
+[node name="Planet3" parent="." instance=ExtResource("1_fj7yv")]
 position = Vector2(727, 574)
 scale = Vector2(0.48, 0.48)
-orbit_enabled = true
-orbit_planet = NodePath("../Planet2")
 
-[node name="Planet" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
+[node name="Planet" parent="." instance=ExtResource("1_fj7yv")]
 position = Vector2(122, 414)
-orbit_enabled = true
-orbit_planet = NodePath("../Planet4")
-orbit_speed = 0.001
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
 position = Vector2(1028, 603)
 orbit_enabled = true
 orbit_planet = NodePath("../Planet4")
-orbit_speed = 0.001
 
 [node name="Planet4" parent="." instance=ExtResource("1_fj7yv")]
 position = Vector2(798, 1674)
 scale = Vector2(4.23341, 4.23341)
 
 [node name="Player" parent="." instance=ExtResource("2_fj7yv")]
-position = Vector2(1290, 341)
+position = Vector2(798, 956)
