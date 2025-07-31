@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://djxxe8osn1t8a"]
+
+[ext_resource type="Script" uid="uid://dquu1nsh7febk" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_06t4h")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 460.0
+offset_top = 156.0
+offset_right = 695.0
+offset_bottom = 225.0
+theme_override_font_sizes/font_size = 50
+text = "Title Here"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 508.0
+offset_top = 222.0
+offset_right = 743.0
+offset_bottom = 291.0
+theme_override_font_sizes/font_size = 20
+text = "Click To Start"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 1158.0
+offset_bottom = 649.0
+
+[connection signal="button_up" from="TextureButton" to="." method="_on_texture_button_button_up"]
