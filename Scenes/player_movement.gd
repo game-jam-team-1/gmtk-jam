@@ -32,7 +32,9 @@ var just_jumped_time: float = 0.0
 
 var is_grounded_movement: bool = false
 var grounded_movement_dir: int = 0
+
 var is_thruster_movement: bool = false
+var is_thruster_on: bool = false
 
 @onready var gravity_detection_area: Area2D = $"GravityDetectionArea"
 
@@ -118,6 +120,8 @@ func _process_thruster_movement(delta: float) -> void:
 	var angle_to_mouse: float = global_position.angle_to_point(get_global_mouse_position())
 	player.rotation = angle_to_mouse + PI/2
 	
+	is_thruster_on = false
+	
 	if thruster_fuel <= 0:
 		return
 	
@@ -127,9 +131,9 @@ func _process_thruster_movement(delta: float) -> void:
 		thruster_fuel -= USAGE_RATE * delta * 5
 		
 	elif Input.is_action_pressed("jump"):
+		is_thruster_on = true
 		thruster_velocity += Vector2.from_angle(angle_to_mouse) * THRUSTER_FORCE
 		thruster_fuel -= USAGE_RATE * delta
-		
 	
 	if thruster_velocity.length() > THRUSTER_MAX_VELOCITY:
 		thruster_velocity = thruster_velocity.normalized() * THRUSTER_MAX_VELOCITY

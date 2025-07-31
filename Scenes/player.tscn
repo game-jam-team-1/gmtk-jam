@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdxanxha8yc48"]
+[gd_scene load_steps=26 format=3 uid="uid://cdxanxha8yc48"]
 
 [ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Scripts/ball.png" id="2_cvnsp"]
@@ -23,6 +23,10 @@ region = Rect2(3520, 0, 320, 736)
 [sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
 atlas = ExtResource("3_6t5aa")
 region = Rect2(3200, 0, 320, 736)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(1600, 0, 320, 736)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
 atlas = ExtResource("3_6t5aa")
@@ -86,10 +90,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_igrcy")
+}],
+"loop": true,
+"name": &"idle_fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qqcod")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"idle_grounded",
 "speed": 5.0
 }, {
 "frames": [{
@@ -188,7 +200,7 @@ script = ExtResource("3_x3wgy")
 position = Vector2(0, 61)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_qqcod")
-animation = &"idle"
+animation = &"idle_fly"
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -205,7 +217,7 @@ shape = SubResource("CircleShape2D_v0iea")
 debug_color = Color(0.840643, 0.364583, 0.318232, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.3, 0.3)
+zoom = Vector2(0.5, 0.5)
 
 [node name="OnePackage" type="Node2D" parent="."]
 visible = false
