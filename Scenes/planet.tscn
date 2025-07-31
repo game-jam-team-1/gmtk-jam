@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dkjf56v3yfohb"]
 
-[ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://ball.png" id="1_1odxm"]
-[ext_resource type="Script" uid="uid://b3744nngua0ne" path="res://planet.gd" id="1_a75xc"]
-[ext_resource type="Script" uid="uid://c05xnwc01yac0" path="res://gravity_area.gd" id="2_mtr83"]
+[ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Scripts/ball.png" id="1_1odxm"]
+[ext_resource type="Script" uid="uid://b3744nngua0ne" path="res://Scripts/planet.gd" id="1_a75xc"]
+[ext_resource type="Script" uid="uid://c05xnwc01yac0" path="res://Scripts/gravity_area.gd" id="2_mtr83"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a75xc"]
 friction = 0.0
