@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cso8oa456wo88"]
 
-[ext_resource type="Script" uid="uid://tut3xa1jfd13" path="res://Scenes/dialog_box.gd" id="1_twcdb"]
+[ext_resource type="Script" uid="uid://tut3xa1jfd13" path="res://Scripts/dialog_box.gd" id="1_twcdb"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sqs0f"]
 

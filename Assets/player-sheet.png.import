@@ -2,24 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbbwu08nxhti0"
-path="res://.godot/imported/space-background-stars.png-75e29bc3d51ae146510d0b65f4477fa9.ctex"
+uid="uid://bs0nmcq3yreug"
+path="res://.godot/imported/player-sheet.png-69c5fdbd4f7e0a2d9d3ed12d4ae2838a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/space-background-stars.png"
-dest_files=["res://.godot/imported/space-background-stars.png-75e29bc3d51ae146510d0b65f4477fa9.ctex"]
+source_file="res://Assets/player-sheet.png"
+dest_files=["res://.godot/imported/player-sheet.png-69c5fdbd4f7e0a2d9d3ed12d4ae2838a.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
-compress/uastc_level=0
-compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -27,10 +25,6 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/channel_remap/red=0
-process/channel_remap/green=1
-process/channel_remap/blue=2
-process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
