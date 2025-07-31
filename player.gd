@@ -1,70 +1,130 @@
 class_name Player
 extends RigidBody2D
 
-const JUMP_VEL: float = 600
-const LONG_JUMP_VEL: float = 1000
-const BOOSTER_VEL: float = 700
-const ACCEL: float = 300
+const JUMP_FORCE: float = 1000
+const HIGH_JUMP_FORCE: float = 2000
+const JUST_JUMP_GRACE_PERIOD = 0.15
 
-@onready var just_jumped_timer: SceneTreeTimer = get_tree().create_timer(0)
+const WALK_SPEED: float = 300
+
+const THRUSTER_FORCE: float = 40
+const THRUSTER_MAX_VELOCITY: float = 500
+
+var target_gravity_velocity: Vector2 = Vector2.ZERO
+var gravity_velocity: Vector2 = Vector2.ZERO
+
+var strafe_velocity: Vector2 = Vector2.ZERO
+var jump_velocity: Vector2 = Vector2.ZERO
+var thruster_velocity: Vector2 = Vector2.ZERO
+
+var closest_gravity_area: GravityArea
+
+var just_jumped: bool = false
+var just_jumped_time: float = 0.0
+
 
 @onready var gravity_detection_area: Area2D = $"Area2D"
 @onready var ground_raycast: RayCast2D = $"RayCast2D"
 
-var jump_velocity: Vector2
-var strafe_velocity: Vector2
-var closest_area: GravityArea
 
 func _physics_process(delta: float) -> void:
-	var areas = gravity_detection_area.get_overlapping_areas()
-	var up_direction: Vector2
+	_process_gravity_area()
 	
-	var closest_distance: float = INF
+	# Count down the jump buffer
+	if just_jumped_time > 0:
+		just_jumped_time -= delta
+	else:
+		just_jumped = false
 	
-	var has_gravity_area = false
-	for area in areas:
-		if area is GravityArea:
-			has_gravity_area = true
-			area = area as GravityArea
-			rotation = (global_position - area.global_position).angle() + PI / 2.0
-			jump_velocity += (area.global_position - global_position).normalized() * area.accel
-			up_direction = (global_position - area.global_position).normalized()
-			
-			if area.position.distance_to(position) < closest_distance:
-				closest_area = area
-	
-	if _is_on_ground() && just_jumped_timer.time_left == 0:
+	if closest_gravity_area:
+		_process_grounded_movement()
+		thruster_velocity = Vector2.ZERO
+	else:
+		_process_thruster_movement()
+		strafe_velocity = Vector2.ZERO
 		jump_velocity = Vector2.ZERO
+		target_gravity_velocity = Vector2.ZERO
+		gravity_velocity = Vector2.ZERO
+
+
+func _process_grounded_movement() -> void:
+	var planet_center: Vector2 = closest_gravity_area.global_position
 	
-	if Input.is_action_just_pressed("long_jump") && _is_on_ground():
-		just_jumped_timer = get_tree().create_timer(0.1)
-		jump_velocity = up_direction * LONG_JUMP_VEL
-	elif Input.is_action_just_pressed("jump") && _is_on_ground():
-		just_jumped_timer = get_tree().create_timer(0.1)
-		jump_velocity = up_direction * JUMP_VEL
+	var upwards_angle: float = planet_center.angle_to_point(global_position)
 	
-	var direction: float = 0.0
+	rotation = upwards_angle + PI/2
+	
+	if is_on_ground():
+		target_gravity_velocity = Vector2.ZERO
+		gravity_velocity = target_gravity_velocity
+		
+		jump_velocity = Vector2.ZERO
+		
+		if Input.is_action_just_pressed("high_jump"):
+			just_jumped = true
+			just_jumped_time = JUST_JUMP_GRACE_PERIOD
+			
+			jump_velocity = Vector2.from_angle(upwards_angle) * HIGH_JUMP_FORCE
+			
+		elif Input.is_action_just_pressed("jump"):
+			just_jumped = true
+			just_jumped_time = JUST_JUMP_GRACE_PERIOD
+			
+			jump_velocity = Vector2.from_angle(upwards_angle) * JUMP_FORCE
+	else:
+		target_gravity_velocity += Vector2.from_angle(upwards_angle + PI) * closest_gravity_area.accel
+		gravity_velocity = target_gravity_velocity
+	
+	strafe_velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("left"):
-		direction += 1
+		strafe_velocity -= Vector2.from_angle(upwards_angle + PI/2) * WALK_SPEED
 	if Input.is_action_pressed("right"):
-		direction -= 1
+		strafe_velocity += Vector2.from_angle(upwards_angle + PI/2) * WALK_SPEED
+
+
+func _process_thruster_movement() -> void:
+	var angle_to_mouse: float = global_position.angle_to_point(get_global_mouse_position())
+	rotation = angle_to_mouse + PI/2
 	
-	if direction != 0:
-		strafe_velocity = up_direction.rotated(-90 * direction) * ACCEL
-	else:
-		strafe_velocity = Vector2(0,0)
+	if Input.is_action_pressed("jump"):
+		thruster_velocity += Vector2.from_angle(angle_to_mouse) * THRUSTER_FORCE
 	
-	if !has_gravity_area:
-		rotation -= 3 * direction * delta
-		if Input.is_action_pressed("jump"):
-			jump_velocity = Vector2.from_angle(rotation-PI/2) * BOOSTER_VEL
+	if thruster_velocity.length() > THRUSTER_MAX_VELOCITY:
+		thruster_velocity = thruster_velocity.normalized() * THRUSTER_MAX_VELOCITY
+
+
+func _process_gravity_area() -> void:
+	var areas = gravity_detection_area.get_overlapping_areas()
+	
+	if areas.size() == 0:
+		closest_gravity_area = null
+	
+	var current_gravity_dist: float = 9999999
+	if closest_gravity_area != null:
+		current_gravity_dist = global_position.distance_to(closest_gravity_area.global_position)
+	
+	for area in areas:
+		if area is not GravityArea:
+			return
+		
+		area = area as GravityArea
+		
+		if area.global_position.distance_to(global_position) < current_gravity_dist:
+			closest_gravity_area = area
+
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO
-	if closest_area:
-		planet_velocity = (closest_area.get_parent() as Planet).constant_linear_velocity * 60
-	linear_velocity = jump_velocity + strafe_velocity + planet_velocity
+	
+	if closest_gravity_area:
+		planet_velocity = (closest_gravity_area.get_parent() as Planet).velocity
+	
+	linear_velocity = gravity_velocity + strafe_velocity + jump_velocity + thruster_velocity + planet_velocity
 
-func _is_on_ground() -> bool:
+
+func is_on_ground() -> bool:
+	if just_jumped:
+		return false
+	
 	return ground_raycast.is_colliding()
