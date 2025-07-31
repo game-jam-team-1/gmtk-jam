@@ -4,7 +4,6 @@ extends RigidBody2D
 const JUMP_FORCE: float = 1000
 const HIGH_JUMP_FORCE: float = 2000
 const JUST_JUMP_GRACE_PERIOD: float = 0.15
-
 const WALK_SPEED: float = 300
 const THRUSTER_FORCE: float = 40
 const THRUSTER_MAX_VELOCITY: float = 500
@@ -23,11 +22,16 @@ var thruster_fuel: float = 100.0
 var closest_gravity_area: GravityArea
 
 var just_jumped: bool = false
+var sending_packages_to_depot: bool = false
 
 var just_jumped_time: float = 0.0
 
 var collected_packages: int = 0
 var deposited_packages: int = 0
+
+var duplicated_balls: Array
+
+var sending_package_depot: PackageDepot
 
 @onready var gravity_detection_area: Area2D = $"GravityDetectionArea"
 @onready var large_detection_area: Area2D = $"LargeDetectionArea"
@@ -146,6 +150,8 @@ func _process_gravity_area() -> void:
 
 
 func _process_packages() -> void:
+	_process_package_animations()
+	
 	var closest_package: Package
 	var package_depot: PackageDepot
 	for area in large_detection_area.get_overlapping_areas():
@@ -155,6 +161,9 @@ func _process_packages() -> void:
 			package_depot = area.get_parent()
 	
 	if Input.is_action_just_pressed("interact") && package_depot:
+		_setup_send_package_to_depot_animation()
+		sending_packages_to_depot = true
+		sending_package_depot = package_depot
 		collected_packages = 0
 		
 	$OnePackage.visible = false
@@ -173,9 +182,27 @@ func _process_packages() -> void:
 	
 	if Input.is_action_just_pressed("interact") && collected_packages < 3:
 		collected_packages += 1
-		closest_package.queue_free()
+		closest_package.get_grabbed()
 		print("Collected Package -- New count: " + str(collected_packages))
 
+
+func _setup_send_package_to_depot_animation() -> void:
+	var icon_node: Node2D
+	if collected_packages == 1:
+		icon_node = $OnePackage
+	if collected_packages == 2:
+		icon_node = $TwoPackages
+	if collected_packages == 3:
+		icon_node = $ThreePackages
+	for node in icon_node.get_children():
+		var duplicated = node.duplicate()
+		add_child(duplicated)
+		duplicated_balls.append(duplicated)
+
+func _process_package_animations() -> void:
+	if sending_packages_to_depot:
+		for ball: Node2D in duplicated_balls:
+			ball.global_position = lerp(ball.global_position, sending_package_depot.global_position, 0.01)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO
@@ -191,6 +218,7 @@ func is_on_ground() -> bool:
 		return false
 	
 	return ground_raycast.is_colliding()
+
 
 func die():
 	queue_free()
