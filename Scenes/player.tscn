@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Scripts/ball.png" id="2_cvnsp"]
-[ext_resource type="Script" uid="uid://bub0fyvm5xhx4" path="res://Scenes/player_movement.gd" id="2_fkybt"]
+[ext_resource type="Script" path="res://Scenes/player_movement.gd" id="2_fkybt"]
 [ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://player-sheet.png" id="3_6t5aa"]
-[ext_resource type="Script" uid="uid://kxqmkedf0r42" path="res://Scenes/player_animation.gd" id="3_x3wgy"]
+[ext_resource type="Script" path="res://Scenes/player_animation.gd" id="3_x3wgy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
 friction = 0.0
@@ -142,7 +142,7 @@ animations = [{
 size = Vector2(83, 140)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0iea"]
-radius = 126.01587
+radius = 126.016
 
 [node name="Player" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_fj7yv")
@@ -206,10 +206,12 @@ debug_color = Color(0.840643, 0.364583, 0.318232, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.3, 0.3)
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 2.0
 
 [node name="OnePackage" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, -3)
+position = Vector2(0, -43)
+scale = Vector2(2.365, 2.365)
 
 [node name="Ball" type="Sprite2D" parent="OnePackage"]
 position = Vector2(1, -34)
@@ -217,8 +219,8 @@ scale = Vector2(0.04375, 0.04375)
 texture = ExtResource("2_cvnsp")
 
 [node name="TwoPackages" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, -3)
+position = Vector2(0, -43)
+scale = Vector2(2.365, 2.365)
 
 [node name="Ball2" type="Sprite2D" parent="TwoPackages"]
 position = Vector2(10, -34)
@@ -231,8 +233,8 @@ scale = Vector2(0.04375, 0.04375)
 texture = ExtResource("2_cvnsp")
 
 [node name="ThreePackages" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, -3)
+position = Vector2(0, -43)
+scale = Vector2(2.365, 2.365)
 
 [node name="Ball2" type="Sprite2D" parent="ThreePackages"]
 position = Vector2(19, -34)

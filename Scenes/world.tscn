@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://debprahfmmn1a"]
+[gd_scene load_steps=9 format=3 uid="uid://debprahfmmn1a"]
 
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="1_fj7yv"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://60gkfls6gjjg" path="res://Scenes/crawler_enemy.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="4_8j60k"]
 [ext_resource type="PackedScene" uid="uid://dg1gbjos1jh51" path="res://Scenes/minimap.tscn" id="6_o06y3"]
+[ext_resource type="PackedScene" uid="uid://cso8oa456wo88" path="res://Scenes/dialog_box.tscn" id="8_k7acu"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_5ukr8")
@@ -55,6 +56,9 @@ show_percentage = false
 [node name="Minimap" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("6_o06y3")]
 position = Vector2(1039, 86)
 player = NodePath("../../Player")
+
+[node name="DialogBox" parent="CanvasLayer" instance=ExtResource("8_k7acu")]
+position = Vector2(578, 86)
 
 [node name="Packages" type="Node2D" parent="."]
 
