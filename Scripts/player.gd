@@ -9,6 +9,9 @@ const WALK_SPEED: float = 300
 
 const THRUSTER_FORCE: float = 40
 const THRUSTER_MAX_VELOCITY: float = 500
+const THRUSTER_MAX_FUEL: float = 100
+const REFUEL_RATE: float = 10
+const USAGE_RATE: float = 10
 
 var target_gravity_velocity: Vector2 = Vector2.ZERO
 var gravity_velocity: Vector2 = Vector2.ZERO
@@ -16,6 +19,8 @@ var gravity_velocity: Vector2 = Vector2.ZERO
 var strafe_velocity: Vector2 = Vector2.ZERO
 var jump_velocity: Vector2 = Vector2.ZERO
 var thruster_velocity: Vector2 = Vector2.ZERO
+
+var thruster_fuel: float = 100.0
 
 var closest_gravity_area: GravityArea
 
@@ -25,10 +30,17 @@ var just_jumped_time: float = 0.0
 
 @onready var gravity_detection_area: Area2D = $"Area2D"
 @onready var ground_raycast: RayCast2D = $"RayCast2D"
+@onready var fuel_bar: ProgressBar = $"../CanvasLayer/FuelBar"
+
+
+func _ready() -> void:
+	fuel_bar.max_value = THRUSTER_MAX_FUEL
 
 
 func _physics_process(delta: float) -> void:
 	_process_gravity_area()
+	
+	fuel_bar.value = thruster_fuel
 	
 	# Count down the jump buffer
 	if just_jumped_time > 0:
@@ -37,17 +49,21 @@ func _physics_process(delta: float) -> void:
 		just_jumped = false
 	
 	if closest_gravity_area:
-		_process_grounded_movement()
+		_process_grounded_movement(delta)
 		thruster_velocity = Vector2.ZERO
 	else:
-		_process_thruster_movement()
+		_process_thruster_movement(delta)
 		strafe_velocity = Vector2.ZERO
 		jump_velocity = Vector2.ZERO
 		target_gravity_velocity = Vector2.ZERO
 		gravity_velocity = Vector2.ZERO
+	
+	for body in get_colliding_bodies():
+		if body.has_method("kills_on_collision"):
+			queue_free()
 
 
-func _process_grounded_movement() -> void:
+func _process_grounded_movement(delta: float) -> void:
 	var planet_center: Vector2 = closest_gravity_area.global_position
 	
 	var upwards_angle: float = planet_center.angle_to_point(global_position)
@@ -55,6 +71,9 @@ func _process_grounded_movement() -> void:
 	rotation = upwards_angle + PI/2
 	
 	if is_on_ground():
+		if closest_gravity_area.get_parent().refills_fuel && thruster_fuel < THRUSTER_MAX_FUEL:
+			thruster_fuel += REFUEL_RATE * delta
+		
 		target_gravity_velocity = Vector2.ZERO
 		gravity_velocity = target_gravity_velocity
 		
@@ -83,12 +102,14 @@ func _process_grounded_movement() -> void:
 		strafe_velocity += Vector2.from_angle(upwards_angle + PI/2) * WALK_SPEED
 
 
-func _process_thruster_movement() -> void:
+func _process_thruster_movement(delta: float) -> void:
 	var angle_to_mouse: float = global_position.angle_to_point(get_global_mouse_position())
 	rotation = angle_to_mouse + PI/2
 	
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_pressed("jump") && thruster_fuel > 0:
 		thruster_velocity += Vector2.from_angle(angle_to_mouse) * THRUSTER_FORCE
+		thruster_fuel -= USAGE_RATE * delta
+		
 	
 	if thruster_velocity.length() > THRUSTER_MAX_VELOCITY:
 		thruster_velocity = thruster_velocity.normalized() * THRUSTER_MAX_VELOCITY
@@ -128,3 +149,6 @@ func is_on_ground() -> bool:
 		return false
 	
 	return ground_raycast.is_colliding()
+
+func die():
+	queue_free()
