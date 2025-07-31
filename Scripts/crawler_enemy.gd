@@ -7,7 +7,7 @@ const CRAWL_VEL = 300
 
 var direction: int
 var crawl_velocity: Vector2
-var attraction_velocity: Vector2 = Vector2.ZERO
+var gravity_velocity: Vector2 = Vector2.ZERO
 var closest_gravity_area = null
 
 @onready var gravity_detection_area = $"GravityDetection"
@@ -29,10 +29,10 @@ func _physics_process(delta: float) -> void:
 	if closest_gravity_area != null:
 		rotation = (global_position - closest_gravity_area.global_position).angle() + PI / 2
 		up_direction = (global_position - closest_gravity_area.global_position).normalized()
-		attraction_velocity += (closest_gravity_area.global_position - global_position).normalized() * closest_gravity_area.accel
+		gravity_velocity += (closest_gravity_area.global_position - global_position).normalized() * closest_gravity_area.accel
 	
 	if is_on_ground():
-		attraction_velocity = Vector2.ZERO
+		gravity_velocity = Vector2.ZERO
 		crawl_velocity = up_direction.rotated(90 * direction) * CRAWL_VEL
 	else:
 		crawl_velocity = Vector2.ZERO
@@ -40,8 +40,8 @@ func _physics_process(delta: float) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO
 	if closest_gravity_area:
-		planet_velocity = (closest_gravity_area.get_parent() as Planet).constant_linear_velocity * 60
-	linear_velocity = crawl_velocity + planet_velocity + attraction_velocity
+		planet_velocity = (closest_gravity_area.get_parent() as Planet).velocity
+	linear_velocity = crawl_velocity + planet_velocity + gravity_velocity
 
 
 func _process_gravity_area() -> void:

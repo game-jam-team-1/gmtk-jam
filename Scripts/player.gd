@@ -37,6 +37,8 @@ var deposited_packages: int = 0
 
 
 func _ready() -> void:
+	Global.Player = self
+	
 	fuel_bar.max_value = THRUSTER_MAX_FUEL
 
 
@@ -64,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	
 	for body in get_colliding_bodies():
 		if body.has_method("kills_on_collision"):
-			queue_free()
+			die()
 
 
 func _process_grounded_movement(delta: float) -> void:
@@ -193,4 +195,4 @@ func is_on_ground() -> bool:
 	return ground_raycast.is_colliding()
 
 func die():
-	queue_free()
+	print("you died")
