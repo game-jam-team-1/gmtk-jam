@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://debprahfmmn1a"]
 
-[ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_5ukr8"]
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://c3ef480rpsots" path="res://Scenes/package_depot.tscn" id="2_fo5ed"]
@@ -8,11 +8,37 @@
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="4_8j60k"]
 [ext_resource type="PackedScene" uid="uid://dg1gbjos1jh51" path="res://Scenes/minimap.tscn" id="6_o06y3"]
 [ext_resource type="PackedScene" uid="uid://cso8oa456wo88" path="res://Scenes/dialog_box.tscn" id="8_k7acu"]
+[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Scenes/space-background-nebula.png" id="8_5v1tr"]
+[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Scenes/space-background-stars.png" id="9_0fj1v"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_5ukr8")
 rounds = 2
 packages_each_round = Array[int]([1, 1])
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Parallax1" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundNebula" type="Sprite2D" parent="Background/Parallax1"]
+modulate = Color(0.6378432, 0.6378432, 0.63784313, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("8_5v1tr")
+
+[node name="Parallax2" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundStars" type="Sprite2D" parent="Background/Parallax2"]
+modulate = Color(0.8111275, 0.8111274, 0.8111274, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("9_0fj1v")
 
 [node name="Planet3" parent="." instance=ExtResource("1_fj7yv")]
 position = Vector2(727, 574)

@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 			return
 		
 		if dir == 0:
-			animated_sprite.play("idle")
+			animated_sprite.play("idle_grounded")
 			return
 	
 	if player.player_movement.is_thruster_movement:
@@ -32,7 +32,12 @@ func _process(delta: float) -> void:
 		if animated_sprite.animation == "start_fly" && animated_sprite.is_playing():
 			return
 		
-		animated_sprite.play("fly_loop")
+		print(player.player_movement.is_thruster_on)
+		if player.player_movement.is_thruster_on:
+			animated_sprite.play("fly_loop")
+			return
+		
+		animated_sprite.play("idle_fly")
 
 func on_thruster_boost() -> void:
 	animated_sprite.play("start_fly")
