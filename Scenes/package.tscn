@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpgm8pf4sxga8"]
+[gd_scene load_steps=9 format=3 uid="uid://bpgm8pf4sxga8"]
 
 [ext_resource type="Script" uid="uid://dwfprdl306fpk" path="res://Scripts/package.gd" id="1_gkk3b"]
+[ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="2_wvags"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkk3b"]
 friction = 0.0
@@ -11,12 +12,53 @@ radius = 75.2396
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkk3b"]
 size = Vector2(100, 100)
 
+[sub_resource type="Animation" id="Animation_gkk3b"]
+resource_name = "grab"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wvags"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8o66u"]
+_data = {
+&"RESET": SubResource("Animation_wvags"),
+&"grab": SubResource("Animation_gkk3b")
+}
+
 [node name="Package" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_gkk3b")
 gravity_scale = 0.0
 lock_rotation = true
 custom_integrator = true
 script = ExtResource("1_gkk3b")
+
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("gravity_detection_area", "raycasts_container")]
+script = ExtResource("2_wvags")
+gravity_detection_area = NodePath("../PackageArea")
+raycasts_container = NodePath("../Raycasts")
 
 [node name="PackageArea" type="Area2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -50,3 +92,10 @@ target_position = Vector2(0, -51)
 
 [node name="RayCast2D7" type="RayCast2D" parent="Raycasts"]
 target_position = Vector2(-51, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8o66u")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

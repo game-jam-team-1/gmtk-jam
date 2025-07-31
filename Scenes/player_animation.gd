@@ -35,5 +35,4 @@ func _process(delta: float) -> void:
 		animated_sprite.play("fly_loop")
 
 func on_thruster_boost() -> void:
-	print("sdfsdf")
 	animated_sprite.play("start_fly")

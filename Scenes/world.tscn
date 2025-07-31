@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://debprahfmmn1a"]
+[gd_scene load_steps=7 format=3 uid="uid://debprahfmmn1a"]
 
+[ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://c3ef480rpsots" path="res://Scenes/package_depot.tscn" id="2_fo5ed"]
@@ -7,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="4_8j60k"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_5ukr8")
+rounds = 2
+packages_each_round = Array[int]([1, 1])
 
 [node name="Planet3" parent="." instance=ExtResource("1_fj7yv")]
 position = Vector2(727, 574)
@@ -38,9 +42,6 @@ max_contacts_reported = 1
 [node name="CrawlerEnemy" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(211, 1213)
 
-[node name="Package" parent="." instance=ExtResource("4_8j60k")]
-position = Vector2(1620, 966)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="FuelBar" type="ProgressBar" parent="CanvasLayer"]
@@ -49,3 +50,12 @@ offset_top = 16.0
 offset_right = 1121.0
 offset_bottom = 78.0
 show_percentage = false
+
+[node name="Packages" type="Node2D" parent="."]
+
+[node name="Package" parent="Packages" instance=ExtResource("4_8j60k")]
+position = Vector2(493, 860)
+
+[node name="Package2" parent="Packages" instance=ExtResource("4_8j60k")]
+position = Vector2(668, 835)
+spawn_round = 1
