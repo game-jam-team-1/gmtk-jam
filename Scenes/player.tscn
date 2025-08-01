@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://cdxanxha8yc48"]
+[gd_scene load_steps=27 format=3 uid="uid://cdxanxha8yc48"]
 
 [ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Scripts/ball.png" id="2_cvnsp"]
 [ext_resource type="Script" uid="uid://bub0fyvm5xhx4" path="res://Scenes/player_movement.gd" id="2_fkybt"]
+[ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="3_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://player-sheet.png" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://kxqmkedf0r42" path="res://Scenes/player_animation.gd" id="3_x3wgy"]
 
@@ -165,10 +166,12 @@ script = ExtResource("1_v0iea")
 [node name="PlayerMovement" type="Node2D" parent="."]
 script = ExtResource("2_fkybt")
 
-[node name="GravityDetectionArea" type="Area2D" parent="PlayerMovement"]
+[node name="GravityComponent" type="Area2D" parent="PlayerMovement" node_paths=PackedStringArray("parent")]
+script = ExtResource("3_3smsa")
+parent = NodePath("../..")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMovement/GravityDetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMovement/GravityComponent"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_6t5aa")
 debug_color = Color(0.478431, 0.588235, 0, 0.305882)
@@ -217,7 +220,7 @@ shape = SubResource("CircleShape2D_v0iea")
 debug_color = Color(0.840643, 0.364583, 0.318232, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.3, 0.3)
 
 [node name="OnePackage" type="Node2D" parent="."]
 visible = false

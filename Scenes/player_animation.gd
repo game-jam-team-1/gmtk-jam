@@ -32,7 +32,6 @@ func _process(delta: float) -> void:
 		if animated_sprite.animation == "start_fly" && animated_sprite.is_playing():
 			return
 		
-		print(player.player_movement.is_thruster_on)
 		if player.player_movement.is_thruster_on:
 			animated_sprite.play("fly_loop")
 			return

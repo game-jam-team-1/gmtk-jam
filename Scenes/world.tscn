@@ -39,21 +39,16 @@ position = Vector2(896, 512)
 scale = Vector2(2, 2)
 texture = ExtResource("9_0fj1v")
 
-[node name="Planet3" parent="." instance=ExtResource("1_fj7yv")]
-position = Vector2(727, 574)
+[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
+position = Vector2(3339.9998, 1126)
 scale = Vector2(0.48, 0.48)
-
-[node name="PackageDepot" parent="Planet3" instance=ExtResource("2_fo5ed")]
-position = Vector2(1141.67, 1183.33)
-rotation = 0.785398
-scale = Vector2(2.08333, 2.08333)
+orbit_planet = NodePath("../Planet")
 
 [node name="Planet" parent="." instance=ExtResource("1_fj7yv")]
-position = Vector2(122, 414)
+position = Vector2(3745, 1280)
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
 position = Vector2(1938, 485)
-orbit_enabled = true
 orbit_planet = NodePath("../Planet4")
 
 [node name="Planet4" parent="." instance=ExtResource("1_fj7yv")]
@@ -61,13 +56,18 @@ position = Vector2(798, 1674)
 scale = Vector2(4.23341, 4.23341)
 refills_fuel = true
 
+[node name="PackageDepot" parent="Planet4" instance=ExtResource("2_fo5ed")]
+position = Vector2(130.62756, -117.871895)
+rotation = 0.785398
+scale = Vector2(0.2362158, 0.2362158)
+
 [node name="Player" parent="." instance=ExtResource("2_fj7yv")]
 position = Vector2(798, 956)
 contact_monitor = true
 max_contacts_reported = 1
 
 [node name="CrawlerEnemy" parent="." instance=ExtResource("3_tlwt5")]
-position = Vector2(211, 1213)
+position = Vector2(-4166, 1324)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -90,3 +90,12 @@ position = Vector2(493, 860)
 [node name="Package2" parent="Packages" instance=ExtResource("4_8j60k")]
 position = Vector2(668, 835)
 spawn_round = 1
+
+[node name="Planet5" parent="." instance=ExtResource("1_fj7yv")]
+position = Vector2(2865, 2820)
+scale = Vector2(3, 3)
+
+[node name="Planet6" parent="." instance=ExtResource("1_fj7yv")]
+position = Vector2(1745, 2204)
+
+[editable path="Planet4"]

@@ -10,22 +10,36 @@ var duplicated_balls: Array
 var sending_package_depot: PackageDepot
 var sending_packages_to_depot: bool = false
 
-
-@onready var gravity_detection_area: Area2D = $"GravityDetectionArea"
+@onready var gravity_component: GravityComponent = $"PlayerMovement/GravityComponent"
 @onready var large_detection_area: Area2D = $"LargeDetectionArea"
 
 @onready var player_movement: PlayerMovement = $"PlayerMovement"
 @onready var player_animation: PlayerAnimation = $"PlayerAnimation"
 
 
+func _ready() -> void:
+	player_movement.is_grounded_movement = true
+
 func _physics_process(delta: float) -> void:
 	_process_packages()
 	
+	if player_movement.is_grounded_movement:
+		
+		if gravity_component.closest_gravity_area != null:
+			gravity_component.update_gravity_force(delta)
+			
+			player_movement._process_grounded_movement(delta)
+		else:
+			player_movement.is_grounded_movement = false
+			player_movement.is_thruster_movement = true
 	
-	if player_movement.closest_gravity_area:
-		player_movement._process_grounded_movement(delta)
-	else:
+	if player_movement.is_thruster_movement:
 		player_movement._process_thruster_movement(delta)
+		
+		var grav_area: GravityArea = gravity_component.closest_gravity_area
+		if (grav_area != null && gravity_component.get_distance_to_gravity_area(grav_area) < 100):
+			player_movement.is_grounded_movement = true
+			player_movement.is_thruster_movement = false
 	
 	for body in get_colliding_bodies():
 		if body.has_method("kills_on_collision"):
@@ -89,14 +103,19 @@ func _process_package_animations() -> void:
 		for ball: Node2D in duplicated_balls:
 			ball.global_position = lerp(ball.global_position, sending_package_depot.global_position, 0.01)
 
+
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO
 	
-	if player_movement.closest_gravity_area:
-		planet_velocity = (player_movement.closest_gravity_area.get_parent() as Planet).velocity
+	if gravity_component.closest_gravity_area && is_on_ground():
+		print("yeh")
+		planet_velocity = gravity_component.closest_gravity_area.planet.velocity
 	
 	linear_velocity = player_movement.get_velocity() + planet_velocity
 
+
+func is_on_ground() -> bool:
+	return player_movement.is_on_ground()
 
 
 func die():
