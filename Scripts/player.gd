@@ -63,7 +63,7 @@ func _process_packages() -> void:
 		if area.name == "PackageArea" && !closest_package:
 			closest_package = area.get_parent()
 	
-	if !closest_package:
+	if !closest_package || closest_package.following_node:
 		return
 	
 	if collected_packages < 3:

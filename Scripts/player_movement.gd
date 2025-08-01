@@ -48,7 +48,7 @@ var is_thruster_on: bool = false
 func _ready() -> void:
 	fuel_bar.max_value = THRUSTER_MAX_FUEL
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	
 	fuel_bar.value = thruster_fuel
 	
