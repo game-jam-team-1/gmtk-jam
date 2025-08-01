@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmdo04ji5483p"]
+[gd_scene load_steps=14 format=3 uid="uid://cmdo04ji5483p"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="1_feyax"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]
 [ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space-background-stars.png" id="2_omtrn"]
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="3_omtrn"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="4_i6t4g"]
+[ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/big-green-planet.png" id="5_on4kn"]
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="6_p1f1o"]
 [ext_resource type="Script" uid="uid://c3rx758kdf3x7" path="res://Scripts/santa.gd" id="6_ys4pu"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="8_h2ono"]
@@ -56,6 +57,9 @@ texture = ExtResource("2_omtrn")
 position = Vector2(2157, 2151)
 scale = Vector2(10, 10)
 refills_fuel = true
+
+[node name="Sprite" parent="Planet" index="0"]
+texture = ExtResource("5_on4kn")
 
 [node name="CollisionShape2D" parent="Planet/Area2D" index="0"]
 shape = SubResource("CircleShape2D_h2ono")

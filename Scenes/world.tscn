@@ -1,13 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://debprahfmmn1a"]
+[gd_scene load_steps=13 format=3 uid="uid://debprahfmmn1a"]
 
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://60gkfls6gjjg" path="res://Scenes/crawler_enemy.tscn" id="3_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://bd886phkg1kv6" path="res://Assets/big-purple-planet.png" id="5_ikia7"]
 [ext_resource type="PackedScene" uid="uid://bdnjjis5flvtj" path="res://Scenes/turret.tscn" id="6_7yui6"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="6_k7acu"]
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="8_5v1tr"]
+[ext_resource type="Texture2D" uid="uid://cr2vbgdm27plv" path="res://Assets/big-orange-planet.png" id="8_7yui6"]
 [ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space-background-stars.png" id="9_0fj1v"]
+[ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/big-blue-planet.png" id="9_c5t2i"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7yui6"]
 
@@ -52,6 +55,9 @@ position = Vector2(3745, 1280)
 orbit_planet = NodePath("../Planet4")
 orbit_speed = 0.002
 
+[node name="Sprite" parent="Planet" index="0"]
+texture = ExtResource("5_ikia7")
+
 [node name="Turret" parent="Planet" instance=ExtResource("6_7yui6")]
 position = Vector2(6, -188)
 bullet_frequency = 5.0
@@ -73,11 +79,17 @@ position = Vector2(254, 176)
 position = Vector2(1938, 485)
 orbit_planet = NodePath("../Planet4")
 
+[node name="Sprite" parent="Planet2" index="0"]
+texture = ExtResource("8_7yui6")
+
 [node name="Planet4" parent="." instance=ExtResource("1_fj7yv")]
 z_index = 1
 position = Vector2(798, 1674)
 scale = Vector2(4.23341, 4.23341)
 refills_fuel = true
+
+[node name="Sprite" parent="Planet4" index="0"]
+texture = ExtResource("9_c5t2i")
 
 [node name="Player" parent="." instance=ExtResource("2_fj7yv")]
 position = Vector2(800, 903)
@@ -102,3 +114,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CrawlerEnemy3" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(3179, 1015)
+
+[editable path="Planet"]
+[editable path="Planet2"]
+[editable path="Planet4"]
