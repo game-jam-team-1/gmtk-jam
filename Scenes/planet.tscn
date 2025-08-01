@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dkjf56v3yfohb"]
 
-[ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Assets/ball.png" id="1_1odxm"]
 [ext_resource type="Script" uid="uid://b3744nngua0ne" path="res://Scripts/planet.gd" id="1_a75xc"]
+[ext_resource type="Texture2D" uid="uid://dex4g2pxoilog" path="res://Assets/big-gray-planet.png" id="2_m0iey"]
 [ext_resource type="Script" uid="uid://c05xnwc01yac0" path="res://Scripts/gravity_area.gd" id="2_mtr83"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a75xc"]
@@ -19,7 +19,8 @@ physics_material_override = SubResource("PhysicsMaterial_a75xc")
 script = ExtResource("1_a75xc")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_1odxm")
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("2_m0iey")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_aqk2v")

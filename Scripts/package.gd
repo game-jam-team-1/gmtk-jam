@@ -34,7 +34,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	gravity_component.update_gravity_force(delta)
 	
-	if following_node && global_position.distance_to(following_node.global_position) > 500:
+	if following_node && global_position.distance_to(following_node.global_position) > 200:
 		global_position = lerp(global_position, following_node.global_position, 0.01)
 	
 	if !gravity_component.closest_gravity_area:
@@ -58,6 +58,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		linear_velocity = Vector2.ZERO
 
 func get_grabbed(following: Node2D) -> void:
+	lock_rotation = false
 	following_node = following
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
