@@ -1,35 +1,65 @@
-[gd_scene load_steps=4 format=3 uid="uid://60gkfls6gjjg"]
+[gd_scene load_steps=9 format=3 uid="uid://60gkfls6gjjg"]
 
 [ext_resource type="Script" uid="uid://dma6d0r2m4r8l" path="res://Scripts/crawler_enemy.gd" id="1_bkh62"]
+[ext_resource type="Texture2D" uid="uid://vdqsaytnjbpi" path="res://Assets/bug-sheet.png" id="2_vyai1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilkcj"]
+atlas = ExtResource("2_vyai1")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m33pl"]
+atlas = ExtResource("2_vyai1")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7klq"]
+atlas = ExtResource("2_vyai1")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_66aqm"]
+animations = [{
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_ilkcj")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_m33pl")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_j7klq")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj566"]
-size = Vector2(69, 36)
+size = Vector2(129, 70.75)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o43cp"]
-radius = 24.0
+radius = 88.27797
 
 [node name="CrawlerEnemy" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_bkh62")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -80)
+sprite_frames = SubResource("SpriteFrames_66aqm")
+animation = &"walk"
+frame = 2
+frame_progress = 0.77227587
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -35)
 shape = SubResource("RectangleShape2D_hj566")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(3, -12)
-scale = Vector2(3, 3)
-polygon = PackedVector2Array(-11, 10, 7, 10, 12, 7, 5, 0, -2, -1, -10, 1, -14, 5)
-
-[node name="Polygon2D2" type="Polygon2D" parent="."]
-position = Vector2(3, -12)
-scale = Vector2(3, 3)
-color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(5, 3, 7, 4, 5, 5, 3, 4)
-
 [node name="GravityDetection" type="Area2D" parent="."]
+position = Vector2(0, -35)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityDetection"]
 shape = SubResource("CircleShape2D_o43cp")
+debug_color = Color(1, 1, 1, 0.15686275)
 
 [node name="GroundRaycast" type="RayCast2D" parent="."]
+position = Vector2(0, -5)
 target_position = Vector2(0, 19)

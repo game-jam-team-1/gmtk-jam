@@ -12,6 +12,7 @@ var closest_gravity_area = null
 
 @onready var gravity_detection_area = $"GravityDetection"
 @onready var ground_raycast = $"GroundRaycast"
+@onready var animations: AnimatedSprite2D = $"AnimatedSprite2D"
 
 func _ready() -> void:
 	if clockwise:
@@ -20,6 +21,8 @@ func _ready() -> void:
 		direction = -1
 		#scale flipping doesnt really work rn
 		scale.x = -scale.x
+	
+	animations.play("walk")
 
 func _physics_process(delta: float) -> void:
 	var up_direction: Vector2 = Vector2.ZERO
