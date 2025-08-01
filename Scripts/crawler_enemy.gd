@@ -1,9 +1,11 @@
 class_name CrawlerEnemy
 extends RigidBody2D
 
+
 const CRAWL_VEL: float = 300.0
 
 @export var clockwise: bool = true
+@export var drift_direction: Vector2 = Vector2(0,0)
 
 var direction: int
 var crawl_velocity: Vector2
@@ -12,10 +14,10 @@ var closest_gravity_area = null
 
 var spin_rate: float = 1
 
-
 @onready var gravity_detection_area = $"GravityDetection"
 @onready var ground_raycast = $"GroundRaycast"
 @onready var animations: AnimatedSprite2D = $"AnimatedSprite2D"
+
 
 func _ready() -> void:
 	if clockwise:
@@ -49,7 +51,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		spin_rate += delta * randf_range(-1, 1)
 		rotation += delta * direction * spin_rate
-		crawl_velocity = Vector2(100,100)
+		crawl_velocity = drift_direction
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO
