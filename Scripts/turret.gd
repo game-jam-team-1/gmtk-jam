@@ -44,7 +44,8 @@ func _physics_process(delta: float) -> void:
 		idle(delta)
 	else:
 		target()
-		shooting()
+		if state == STATE.AGGRO:
+			aggro()
 
 func _proccess_movement():
 	rotation = (position).angle() + PI/2.0
@@ -89,17 +90,17 @@ func idle(delta):
 		rotation_direction = -rotation_direction
 
 
-func shooting():
+func target():
+	pivot.rotation = clamp(normalize_angle((pivot.global_position - Global.Player.global_position).angle() - PI/2 - global_rotation), -MAX_BARREL_ROTATION, MAX_BARREL_ROTATION)
+
+
+func aggro():
 	if bullet_shoot_timer.time_left == 0:
 		bullet_shoot_timer = get_tree().create_timer(1 / bullet_frequency)
 		
 		var new_bullet: TurretBullet = bullet.instantiate()
 		add_child(new_bullet)
-		new_bullet.setup(global_position, Vector2.from_angle(pivot.rotation - PI / 2.0), bullet_speed)
-
-
-func target():
-	pivot.rotation = clamp(normalize_angle((pivot.global_position - Global.Player.global_position).angle() - PI/2 - global_rotation), -MAX_BARREL_ROTATION, MAX_BARREL_ROTATION)
+		new_bullet.setup(pivot.global_position, Vector2.from_angle(pivot.rotation - PI / 2.0), bullet_speed)
 
 
 func is_on_ground() -> bool:
