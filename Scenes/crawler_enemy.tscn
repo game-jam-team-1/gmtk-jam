@@ -36,9 +36,11 @@ animations = [{
 size = Vector2(129, 70.75)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o43cp"]
-radius = 88.27797
+radius = 88.278
 
 [node name="CrawlerEnemy" type="RigidBody2D"]
+z_index = 1
+collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource("1_bkh62")
 
@@ -47,7 +49,7 @@ position = Vector2(1, -80)
 sprite_frames = SubResource("SpriteFrames_66aqm")
 animation = &"walk"
 frame = 2
-frame_progress = 0.77227587
+frame_progress = 0.772276
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -35)
@@ -58,7 +60,7 @@ position = Vector2(0, -35)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityDetection"]
 shape = SubResource("CircleShape2D_o43cp")
-debug_color = Color(1, 1, 1, 0.15686275)
+debug_color = Color(1, 1, 1, 0.156863)
 
 [node name="GroundRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, -5)

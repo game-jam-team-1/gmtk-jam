@@ -7,8 +7,8 @@ enum STATE {
 	AGGRO,
 }
 
-const AGGRO_THRESHOLD: float = 2.0
-const MAX_AGGRO: float = 30.0
+const AGGRO_THRESHOLD: float = 1.0
+const MAX_AGGRO: float = 3.0
 const MAX_BARREL_ROTATION: float = PI/2
 
 var planet_velocity = Vector2.ZERO

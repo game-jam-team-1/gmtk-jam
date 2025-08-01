@@ -83,7 +83,7 @@ contact_monitor = true
 max_contacts_reported = 1
 
 [node name="CrawlerEnemy" parent="." instance=ExtResource("3_tlwt5")]
-position = Vector2(1497, 2081)
+position = Vector2(-26, 2161)
 
 [node name="Package" parent="." instance=ExtResource("4_8j60k")]
 position = Vector2(1620, 966)
@@ -127,7 +127,7 @@ visible = false
 points = PackedVector2Array(1910, 863, 1781, 620, 1791, 462, 1785, 308, 1723, 201, 1599, 143, 1463, 177, 1310, 292, 1101, 458, 853, 526, 600, 600, 420, 709, 188, 1028, 70, 1309, 13, 1514, -43, 1654, -167, 1743, -423, 1910, -604, 2177, -680, 2375, -658, 2477, -460, 2523, -210, 2534, 216, 2519, 668, 2469, 991, 2462, 1420, 2428, 1735, 2169, 1989, 2033, 2236, 1934, 2351, 1828, 2493, 1635, 2475, 1493, 2305, 1378, 2135, 1286)
 
 [node name="CrawlerEnemy2" parent="." instance=ExtResource("3_tlwt5")]
-position = Vector2(409, 1077)
+position = Vector2(678, 70)
 
 [node name="CrawlerEnemy3" parent="." instance=ExtResource("3_tlwt5")]
-position = Vector2(97, 2072)
+position = Vector2(3648, 1035)

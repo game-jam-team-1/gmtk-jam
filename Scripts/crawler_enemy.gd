@@ -1,7 +1,7 @@
 class_name CrawlerEnemy
 extends RigidBody2D
 
-const CRAWL_VEL = 300
+const CRAWL_VEL: float = 300.0
 
 @export var clockwise: bool = true
 
@@ -9,6 +9,9 @@ var direction: int
 var crawl_velocity: Vector2
 var gravity_velocity: Vector2 = Vector2.ZERO
 var closest_gravity_area = null
+
+var spin_rate: float = 1
+
 
 @onready var gravity_detection_area = $"GravityDetection"
 @onready var ground_raycast = $"GroundRaycast"
@@ -21,8 +24,12 @@ func _ready() -> void:
 		direction = -1
 		#scale flipping doesnt really work rn
 		scale.x = -scale.x
-	
 	animations.play("walk")
+	
+	_process_gravity_area()
+	if closest_gravity_area == null:
+		spin_rate = randi_range(-5,5)
+
 
 func _physics_process(delta: float) -> void:
 	var up_direction: Vector2 = Vector2.ZERO
@@ -30,15 +37,19 @@ func _physics_process(delta: float) -> void:
 	_process_gravity_area()
 	
 	if closest_gravity_area != null:
-		rotation = (global_position - closest_gravity_area.global_position).angle() + PI / 2
+		rotation = lerp_angle(rotation, (global_position - closest_gravity_area.global_position).angle() + PI / 2, 0.05)
+		spin_rate *= 0.95
 		up_direction = (global_position - closest_gravity_area.global_position).normalized()
-		gravity_velocity += (closest_gravity_area.global_position - global_position).normalized() * closest_gravity_area.accel
+		gravity_velocity += (closest_gravity_area.global_position - global_position).normalized() * closest_gravity_area.accel * 0.01
 	
 	if is_on_ground():
 		gravity_velocity = Vector2.ZERO
+		spin_rate = 0.0
 		crawl_velocity = up_direction.rotated(90 * direction) * CRAWL_VEL
 	else:
-		crawl_velocity = Vector2.ZERO
+		spin_rate += delta * randf_range(-1, 1)
+		rotation += delta * direction * spin_rate
+		crawl_velocity = Vector2(100,100)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO
