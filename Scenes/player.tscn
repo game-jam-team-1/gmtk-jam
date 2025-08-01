@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cdxanxha8yc48"]
+[gd_scene load_steps=29 format=3 uid="uid://cdxanxha8yc48"]
 
 [ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Assets/ball.png" id="2_cvnsp"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="3_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://Assets/player-sheet.png" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://kxqmkedf0r42" path="res://Scripts/player_animation.gd" id="4_3smsa"]
+[ext_resource type="PackedScene" uid="uid://dg1gbjos1jh51" path="res://Scenes/minimap.tscn" id="7_8erm5"]
+[ext_resource type="PackedScene" uid="uid://cso8oa456wo88" path="res://Scenes/dialog_box.tscn" id="8_f1ek2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
 friction = 0.0
@@ -215,7 +217,7 @@ metadata/_edit_lock_ = true
 position = Vector2(2, 85)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LargeDetectionArea"]
-position = Vector2(-2, -85)
+position = Vector2(-3, -85)
 shape = SubResource("CircleShape2D_v0iea")
 debug_color = Color(0.840643, 0.364583, 0.318232, 0.42)
 
@@ -224,42 +226,59 @@ zoom = Vector2(0.3, 0.3)
 
 [node name="OnePackage" type="Node2D" parent="."]
 visible = false
-position = Vector2(0, -3)
+position = Vector2(0, -75)
 
 [node name="Ball" type="Sprite2D" parent="OnePackage"]
-position = Vector2(1, -34)
-scale = Vector2(0.04375, 0.04375)
+position = Vector2(1, -55.000008)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_cvnsp")
 
 [node name="TwoPackages" type="Node2D" parent="."]
 visible = false
-position = Vector2(0, -3)
+position = Vector2(0, -96)
 
 [node name="Ball2" type="Sprite2D" parent="TwoPackages"]
-position = Vector2(10, -34)
-scale = Vector2(0.04375, 0.04375)
+position = Vector2(37.00001, -34)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_cvnsp")
 
 [node name="Ball3" type="Sprite2D" parent="TwoPackages"]
-position = Vector2(-8, -34)
-scale = Vector2(0.04375, 0.04375)
+position = Vector2(-37, -34)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_cvnsp")
 
 [node name="ThreePackages" type="Node2D" parent="."]
 visible = false
-position = Vector2(0, -3)
+position = Vector2(0, -75)
 
 [node name="Ball2" type="Sprite2D" parent="ThreePackages"]
-position = Vector2(19, -34)
-scale = Vector2(0.04375, 0.04375)
+position = Vector2(75, -55.000008)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_cvnsp")
 
 [node name="Ball3" type="Sprite2D" parent="ThreePackages"]
-position = Vector2(1, -34)
-scale = Vector2(0.04375, 0.04375)
+position = Vector2(1, -55.000008)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_cvnsp")
 
 [node name="Ball4" type="Sprite2D" parent="ThreePackages"]
-position = Vector2(-17, -34)
-scale = Vector2(0.04375, 0.04375)
+position = Vector2(-73.00002, -55.000008)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_cvnsp")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="FuelBar" type="ProgressBar" parent="UI"]
+offset_left = 738.0
+offset_top = 998.0
+offset_right = 1243.0
+offset_bottom = 1060.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Minimap" parent="UI" instance=ExtResource("7_8erm5")]
+position = Vector2(1836, 84)
+
+[node name="DialogBox" parent="UI" instance=ExtResource("8_f1ek2")]
+visible = false
+position = Vector2(935, 85)

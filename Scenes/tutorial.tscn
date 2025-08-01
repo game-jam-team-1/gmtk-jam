@@ -1,0 +1,143 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmdo04ji5483p"]
+
+[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="1_feyax"]
+[ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]
+[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space-background-stars.png" id="2_omtrn"]
+[ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="3_omtrn"]
+[ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="4_i6t4g"]
+[ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="6_p1f1o"]
+[ext_resource type="Script" uid="uid://c3rx758kdf3x7" path="res://Scripts/santa.gd" id="6_ys4pu"]
+[ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="8_h2ono"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1f1o"]
+size = Vector2(192, 346)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ys4pu"]
+radius = 213.03755
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p1f1o"]
+radius = 76.0
+height = 380.0
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource("1_p8jf4")
+rounds = 1
+packages_each_round = Array[int]([2])
+
+[node name="Background" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Parallax1" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundNebula" type="Sprite2D" parent="Background/Parallax1"]
+modulate = Color(0.637843, 0.637843, 0.637843, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("1_feyax")
+
+[node name="Parallax2" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundStars" type="Sprite2D" parent="Background/Parallax2"]
+modulate = Color(0.811127, 0.811127, 0.811127, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("2_omtrn")
+
+[node name="Planet" parent="." instance=ExtResource("3_omtrn")]
+position = Vector2(2157, 2151)
+scale = Vector2(10, 10)
+refills_fuel = true
+
+[node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
+position = Vector2(4365, 165)
+scale = Vector2(2, 2)
+refills_fuel = true
+orbit_planet = NodePath("../Planet")
+orbit_speed = 0.0029999999969732
+
+[node name="Player" parent="." instance=ExtResource("4_i6t4g")]
+position = Vector2(3651, 1520)
+contact_monitor = true
+
+[node name="Santa" type="RigidBody2D" parent="."]
+position = Vector2(2186, 264)
+gravity_scale = 0.0
+lock_rotation = true
+custom_integrator = true
+contact_monitor = true
+script = ExtResource("6_ys4pu")
+
+[node name="Polygon2D" type="Polygon2D" parent="Santa"]
+position = Vector2(-2666, 1728.3425)
+rotation = -0.7853982
+color = Color(1, 0.24000001, 0.24000001, 1)
+polygon = PackedVector2Array(2910, 749, 3085, 583, 2957, 565, 3160, 540, 3223, 590, 3246, 703, 3191, 619, 3047, 840, 3081, 695)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D2" type="Polygon2D" parent="Santa"]
+position = Vector2(-2666, 1728.3425)
+rotation = -0.7853982
+polygon = PackedVector2Array(3232, 569, 3199, 552, 3178, 522, 3135, 562, 3132, 587, 3142, 601, 3165, 609, 3204, 602)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D3" type="Polygon2D" parent="Santa"]
+position = Vector2(-2666, 1728.3425)
+rotation = -0.7853982
+color = Color(0.8848986, 0.44472414, 0.3387881, 1)
+polygon = PackedVector2Array(3233, 569, 3258, 560, 3264, 523, 3249, 486, 3214, 486, 3179, 497, 3178, 522, 3199, 553)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D4" type="Polygon2D" parent="Santa"]
+position = Vector2(-2666, 1728.3425)
+rotation = -0.7853982
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(3214, 502, 3221, 505, 3221, 511, 3214, 508)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D5" type="Polygon2D" parent="Santa"]
+position = Vector2(-2646, 1747.3425)
+rotation = -0.7853982
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(3214, 502, 3221, 505, 3221, 511, 3214, 508)
+metadata/_edit_lock_ = true
+
+[node name="GravityComponent" type="Area2D" parent="Santa" node_paths=PackedStringArray("parent")]
+position = Vector2(5, 33)
+script = ExtResource("6_p1f1o")
+parent = NodePath("..")
+metadata/_custom_type_script = "uid://bpfjf8wccyltd"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Santa/GravityComponent"]
+position = Vector2(-9, -49)
+shape = SubResource("RectangleShape2D_p1f1o")
+debug_color = Color(0.47843137, 0.5882353, 0, 0.30588236)
+metadata/_edit_lock_ = true
+
+[node name="PlayerDetectionArea" type="Area2D" parent="Santa"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Santa/PlayerDetectionArea"]
+position = Vector2(-9, -15)
+shape = SubResource("CircleShape2D_ys4pu")
+debug_color = Color(0.8392157, 0.3647059, 0.31764707, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Santa"]
+position = Vector2(-5, -19.65747)
+shape = SubResource("CapsuleShape2D_p1f1o")
+metadata/_edit_lock_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="Santa"]
+position = Vector2(-5, 132.34253)
+target_position = Vector2(0, 41)
+metadata/_edit_lock_ = true
+
+[node name="Package" parent="." instance=ExtResource("8_h2ono")]
+position = Vector2(4689, 415)
+
+[editable path="Planet"]

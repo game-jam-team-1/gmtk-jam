@@ -40,7 +40,7 @@ var is_thruster_on: bool = false
 	$"FloorCasts/RayCast3",
 ]
 
-@onready var fuel_bar: ProgressBar = $"../../CanvasLayer/FuelBar"
+@onready var fuel_bar: ProgressBar = $"../UI/FuelBar"
 
 @onready var player: Player = get_parent()
 

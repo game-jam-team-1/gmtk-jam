@@ -3,8 +3,8 @@ extends Node2D
 
 const scale_factor: float = 100.0
 
-@onready var world: World = get_parent().get_parent()
-@export var player: Player
+@onready var world: World = get_parent().get_parent().get_parent()
+@onready var player: Player = get_parent().get_parent()
 
 func _process(delta: float) -> void:
 	queue_redraw()
@@ -21,6 +21,7 @@ func _get_alpha(local_pos: Vector2) -> float:
 func _draw() -> void:
 	var planets: Array[Planet]
 	var enemies: Array[Node2D]
+	var packages: Array[Package]
 	
 	for node in world.get_children():
 		if node is Planet:
@@ -29,6 +30,8 @@ func _draw() -> void:
 			enemies.append(node)
 		if node is ShipEnemy:
 			enemies.append(node)
+		if node is Package:
+			packages.append(node)
 	
 	for planet in planets:
 		var local: Vector2 = _convert_to_local(planet.global_position)
@@ -36,4 +39,7 @@ func _draw() -> void:
 	for enemy in enemies:
 		var local: Vector2 = _convert_to_local(enemy.global_position)
 		draw_circle(local, 2.0, Color(1, 0, 0, _get_alpha(local)))
+	for package in packages:
+		var local: Vector2 = _convert_to_local(package.global_position)
+		draw_circle(local, 2.0, Color(166/255.0,38/255.0,84/255.0))
 	draw_circle(Vector2.ZERO, 3.0, Color.WHITE)
