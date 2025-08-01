@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dquu1nsh7febk" path="res://Scripts/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="2_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space-background-stars.png" id="3_ce3w2"]
-[ext_resource type="Script" uid="uid://cxragsgncirtb" path="res://Scripts/menu_camera.gd" id="4_ce3w2"]
+[ext_resource type="Script" path="res://Scripts/menu_camera.gd" id="4_ce3w2"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_06t4h")
