@@ -7,9 +7,8 @@ enum STATE {
 	AGGRO,
 }
 
-const PLAYER_DETECTION_RANGE: float = 1000.0
 const AGGRO_THRESHOLD: float = 2.0
-const MAX_AGGRO: float = 3.0
+const MAX_AGGRO: float = 30.0
 const MAX_BARREL_ROTATION: float = PI/2
 
 var planet_velocity = Vector2.ZERO
@@ -29,8 +28,8 @@ var center_rotation = global_rotation
 
 @onready var bullet_shoot_timer: SceneTreeTimer = get_tree().create_timer(1.0 / bullet_frequency)
 
-@export var bullet_speed: float = 1000.0 # pixels per second
-@export var bullet_frequency: float = 2.0 # bullet per second
+@export var bullet_speed: float = 1500.0 # pixels per second
+@export var bullet_frequency: float = 1.5 # bullet per second
 
 
 func _ready() -> void:
@@ -41,13 +40,13 @@ func _physics_process(delta: float) -> void:
 	_proccess_movement()
 	player_detection(delta)
 	
-	
+	print(aggro_value)
 	if state == STATE.IDLE:
 		idle(delta)
 	else:
 		target()
 		if state == STATE.AGGRO:
-			aggro()
+			shooting()
 
 func _proccess_movement():
 	rotation = (position).angle() + PI/2.0
@@ -81,9 +80,7 @@ func player_detection(delta: float):
 				state = STATE.IDLE
 				pivot.rotation = 0
 		elif state == STATE.AGGRO:
-			aggro_value -= delta
-			if aggro_value < AGGRO_THRESHOLD:
-				state = STATE.TARGETING
+			state = STATE.TARGETING
 
 
 func idle(delta):
@@ -96,7 +93,7 @@ func target():
 	pivot.rotation = clamp(normalize_angle((pivot.global_position - Global.Player.global_position).angle() - PI/2 - global_rotation), -MAX_BARREL_ROTATION, MAX_BARREL_ROTATION)
 
 
-func aggro():
+func shooting():
 	if bullet_shoot_timer.time_left == 0:
 		bullet_shoot_timer = get_tree().create_timer(1 / bullet_frequency)
 		

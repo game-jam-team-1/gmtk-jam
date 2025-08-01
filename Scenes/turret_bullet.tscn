@@ -10,6 +10,7 @@ radius = 31.0
 script = ExtResource("1_31wnt")
 
 [node name="Bullet" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("2_xmyl2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

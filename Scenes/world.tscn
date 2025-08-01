@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://bftvio34nopyu" path="res://Scenes/ship_enemy.tscn" id="11_ikia7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7yui6"]
-load_path = "res://.godot/imported/turret.png-fa72544047538dc9a81d5d83926fad9b.ctex"
 
 [node name="World" type="Node2D"]
 position = Vector2(656, 904)
@@ -74,8 +73,9 @@ rotation = 0.785398
 scale = Vector2(0.236216, 0.236216)
 
 [node name="Turret" parent="Planet4" instance=ExtResource("6_7yui6")]
-position = Vector2(190.62648, -4.9605403)
+position = Vector2(190.626, -4.96054)
 rotation = 1.5708
+scale = Vector2(0.25, 0.25)
 
 [node name="Player" parent="." instance=ExtResource("2_fj7yv")]
 position = Vector2(800, 903)

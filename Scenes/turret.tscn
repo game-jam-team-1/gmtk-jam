@@ -63,7 +63,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcprl"]
@@ -79,7 +79,7 @@ script = ExtResource("1_fcprl")
 position = Vector2(0, -78)
 
 [node name="PlayerRaycast" type="RayCast2D" parent="Pivot"]
-target_position = Vector2(0, -1000)
+target_position = Vector2(0, -3000)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
 position = Vector2(0, -66)
@@ -98,5 +98,5 @@ target_position = Vector2(0, 30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -42)
-rotation = 1.5707964
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_fcprl")
