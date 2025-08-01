@@ -1,34 +1,102 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdnjjis5flvtj"]
+[gd_scene load_steps=13 format=3 uid="uid://bdnjjis5flvtj"]
 
 [ext_resource type="Script" uid="uid://cbq7qrqn7b77c" path="res://Scripts/turret.gd" id="1_fcprl"]
+[ext_resource type="Texture2D" uid="uid://d0nha0prp1q8v" path="res://Assets/turret-shaft-sheet.png" id="2_6spbj"]
+[ext_resource type="Texture2D" uid="uid://bgwxe38veq3v3" path="res://Assets/turret-base.png" id="3_pulj5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pulj5"]
+atlas = ExtResource("2_6spbj")
+region = Rect2(0, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahfaj"]
+atlas = ExtResource("2_6spbj")
+region = Rect2(192, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ku01o"]
+atlas = ExtResource("2_6spbj")
+region = Rect2(384, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_628tr"]
+atlas = ExtResource("2_6spbj")
+region = Rect2(576, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74mb1"]
+atlas = ExtResource("2_6spbj")
+region = Rect2(768, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxjjt"]
+atlas = ExtResource("2_6spbj")
+region = Rect2(960, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpwha"]
+atlas = ExtResource("2_6spbj")
+region = Rect2(1152, 0, 192, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bfgsf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pulj5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ahfaj")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ku01o")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_628tr")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_74mb1")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_hxjjt")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_hpwha")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcprl"]
-radius = 27.0
-height = 54.0
+radius = 41.0
+height = 152.0
 
 [node name="Turret" type="RigidBody2D"]
 mass = 1000.0
 gravity_scale = 0.0
 script = ExtResource("1_fcprl")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-35, 26, 35, 26, 35, -10, 11, -30, -11, -30, -35, -10)
-
-[node name="GroundRaycast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 27)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_fcprl")
-
 [node name="Pivot" type="Node2D" parent="."]
-position = Vector2(0, -34)
-
-[node name="ColorRect" type="ColorRect" parent="Pivot"]
-offset_left = -4.0
-offset_right = 55.0
-offset_bottom = 8.0
-rotation = -1.5708
+position = Vector2(0, -78)
 
 [node name="PlayerRaycast" type="RayCast2D" parent="Pivot"]
 target_position = Vector2(0, -1000)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
+position = Vector2(0, -66)
+sprite_frames = SubResource("SpriteFrames_bfgsf")
+animation = &"shoot"
+frame = 5
+frame_progress = 1.0
+
+[node name="TurretBase" type="Sprite2D" parent="."]
+position = Vector2(0, -77)
+texture = ExtResource("3_pulj5")
+
+[node name="GroundRaycast" type="RayCast2D" parent="."]
+position = Vector2(0, -22)
+target_position = Vector2(0, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -42)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_fcprl")

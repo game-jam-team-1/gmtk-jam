@@ -1,7 +1,7 @@
 class_name Minimap
 extends Node2D
 
-const scale_factor: float = 50.0
+const scale_factor: float = 100.0
 
 @onready var world: World = get_parent().get_parent()
 @export var player: Player
@@ -16,7 +16,7 @@ func _convert_to_local(pos: Vector2):
 	return converted
 
 func _get_alpha(local_pos: Vector2) -> float:
-	return 1 - local_pos.length() / 60
+	return 1 - local_pos.length() / 65
 
 func _draw() -> void:
 	var planets: Array[Planet]
@@ -26,6 +26,8 @@ func _draw() -> void:
 		if node is Planet:
 			planets.append(node)
 		if node is CrawlerEnemy:
+			enemies.append(node)
+		if node is ShipEnemy:
 			enemies.append(node)
 	
 	for planet in planets:
