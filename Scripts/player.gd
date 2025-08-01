@@ -83,3 +83,5 @@ func is_on_ground() -> bool:
 
 func die():
 	print("you died")
+	$"UI/DeathScreen".visible = true
+	get_tree().paused = true

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dquu1nsh7febk" path="res://Scripts/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="2_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space-background-stars.png" id="3_ce3w2"]
-[ext_resource type="Script" path="res://Scripts/menu_camera.gd" id="4_ce3w2"]
+[ext_resource type="Script" uid="uid://cxragsgncirtb" path="res://Scripts/menu_camera.gd" id="4_ce3w2"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_06t4h")
@@ -36,28 +36,22 @@ texture = ExtResource("3_ce3w2")
 position = Vector2(1152, 648)
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("4_ce3w2")
+speed = 300.0
 
-[node name="Label" type="Label" parent="Camera2D"]
-offset_left = -970.0
-offset_top = -124.0
-offset_right = -267.0
-offset_bottom = 81.0
+[node name="Title" type="Label" parent="Camera2D"]
+offset_left = -1067.0
+offset_top = -244.0
+offset_right = -364.0
+offset_bottom = -39.0
 theme_override_font_sizes/font_size = 150
 text = "Title Here"
 
-[node name="Label2" type="Label" parent="Camera2D"]
-offset_left = 472.0
-offset_top = -369.0
-offset_right = 787.0
-offset_bottom = -300.0
-theme_override_font_sizes/font_size = 50
-text = "Click To Start"
+[node name="Play" type="Button" parent="Camera2D"]
+offset_left = -72.0
+offset_top = -367.0
+offset_right = 655.0
+offset_bottom = -202.0
+theme_override_font_sizes/font_size = 80
+text = "Play"
 
-[node name="TextureButton" type="TextureButton" parent="Camera2D"]
-z_index = 5
-offset_left = 283.0
-offset_top = -381.0
-offset_right = 990.0
-offset_bottom = -282.0
-
-[connection signal="button_up" from="Camera2D/TextureButton" to="." method="_on_texture_button_button_up"]
+[connection signal="button_up" from="Camera2D/Play" to="." method="_on_play_button_up"]
