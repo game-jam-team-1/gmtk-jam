@@ -14,6 +14,7 @@ radius = 158.114
 radius = 210.3002
 
 [node name="Planet" type="AnimatableBody2D"]
+collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_a75xc")
 script = ExtResource("1_a75xc")
 

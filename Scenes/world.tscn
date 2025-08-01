@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 [gd_scene load_steps=11 format=3 uid="uid://debprahfmmn1a"]
+=======
+[gd_scene load_steps=14 format=3 uid="uid://debprahfmmn1a"]
+>>>>>>> 7123090503d278e8c22b53cc33c604c60f23afd9
 
-[ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_5ukr8"]
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://c3ef480rpsots" path="res://Scenes/package_depot.tscn" id="2_fo5ed"]
@@ -10,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="8_5v1tr"]
 [ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space-background-stars.png" id="9_0fj1v"]
 [ext_resource type="PackedScene" uid="uid://bftvio34nopyu" path="res://Scenes/ship_enemy.tscn" id="11_ikia7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7yui6"]
 
 [node name="World" type="Node2D"]
 position = Vector2(656, 904)
@@ -69,8 +75,9 @@ rotation = 0.785398
 scale = Vector2(0.236216, 0.236216)
 
 [node name="Turret" parent="Planet4" instance=ExtResource("6_7yui6")]
-position = Vector2(178.579, -6.85027)
+position = Vector2(190.626, -4.96054)
 rotation = 1.5708
+scale = Vector2(0.25, 0.25)
 
 [node name="Player" parent="." instance=ExtResource("2_fj7yv")]
 position = Vector2(800, 903)
@@ -78,10 +85,31 @@ contact_monitor = true
 max_contacts_reported = 1
 
 [node name="CrawlerEnemy" parent="." instance=ExtResource("3_tlwt5")]
-position = Vector2(1497, 2081)
+position = Vector2(-154, 1462)
 
 [node name="Package" parent="." instance=ExtResource("4_8j60k")]
 position = Vector2(1620, 966)
+
+[node name="Turret2" type="Sprite2D" parent="."]
+position = Vector2(1871, 1892)
+texture = SubResource("CompressedTexture2D_7yui6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FuelBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 738.0
+offset_top = 998.0
+offset_right = 1243.0
+offset_bottom = 1060.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Minimap" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("6_o06y3")]
+position = Vector2(1836, 84)
+player = NodePath("../../Player")
+
+[node name="DialogBox" parent="CanvasLayer" instance=ExtResource("8_k7acu")]
+position = Vector2(935, 85)
 
 [node name="Packages" type="Node2D" parent="."]
 
@@ -101,7 +129,8 @@ visible = false
 points = PackedVector2Array(1910, 863, 1781, 620, 1791, 462, 1785, 308, 1723, 201, 1599, 143, 1463, 177, 1310, 292, 1101, 458, 853, 526, 600, 600, 420, 709, 188, 1028, 70, 1309, 13, 1514, -43, 1654, -167, 1743, -423, 1910, -604, 2177, -680, 2375, -658, 2477, -460, 2523, -210, 2534, 216, 2519, 668, 2469, 991, 2462, 1420, 2428, 1735, 2169, 1989, 2033, 2236, 1934, 2351, 1828, 2493, 1635, 2475, 1493, 2305, 1378, 2135, 1286)
 
 [node name="CrawlerEnemy2" parent="." instance=ExtResource("3_tlwt5")]
-position = Vector2(409, 1077)
+position = Vector2(678, 70)
 
 [node name="CrawlerEnemy3" parent="." instance=ExtResource("3_tlwt5")]
-position = Vector2(97, 2072)
+position = Vector2(3298, 668)
+drift_direction = Vector2(-50, 10)
