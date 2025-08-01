@@ -12,20 +12,23 @@ const AGGRO_THRESHOLD: float = 2.0
 const MAX_AGGRO: float = 3.0
 const MAX_BARREL_ROTATION: float = PI/2
 
-
 var planet_velocity = Vector2.ZERO
 var gravity_velocity = Vector2.ZERO
-
-
 var state: STATE = STATE.IDLE
 var aggro_value: float = 0.0
 var rotation_direction = 1
 var center_rotation = global_rotation
 
-
 @onready var ground_raycast: RayCast2D = $"GroundRaycast"
 @onready var player_raycast: RayCast2D = $"Pivot/PlayerRaycast"
 @onready var pivot: Node2D = $"Pivot"
+
+@onready var bullet = preload("uid://de75elo7ykf0g")
+
+@onready var bullet_shoot_timer: SceneTreeTimer = get_tree().create_timer(1.0 / bullet_frequency)
+
+@export var bullet_speed: float = 1000.0 # pixels per second
+@export var bullet_frequency: float = 2.0 # bullet per second
 
 
 func _ready() -> void:
@@ -41,9 +44,7 @@ func _physics_process(delta: float) -> void:
 		idle(delta)
 	else:
 		target()
-		print(rad_to_deg(pivot.rotation))
-	
-
+		shooting()
 
 func _proccess_movement():
 	rotation = (position).angle() + PI/2.0
@@ -86,6 +87,16 @@ func idle(delta):
 	pivot.rotation += rotation_direction * delta
 	if abs(pivot.rotation) >= MAX_BARREL_ROTATION:
 		rotation_direction = -rotation_direction
+
+
+func shooting():
+	if bullet_shoot_timer.time_left == 0:
+		bullet_shoot_timer = get_tree().create_timer(1 / bullet_frequency)
+		
+		var new_bullet: TurretBullet = bullet.instantiate()
+		add_child(new_bullet)
+		new_bullet.setup(global_position, Vector2.from_angle(pivot.rotation - PI / 2.0), bullet_speed)
+
 
 func target():
 	pivot.rotation = clamp(normalize_angle((pivot.global_position - Global.Player.global_position).angle() - PI/2 - global_rotation), -MAX_BARREL_ROTATION, MAX_BARREL_ROTATION)

@@ -26,6 +26,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	queue_redraw()
+	
 	if !orbit_planet:
 		return
 	
@@ -36,6 +38,15 @@ func _physics_process(delta: float) -> void:
 	
 	previous_position = global_position
 
+func _draw() -> void:
+	if !orbit_planet:
+		return
+	
+	draw_circle(
+		to_local(orbit_planet.global_position), 
+		global_position.distance_to(orbit_planet.global_position) / scale.x, 
+		Color(0.5, 0.5, 0.5, 0.5), 
+		false, 2 / scale.x, true)
 
 func get_radius() -> float:
 	return radius

@@ -36,11 +36,7 @@ func _physics_process(delta: float) -> void:
 	if player_movement.is_thruster_movement:
 		player_movement._process_thruster_movement(delta)
 	
-	
-	for body in get_colliding_bodies():
-		if body.has_method("kills_on_collision"):
-			die()
-
+	_process_death()
 
 func _update_movement_mode() -> void:
 	var grav_area: GravityArea = gravity_component.closest_gravity_area
@@ -54,6 +50,17 @@ func _update_movement_mode() -> void:
 	else:
 		player_movement.set_thruster_movement()
 
+## BAd
+func _process_death() -> void:
+	var potential_killers: Array[Node2D]
+	
+	for body in get_colliding_bodies():
+		potential_killers.append(body)
+	for area in $PlayerMovement/GravityComponent.get_overlapping_areas():
+		potential_killers.append(area)
+	for node in potential_killers:
+		if (node.has_method("kills_on_collision") && node.kills_on_collision()):
+			die()
 
 func _process_packages() -> void:
 	_process_package_animations()
@@ -92,7 +99,6 @@ func _process_packages() -> void:
 		closest_package.get_grabbed()
 		print("Collected Package -- New count: " + str(collected_packages))
 
-
 func _setup_send_package_to_depot_animation() -> void:
 	var icon_node: Node2D
 	if collected_packages == 1:
@@ -112,7 +118,6 @@ func _process_package_animations() -> void:
 		for ball: Node2D in duplicated_balls:
 			ball.global_position = lerp(ball.global_position, sending_package_depot.global_position, 0.01)
 
-
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO
 	
@@ -121,10 +126,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	
 	linear_velocity = player_movement.get_velocity() + planet_velocity
 
-
 func is_on_ground() -> bool:
 	return player_movement.is_on_ground()
-
 
 func die():
 	print("you died")
