@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o7rm611mln36"
-path="res://.godot/imported/turret-shaft.png-0a558cad72e42b19e38dd7ceb120c227.ctex"
+uid="uid://vdqsaytnjbpi"
+path="res://.godot/imported/bug_sheet.png-91ae438b0af23dd5855ee13c878573d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/turret-shaft.png"
-dest_files=["res://.godot/imported/turret-shaft.png-0a558cad72e42b19e38dd7ceb120c227.ctex"]
+source_file="res://Assets/bug_sheet.png"
+dest_files=["res://.godot/imported/bug_sheet.png-91ae438b0af23dd5855ee13c878573d7.ctex"]
 
 [params]
 

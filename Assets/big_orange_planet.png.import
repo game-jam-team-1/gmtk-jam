@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgwxe38veq3v3"
-path="res://.godot/imported/turret-base.png-f0df103b85d0bb40d454d17188340fa2.ctex"
+uid="uid://cr2vbgdm27plv"
+path="res://.godot/imported/big_orange_planet.png-a8b89d2b04565a60ae1009b6f06cb95d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/turret-base.png"
-dest_files=["res://.godot/imported/turret-base.png-f0df103b85d0bb40d454d17188340fa2.ctex"]
+source_file="res://Assets/big_orange_planet.png"
+dest_files=["res://.godot/imported/big_orange_planet.png-a8b89d2b04565a60ae1009b6f06cb95d.ctex"]
 
 [params]
 

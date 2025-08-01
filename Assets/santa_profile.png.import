@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0nha0prp1q8v"
-path="res://.godot/imported/turret-shaft-sheet.png-2410042a19ac14a227080b91cc08bb78.ctex"
+uid="uid://bfwrqrm3545sm"
+path="res://.godot/imported/santa_profile.png-6b885488af1545792d7c8a20855c3728.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/turret-shaft-sheet.png"
-dest_files=["res://.godot/imported/turret-shaft-sheet.png-2410042a19ac14a227080b91cc08bb78.ctex"]
+source_file="res://Assets/santa_profile.png"
+dest_files=["res://.godot/imported/santa_profile.png-6b885488af1545792d7c8a20855c3728.ctex"]
 
 [params]
 

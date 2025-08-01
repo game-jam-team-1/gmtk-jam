@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://bdnjjis5flvtj"]
 
 [ext_resource type="Script" uid="uid://cbq7qrqn7b77c" path="res://Scripts/turret.gd" id="1_fcprl"]
-[ext_resource type="Texture2D" uid="uid://d0nha0prp1q8v" path="res://Assets/turret-shaft-sheet.png" id="2_6spbj"]
-[ext_resource type="Texture2D" uid="uid://bgwxe38veq3v3" path="res://Assets/turret-base.png" id="3_pulj5"]
+[ext_resource type="Texture2D" uid="uid://d0nha0prp1q8v" path="res://Assets/turret_shaft_sheet.png" id="2_6spbj"]
+[ext_resource type="Texture2D" uid="uid://bgwxe38veq3v3" path="res://Assets/turret_base.png" id="3_pulj5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pulj5"]
 atlas = ExtResource("2_6spbj")

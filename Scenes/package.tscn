@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwfprdl306fpk" path="res://Scripts/package.gd" id="1_gkk3b"]
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="2_wvags"]
-[ext_resource type="Texture2D" uid="uid://coaxubw1xq4xc" path="res://Assets/package-sheet.png" id="3_8o66u"]
+[ext_resource type="Texture2D" uid="uid://coaxubw1xq4xc" path="res://Assets/purple_package.png" id="3_8o66u"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkk3b"]
 friction = 0.0

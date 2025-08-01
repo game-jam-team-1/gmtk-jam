@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dof6g6vr1scyj"
-path="res://.godot/imported/big-blue-planet.png-1fd1d4cd79ca53698764666cf8546cd1.ctex"
+uid="uid://o7rm611mln36"
+path="res://.godot/imported/turret_shaft.png-5af12011d610a7236a3d9ea414c8334f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/big-blue-planet.png"
-dest_files=["res://.godot/imported/big-blue-planet.png-1fd1d4cd79ca53698764666cf8546cd1.ctex"]
+source_file="res://Assets/turret_shaft.png"
+dest_files=["res://.godot/imported/turret_shaft.png-5af12011d610a7236a3d9ea414c8334f.ctex"]
 
 [params]
 

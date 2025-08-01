@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coaxubw1xq4xc"
-path="res://.godot/imported/package-sheet.png-702b18bc983dbc21d4f5794b833a9512.ctex"
+uid="uid://bd886phkg1kv6"
+path="res://.godot/imported/big_purple_planet.png-39741af8c1bd504b453add1fc0bed498.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/package-sheet.png"
-dest_files=["res://.godot/imported/package-sheet.png-702b18bc983dbc21d4f5794b833a9512.ctex"]
+source_file="res://Assets/big_purple_planet.png"
+dest_files=["res://.godot/imported/big_purple_planet.png-39741af8c1bd504b453add1fc0bed498.ctex"]
 
 [params]
 
