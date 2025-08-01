@@ -17,7 +17,6 @@ func _physics_process(delta: float) -> void:
 	if randomization_time <= 0:
 		randomize_direction()
 	
-	print(angle_difference(direction, target_direction))
 	position += Vector2.from_angle(direction) * speed * delta
 
 func randomize_direction() -> void:
