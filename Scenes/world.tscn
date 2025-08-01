@@ -53,9 +53,11 @@ orbit_speed = 0.002
 
 [node name="Turret" parent="Planet" instance=ExtResource("6_7yui6")]
 position = Vector2(6, -188)
+bullet_frequency = 5.0
 
 [node name="Turret3" parent="Planet" instance=ExtResource("6_7yui6")]
 position = Vector2(1, 212)
+bullet_frequency = 2.0
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("1_fj7yv")]
 position = Vector2(1938, 485)

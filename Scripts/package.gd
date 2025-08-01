@@ -2,10 +2,13 @@ class_name Package
 extends RigidBody2D
 
 
+@export var package_type: Planet.PlanetType
+
 @export var spawn_round: int
 
 @onready var gravity_component: GravityComponent = $"PackageArea"
-@onready var animation: AnimationPlayer = $"AnimationPlayer"
+
+var following_node: Node2D
 
 @onready var raycasts: Array[RayCast2D] = [
 	$"Raycasts/RayCast1",
@@ -31,6 +34,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	gravity_component.update_gravity_force(delta)
 	
+	if following_node && global_position.distance_to(following_node.global_position) > 500:
+		global_position = lerp(global_position, following_node.global_position, 0.01)
+	
 	if !gravity_component.closest_gravity_area:
 		return
 	
@@ -46,14 +52,15 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if gravity_component.closest_gravity_area:
 		planet_velocity = gravity_component.closest_gravity_area.planet.velocity
 	
-	state.linear_velocity = gravity_component.get_gravitational_force() + planet_velocity
+	if !following_node:
+		linear_velocity = gravity_component.get_gravitational_force() + planet_velocity
+	else:
+		linear_velocity = Vector2.ZERO
 
-func get_grabbed() -> void:
-	if get_parent() is World:
-		get_parent().package_collected()
-	animation.play("grab")
+func get_grabbed(following: Node2D) -> void:
+	following_node = following
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	queue_free()
 
 func _new_round(round: int) -> void:

@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cso8oa456wo88"]
 
 [ext_resource type="Script" uid="uid://tut3xa1jfd13" path="res://Scripts/dialog_box.gd" id="1_twcdb"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sqs0f"]
+[ext_resource type="Texture2D" uid="uid://bfwrqrm3545sm" path="res://Assets/santa-profile.png" id="2_sqs0f"]
 
 [node name="DialogBox" type="Node2D"]
 position = Vector2(320, 96)
@@ -29,8 +28,8 @@ metadata/_edit_use_anchors_ = true
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-224.812, 0)
-scale = Vector2(115, 115)
-texture = SubResource("PlaceholderTexture2D_sqs0f")
+scale = Vector2(0.68, 0.68)
+texture = ExtResource("2_sqs0f")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -157.0

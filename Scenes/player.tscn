@@ -1,7 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://cdxanxha8yc48"]
+[gd_scene load_steps=31 format=3 uid="uid://cdxanxha8yc48"]
 
 [ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://Scripts/player.gd" id="1_v0iea"]
-[ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Assets/ball.png" id="2_cvnsp"]
 [ext_resource type="Script" uid="uid://bub0fyvm5xhx4" path="res://Scripts/player_movement.gd" id="2_x3wgy"]
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="3_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://Assets/player-sheet.png" id="3_6t5aa"]
@@ -159,6 +158,44 @@ size = Vector2(83, 140)
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0iea"]
 radius = 126.016
 
+[sub_resource type="Animation" id="Animation_8erm5"]
+resource_name = "begin"
+length = 2.0
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.46666667, 1.9333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f1ek2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tx1dd"]
+_data = {
+&"RESET": SubResource("Animation_f1ek2"),
+&"begin": SubResource("Animation_8erm5")
+}
+
 [node name="Player" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_fj7yv")
 gravity_scale = 0.0
@@ -224,48 +261,6 @@ debug_color = Color(0.840643, 0.364583, 0.318232, 0.42)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.3, 0.3)
 
-[node name="OnePackage" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, -75)
-
-[node name="Ball" type="Sprite2D" parent="OnePackage"]
-position = Vector2(1, -55.000008)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_cvnsp")
-
-[node name="TwoPackages" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, -96)
-
-[node name="Ball2" type="Sprite2D" parent="TwoPackages"]
-position = Vector2(37.00001, -34)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_cvnsp")
-
-[node name="Ball3" type="Sprite2D" parent="TwoPackages"]
-position = Vector2(-37, -34)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_cvnsp")
-
-[node name="ThreePackages" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, -75)
-
-[node name="Ball2" type="Sprite2D" parent="ThreePackages"]
-position = Vector2(75, -55.000008)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_cvnsp")
-
-[node name="Ball3" type="Sprite2D" parent="ThreePackages"]
-position = Vector2(1, -55.000008)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_cvnsp")
-
-[node name="Ball4" type="Sprite2D" parent="ThreePackages"]
-position = Vector2(-73.00002, -55.000008)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_cvnsp")
-
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="FuelBar" type="ProgressBar" parent="UI"]
@@ -282,3 +277,14 @@ position = Vector2(1836, 84)
 [node name="DialogBox" parent="UI" instance=ExtResource("8_f1ek2")]
 visible = false
 position = Vector2(935, 85)
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+offset_right = 1946.0
+offset_bottom = 1103.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+&"": SubResource("AnimationLibrary_tx1dd")
+}
+autoplay = "begin"

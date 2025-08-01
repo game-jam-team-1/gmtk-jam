@@ -1,6 +1,14 @@
 class_name Planet
 extends AnimatableBody2D
 
+enum PlanetType {
+	ORANGE,
+	GREEN,
+	BLUE,
+	PURPLE,
+}
+
+@export var planet_type: PlanetType
 @export var refills_fuel: bool = false
 @export var orbit_planet: Planet
 @export var orbit_speed: float = 0.01

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmdo04ji5483p"]
+[gd_scene load_steps=13 format=3 uid="uid://cmdo04ji5483p"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="1_feyax"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="6_p1f1o"]
 [ext_resource type="Script" uid="uid://c3rx758kdf3x7" path="res://Scripts/santa.gd" id="6_ys4pu"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="8_h2ono"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2ono"]
+radius = 204.3055
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1f1o"]
 size = Vector2(192, 346)
@@ -54,12 +57,19 @@ position = Vector2(2157, 2151)
 scale = Vector2(10, 10)
 refills_fuel = true
 
+[node name="CollisionShape2D" parent="Planet/Area2D" index="0"]
+shape = SubResource("CircleShape2D_h2ono")
+
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
-position = Vector2(4365, 165)
+position = Vector2(3942, 3903)
 scale = Vector2(2, 2)
 refills_fuel = true
 orbit_planet = NodePath("../Planet")
 orbit_speed = 0.0029999999969732
+
+[node name="Package" parent="Planet2" instance=ExtResource("8_h2ono")]
+position = Vector2(162, 125)
+scale = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." instance=ExtResource("4_i6t4g")]
 position = Vector2(3651, 1520)
@@ -136,8 +146,5 @@ metadata/_edit_lock_ = true
 position = Vector2(-5, 132.34253)
 target_position = Vector2(0, 41)
 metadata/_edit_lock_ = true
-
-[node name="Package" parent="." instance=ExtResource("8_h2ono")]
-position = Vector2(4689, 415)
 
 [editable path="Planet"]
