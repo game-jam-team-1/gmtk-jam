@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvcoyy63ccdn6"
-path="res://.godot/imported/ball.png-1953c7d658a9d52aab6b71a2f962f6ac.ctex"
+uid="uid://bgwxe38veq3v3"
+path="res://.godot/imported/turret-base.png-f0df103b85d0bb40d454d17188340fa2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ball.png"
-dest_files=["res://.godot/imported/ball.png-1953c7d658a9d52aab6b71a2f962f6ac.ctex"]
+source_file="res://Assets/turret-base.png"
+dest_files=["res://.godot/imported/turret-base.png-f0df103b85d0bb40d454d17188340fa2.ctex"]
 
 [params]
 
