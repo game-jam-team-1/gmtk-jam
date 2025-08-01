@@ -8,7 +8,7 @@ var gravitational_force: Vector2 = Vector2.ZERO
 
 
 func _physics_process(delta: float) -> void:
-	var areas = get_overlapping_areas()
+	var areas = get_overlapping_areas()  # Returns empty on first frame
 	var nearest_area: GravityArea = null
 	var shortest_distance: float = INF
 	

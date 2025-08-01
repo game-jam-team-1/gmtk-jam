@@ -1,11 +1,11 @@
 [gd_scene load_steps=27 format=3 uid="uid://cdxanxha8yc48"]
 
 [ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://Scripts/player.gd" id="1_v0iea"]
-[ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Scripts/ball.png" id="2_cvnsp"]
-[ext_resource type="Script" uid="uid://bub0fyvm5xhx4" path="res://Scenes/player_movement.gd" id="2_fkybt"]
+[ext_resource type="Texture2D" uid="uid://cvcoyy63ccdn6" path="res://Assets/ball.png" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://bub0fyvm5xhx4" path="res://Scripts/player_movement.gd" id="2_x3wgy"]
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="3_3smsa"]
-[ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://player-sheet.png" id="3_6t5aa"]
-[ext_resource type="Script" uid="uid://kxqmkedf0r42" path="res://Scenes/player_animation.gd" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://Assets/player-sheet.png" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://kxqmkedf0r42" path="res://Scripts/player_animation.gd" id="4_3smsa"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
 friction = 0.0
@@ -155,7 +155,7 @@ animations = [{
 size = Vector2(83, 140)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0iea"]
-radius = 126.01587
+radius = 126.016
 
 [node name="Player" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_fj7yv")
@@ -164,7 +164,7 @@ lock_rotation = true
 script = ExtResource("1_v0iea")
 
 [node name="PlayerMovement" type="Node2D" parent="."]
-script = ExtResource("2_fkybt")
+script = ExtResource("2_x3wgy")
 
 [node name="GravityComponent" type="Area2D" parent="PlayerMovement" node_paths=PackedStringArray("parent")]
 script = ExtResource("3_3smsa")
@@ -197,7 +197,7 @@ target_position = Vector2(0, 23)
 metadata/_edit_lock_ = true
 
 [node name="PlayerAnimation" type="Node2D" parent="."]
-script = ExtResource("3_x3wgy")
+script = ExtResource("4_3smsa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerAnimation"]
 position = Vector2(0, 61)

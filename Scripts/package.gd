@@ -14,12 +14,12 @@ extends RigidBody2D
 	$"Raycasts/RayCast4",
 ]
 
-@onready var world: World = get_parent().get_parent()
+#@onready var world: World = get_parent().get_parent()
 
 func _ready() -> void:
 	visible = false
 	$CollisionShape2D.disabled = true
-	world.new_round.connect(_new_round)
+	#world.new_round.connect(_new_round)
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:

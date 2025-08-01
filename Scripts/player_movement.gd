@@ -149,6 +149,7 @@ func is_on_ground() -> bool:
 	
 	return false
 
+
 func get_velocity() -> Vector2:
 	var vel: Vector2 = strafe_velocity + jump_velocity + thruster_velocity
 	
@@ -159,3 +160,11 @@ func get_velocity() -> Vector2:
 		vel += gravity_component.get_gravitational_force() * 0.3
 	
 	return vel
+
+func set_grounded_movement() -> void:
+	is_grounded_movement = true
+	is_thruster_movement = false
+
+func set_thruster_movement() -> void:
+	is_thruster_movement = true
+	is_grounded_movement = false

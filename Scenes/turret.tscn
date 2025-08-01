@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdnjjis5flvtj"]
+
+[ext_resource type="Script" uid="uid://cbq7qrqn7b77c" path="res://Scripts/turret.gd" id="1_fcprl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcprl"]
+radius = 27.0
+height = 54.0
+
+[node name="Turret" type="RigidBody2D"]
+mass = 1000.0
+gravity_scale = 0.0
+script = ExtResource("1_fcprl")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-35, 26, 35, 26, 35, -10, 11, -30, -11, -30, -35, -10)
+
+[node name="GroundRaycast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 27)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_fcprl")
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(0, -34)
+
+[node name="ColorRect" type="ColorRect" parent="Pivot"]
+offset_left = -4.0
+offset_right = 55.0
+offset_bottom = 8.0
+rotation = -1.5708
+
+[node name="PlayerRaycast" type="RayCast2D" parent="Pivot"]
+target_position = Vector2(0, -1000)

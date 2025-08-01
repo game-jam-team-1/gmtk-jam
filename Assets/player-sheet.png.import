@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbbwu08nxhti0"
-path="res://.godot/imported/space-background-stars.png-75e29bc3d51ae146510d0b65f4477fa9.ctex"
+uid="uid://bs0nmcq3yreug"
+path="res://.godot/imported/player-sheet.png-69c5fdbd4f7e0a2d9d3ed12d4ae2838a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/space-background-stars.png"
-dest_files=["res://.godot/imported/space-background-stars.png-75e29bc3d51ae146510d0b65f4477fa9.ctex"]
+source_file="res://Assets/player-sheet.png"
+dest_files=["res://.godot/imported/player-sheet.png-69c5fdbd4f7e0a2d9d3ed12d4ae2838a.ctex"]
 
 [params]
 

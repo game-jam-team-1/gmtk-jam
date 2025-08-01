@@ -13,37 +13,46 @@ var sending_packages_to_depot: bool = false
 @onready var gravity_component: GravityComponent = $"PlayerMovement/GravityComponent"
 @onready var large_detection_area: Area2D = $"LargeDetectionArea"
 
+@onready var ground_raycast: RayCast2D = $"RayCast2D"
+@onready var fuel_bar: ProgressBar = $"../CanvasLayer/FuelBar"
+
 @onready var player_movement: PlayerMovement = $"PlayerMovement"
 @onready var player_animation: PlayerAnimation = $"PlayerAnimation"
 
 
 func _ready() -> void:
 	player_movement.is_grounded_movement = true
+	Global.Player = self
 
 func _physics_process(delta: float) -> void:
 	_process_packages()
 	
+	_update_movement_mode()
+	
 	if player_movement.is_grounded_movement:
-		
-		if gravity_component.closest_gravity_area != null:
-			gravity_component.update_gravity_force(delta)
-			
-			player_movement._process_grounded_movement(delta)
-		else:
-			player_movement.is_grounded_movement = false
-			player_movement.is_thruster_movement = true
+		player_movement._process_grounded_movement(delta)
+		gravity_component.update_gravity_force(delta)
 	
 	if player_movement.is_thruster_movement:
 		player_movement._process_thruster_movement(delta)
-		
-		var grav_area: GravityArea = gravity_component.closest_gravity_area
-		if (grav_area != null && gravity_component.get_distance_to_gravity_area(grav_area) < 100):
-			player_movement.is_grounded_movement = true
-			player_movement.is_thruster_movement = false
+	
 	
 	for body in get_colliding_bodies():
 		if body.has_method("kills_on_collision"):
-			queue_free()
+			die()
+
+
+func _update_movement_mode() -> void:
+	var grav_area: GravityArea = gravity_component.closest_gravity_area
+	
+	if grav_area != null:
+		var distance = gravity_component.get_distance_to_gravity_area(grav_area)
+		
+		if player_movement.is_thruster_movement && distance < 100:
+			player_movement.set_grounded_movement()
+		
+	else:
+		player_movement.set_thruster_movement()
 
 
 func _process_packages() -> void:
@@ -108,7 +117,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO
 	
 	if gravity_component.closest_gravity_area && is_on_ground():
-		print("yeh")
 		planet_velocity = gravity_component.closest_gravity_area.planet.velocity
 	
 	linear_velocity = player_movement.get_velocity() + planet_velocity
@@ -119,4 +127,4 @@ func is_on_ground() -> bool:
 
 
 func die():
-	queue_free()
+	print("you died")
