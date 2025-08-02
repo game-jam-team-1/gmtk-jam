@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmdo04ji5483p"]
+[gd_scene load_steps=13 format=3 uid="uid://djc3m70hpnbf4"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_feyax"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]
@@ -13,11 +13,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2ono"]
 radius = 197.235
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8va2t"]
-radius = 244.12
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_8mnmb"]
 radius = 297.152
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8va2t"]
+radius = 244.1199
 
 [node name="Tutorial" type="Node2D"]
 script = ExtResource("1_p8jf4")
@@ -50,45 +50,31 @@ position = Vector2(896, 512)
 scale = Vector2(2, 2)
 texture = ExtResource("2_omtrn")
 
-[node name="Planet" parent="." instance=ExtResource("3_omtrn")]
+[node name="Planet1" parent="." instance=ExtResource("3_omtrn")]
 position = Vector2(2157, 2151)
 scale = Vector2(10, 10)
 planet_type = 1
 refills_fuel = true
 
-[node name="Sprite" parent="Planet" index="0"]
+[node name="Sprite" parent="Planet1" index="0"]
 texture = ExtResource("5_on4kn")
 
-[node name="CollisionShape2D" parent="Planet/Area2D" index="0"]
+[node name="CollisionShape2D" parent="Planet1/Area2D" index="0"]
 shape = SubResource("CircleShape2D_h2ono")
 
-[node name="Package" parent="Planet" instance=ExtResource("8_h2ono")]
-position = Vector2(37.2, -161.3)
-scale = Vector2(0.1, 0.1)
+[node name="Package" parent="Planet1" instance=ExtResource("8_h2ono")]
+position = Vector2(108.2, -132.40001)
+scale = Vector2(0.099999994, 0.099999994)
 package_type = 2
 spawn_round = 1
-
-[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
-position = Vector2(7509, 2151)
-scale = Vector2(5, 5)
-planet_type = 2
-refills_fuel = true
-orbit_planet = NodePath("../Planet")
-orbit_speed = 0.001
-
-[node name="Sprite" parent="Planet3" index="0"]
-texture = ExtResource("6_8va2t")
-
-[node name="CollisionShape2D" parent="Planet3/Area2D" index="0"]
-shape = SubResource("CircleShape2D_8va2t")
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
 position = Vector2(4794, 4401)
 scale = Vector2(2, 2)
 planet_type = 4
 refills_fuel = true
-orbit_planet = NodePath("../Planet")
-orbit_speed = 0.003
+orbit_planet = NodePath("../Planet1")
+orbit_speed = 0.0029999999969732
 
 [node name="CollisionShape2D" parent="Planet2/Area2D" index="0"]
 shape = SubResource("CircleShape2D_8mnmb")
@@ -98,15 +84,28 @@ position = Vector2(162, 125)
 scale = Vector2(0.5, 0.5)
 package_type = 1
 
+[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
+position = Vector2(7509.0005, 2151)
+scale = Vector2(5, 5)
+planet_type = 2
+refills_fuel = true
+orbit_planet = NodePath("../Planet1")
+orbit_speed = 0.0010000000038417
+
+[node name="Sprite" parent="Planet3" index="0"]
+texture = ExtResource("6_8va2t")
+
+[node name="CollisionShape2D" parent="Planet3/Area2D" index="0"]
+shape = SubResource("CircleShape2D_8va2t")
+
 [node name="Player" parent="." instance=ExtResource("4_i6t4g")]
-position = Vector2(3083, 742)
+position = Vector2(1473, 717)
 contact_monitor = true
 
 [node name="Santa" parent="." instance=ExtResource("9_on4kn")]
-position = Vector2(2163, 405)
+position = Vector2(2228, 380)
 is_tutorial = true
 
-[editable path="Planet"]
-[editable path="Planet3"]
+[editable path="Planet1"]
 [editable path="Planet2"]
-[editable path="Player"]
+[editable path="Planet3"]

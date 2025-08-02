@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ffogbwobg7i3"]
+[gd_scene load_steps=15 format=3 uid="uid://1p5fxqvcld2h"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_8fptb"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_jeuw4"]
@@ -21,7 +21,7 @@ radius = 369.229
 [sub_resource type="CircleShape2D" id="CircleShape2D_w78nr"]
 radius = 334.253
 
-[node name="World2" type="Node2D"]
+[node name="Level2" type="Node2D"]
 script = ExtResource("1_jeuw4")
 level_number = 2
 rounds = 2
@@ -103,11 +103,6 @@ scale = Vector2(0.236216, 0.236216)
 position = Vector2(7.5589, 186.847)
 scale = Vector2(0.236216, 0.236216)
 
-[node name="Player" parent="." instance=ExtResource("5_8y0xx")]
-position = Vector2(2, 1776)
-contact_monitor = true
-max_contacts_reported = 1
-
 [node name="Planet" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
 position = Vector2(5254, 2435)
 orbit_planet = NodePath("../Green")
@@ -119,7 +114,7 @@ shape = SubResource("CircleShape2D_kyu1k")
 shape = SubResource("CircleShape2D_keswu")
 
 [node name="Turret2" parent="Planet" instance=ExtResource("10_0aor2")]
-position = Vector2(23, -159)
+position = Vector2(1, -159)
 
 [node name="Package2" parent="Planet" instance=ExtResource("9_8y0xx")]
 position = Vector2(259, 51)
@@ -157,6 +152,11 @@ orbit_speed = 0.001
 [node name="Santa" parent="." instance=ExtResource("11_kyu1k")]
 position = Vector2(480, 1879)
 rotation = 0.6195919
+
+[node name="Player" parent="." instance=ExtResource("5_8y0xx")]
+position = Vector2(2, 1776)
+contact_monitor = true
+max_contacts_reported = 1
 
 [editable path="Blue"]
 [editable path="Green"]
