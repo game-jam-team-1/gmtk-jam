@@ -6,8 +6,11 @@ extends Node2D
 @onready var thruster: AudioStreamPlayer = $"Thruster"
 @onready var walk: AudioStreamPlayer = $"Walk"
 @onready var jump: AudioStreamPlayer = $"Jump"
+@onready var low_fuel_warning: AudioStreamPlayer = $"LowFuelWarning"
 
 var jumped: bool = false
+
+var is_low_fuel: bool = false
 
 
 func _process(delta: float) -> void:
@@ -28,5 +31,12 @@ func _process(delta: float) -> void:
 		jumped = true
 	
 	if jumped && player.is_on_ground():
-		jump.play(0.15)
+		jump.play(0.2)
 		jumped = false
+	
+	
+	if is_low_fuel && !low_fuel_warning.playing:
+		low_fuel_warning.play()
+	
+	if !is_low_fuel && low_fuel_warning.playing:
+		low_fuel_warning.stop()

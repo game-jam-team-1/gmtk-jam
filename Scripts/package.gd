@@ -18,7 +18,6 @@ var following_node: Node2D
 var spawned_in: bool = false
 var parent_offset_pos: Vector2
 
-var rope_on: bool = false
 
 @onready var raycasts: Array[RayCast2D] = [
 	$"Raycasts/RayCast1",
@@ -76,6 +75,8 @@ func _physics_process(delta: float) -> void:
 	
 	if gravity_component.closest_gravity_area.planet.planet_type == package_type:
 		get_parent().get_parent().package_collected()
+		$"Dropoff".play()
+		await get_tree().create_timer(0.2).timeout
 		queue_free()
 	
 	var planet_center: Vector2 = gravity_component.closest_gravity_area.global_position
@@ -86,9 +87,6 @@ func _physics_process(delta: float) -> void:
 
 func _update_rope() -> void:
 	if following_node:
-		rope_on = true
-	
-	if rope_on:
 		$"Line2D".visible = true
 		$"Line2D".points[0] = global_position
 		$"Line2D".points[1] = Global.player.global_position
@@ -114,6 +112,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	_update_rope()
 
 func get_grabbed(following: Node2D) -> void:
+	$"Pickup".play()
 	lock_rotation = false
 	following_node = following
 

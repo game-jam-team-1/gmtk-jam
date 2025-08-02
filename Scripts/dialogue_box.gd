@@ -24,14 +24,17 @@ func text_chain(chain: Array[String]) -> void:
 	chain.pop_at(0)
 	queue = chain
 
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("dismiss_dialogue"):
 		if is_writing_text:
 			finish_writing_immediately()
 		elif queue.is_empty():
+			$"Click".play()
 			visible = false
 			finished.emit()
 		else:
+			$"Click".play()
 			text_chain(queue)
 	
 	if !is_writing_text:

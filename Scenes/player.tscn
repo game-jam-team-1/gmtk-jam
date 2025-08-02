@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cdxanxha8yc48"]
+[gd_scene load_steps=42 format=3 uid="uid://cdxanxha8yc48"]
 
 [ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://Scripts/player.gd" id="1_7dp3o"]
 [ext_resource type="Script" uid="uid://bub0fyvm5xhx4" path="res://Scripts/player_movement.gd" id="2_x3wgy"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://Assets/Art/player_sheet.png" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://kxqmkedf0r42" path="res://Scripts/player_animation.gd" id="4_3smsa"]
 [ext_resource type="Script" uid="uid://bas5dp26y004j" path="res://Scripts/ScreenColor.gd" id="6_f1ek2"]
-[ext_resource type="Script" path="res://Scripts/player_camera.gd" id="6_pu2lt"]
+[ext_resource type="Script" uid="uid://cjvdl65j2uhyb" path="res://Scripts/player_camera.gd" id="6_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://dxn2cem3kdxyv" path="res://Assets/Art/fuel_bar_over.png" id="8_7dp3o"]
 [ext_resource type="Script" path="res://Scenes/death_screen.gd" id="8_8erm5"]
 [ext_resource type="PackedScene" uid="uid://cso8oa456wo88" path="res://Scenes/dialogue_box.tscn" id="8_f1ek2"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://c5jvjdddsgi5m" path="res://Assets/Art/fuel_bar_under.png" id="9_h4iuc"]
 [ext_resource type="AudioStream" uid="uid://bcj0tj3e55quh" path="res://Sounds/Player/thruster.ogg" id="14_7dp3o"]
 [ext_resource type="AudioStream" uid="uid://hqvs6ntfl45f" path="res://Sounds/Player/jump.ogg" id="15_h4iuc"]
+[ext_resource type="AudioStream" uid="uid://kaexjcklage6" path="res://Sounds/Player/low_fuel_warning.mp3" id="16_fd4e3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
 friction = 0.0
@@ -322,7 +323,10 @@ texture_over = ExtResource("8_7dp3o")
 texture_progress = ExtResource("9_h4iuc")
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("8_f1ek2")]
-position = Vector2(1020, 978)
+offset_left = 630.0
+offset_top = 904.0
+offset_right = 1230.0
+offset_bottom = 1055.0
 
 [node name="ScreenColor" type="ColorRect" parent="UI"]
 visible = false
@@ -337,10 +341,10 @@ metadata/_edit_lock_ = true
 
 [node name="FuelWarning" type="Label" parent="UI"]
 visible = false
-offset_left = 946.0
-offset_top = 918.0
-offset_right = 1489.0
-offset_bottom = 993.0
+offset_left = 668.0
+offset_top = 785.0
+offset_right = 1211.0
+offset_bottom = 860.0
 text = "WARNING: Fuel low! Return to spawn planet to refuel!"
 label_settings = SubResource("LabelSettings_pu2lt")
 vertical_alignment = 2
@@ -399,23 +403,28 @@ theme_override_font_sizes/font_size = 80
 text = "You died"
 horizontal_alignment = 1
 
-[node name="Audio" type="Node2D" parent="."]
+[node name="PlayerAudio" type="Node2D" parent="."]
 script = ExtResource("8_tx1dd")
 
-[node name="Thruster" type="AudioStreamPlayer" parent="Audio"]
+[node name="Thruster" type="AudioStreamPlayer" parent="PlayerAudio"]
 stream = ExtResource("14_7dp3o")
 volume_db = -16.22
 pitch_scale = 0.88
 
-[node name="Walk" type="AudioStreamPlayer" parent="Audio"]
+[node name="Walk" type="AudioStreamPlayer" parent="PlayerAudio"]
 stream = ExtResource("9_gymyn")
 volume_db = -38.202
 pitch_scale = 1.98
 
-[node name="Jump" type="AudioStreamPlayer" parent="Audio"]
+[node name="Jump" type="AudioStreamPlayer" parent="PlayerAudio"]
 stream = ExtResource("15_h4iuc")
 volume_db = -6.203
 pitch_scale = 1.35
+
+[node name="LowFuelWarning" type="AudioStreamPlayer" parent="PlayerAudio"]
+stream = ExtResource("16_fd4e3")
+volume_db = -22.0
+pitch_scale = 0.98
 
 [node name="DamagedAnimations" type="AnimationPlayer" parent="."]
 libraries = {
@@ -423,6 +432,7 @@ libraries = {
 }
 
 [node name="Arrow" type="Node2D" parent="."]
+visible = false
 
 [node name="Polygon2D" type="Polygon2D" parent="Arrow"]
 polygon = PackedVector2Array(1073, 22, 1073, -31, 1133, -2)

@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 		collected_package = true
 		player = $"../Player"
 		var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
+		$"Bells".play()
 		dialogue.text_chain([
 			"Good job collecting the package.",
 			"Remember to only bring green packages to green planets, and blue packages to blue planets, and so on.",
@@ -49,6 +50,7 @@ func _process(delta: float) -> void:
 		final_dialogue = true
 		player = $"../Player"
 		var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
+		$"Bells".play()
 		dialogue.text_chain([
 			"You show great promise! It is time for you to head out into the galaxy.",
 			"Fairwell!"
@@ -60,6 +62,7 @@ func _process(delta: float) -> void:
 			player = area.get_parent()
 			met_santa = true
 			var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
+			$"Bells".play()
 			dialogue.text_chain([
 				"Ho ho ho! I am santa.\n\nPress space to continue the dialogue.",
 				"You can jump by pressing W, and high jump by pressing Shift+W.",

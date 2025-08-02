@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cso8oa456wo88"]
+[gd_scene load_steps=6 format=3 uid="uid://cso8oa456wo88"]
 
 [ext_resource type="Script" uid="uid://tut3xa1jfd13" path="res://Scripts/dialogue_box.gd" id="1_kyvu4"]
 [ext_resource type="Texture2D" uid="uid://bfwrqrm3545sm" path="res://Assets/Art/santa_profile.png" id="2_tlprh"]
 [ext_resource type="FontFile" uid="uid://cmd18xd5qilt5" path="res://Assets/Fonts/MedodicaRegular.otf" id="3_hg80k"]
+[ext_resource type="AudioStream" uid="uid://bxaaci6y4dbrm" path="res://Sounds/click.ogg" id="4_tlprh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p43km"]
 line_spacing = -2.0
@@ -56,3 +57,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tlprh")
+volume_db = -16.0

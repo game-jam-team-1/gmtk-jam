@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7nvpr65unuoi"]
+[gd_scene load_steps=8 format=3 uid="uid://b7nvpr65unuoi"]
 
 [ext_resource type="Script" uid="uid://c3rx758kdf3x7" path="res://Scripts/santa.gd" id="1_apxct"]
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="2_mux0t"]
 [ext_resource type="Texture2D" uid="uid://qo7bl4lt3g8c" path="res://Assets/Art/santa.png" id="3_auslg"]
+[ext_resource type="AudioStream" uid="uid://b5dcwraddgirk" path="res://Sounds/Santa/bells.ogg" id="4_mux0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1f1o"]
 size = Vector2(192, 346)
@@ -54,3 +55,6 @@ metadata/_edit_lock_ = true
 [node name="Santa2" type="Sprite2D" parent="."]
 position = Vector2(-2, -3)
 texture = ExtResource("3_auslg")
+
+[node name="Bells" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mux0t")

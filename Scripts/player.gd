@@ -29,6 +29,7 @@ var sending_packages_to_depot: bool = false
 
 @onready var player_movement: PlayerMovement = $"PlayerMovement"
 @onready var player_animation: PlayerAnimation = $"PlayerAnimation"
+@onready var player_audio: PlayerAudio = $"PlayerAudio"
 
 @onready var world: World = get_parent()
 

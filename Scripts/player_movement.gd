@@ -44,14 +44,9 @@ var is_thruster_on: bool = false
 ]
 
 @onready var fuel_bar: TextureProgressBar = $"../UI/FuelBar"
-
-@onready var screen_color: ScreenColor = $"../UI/ScreenColor"
-
-@onready var player: Player = get_parent()
-
-@onready var thruster_sound: AudioStreamPlayer2D = $"../Sounds/Thruster"
-
 @onready var self_destruct_timer: Timer = $"SelfDestructTimer"
+@onready var screen_color: ScreenColor = $"../UI/ScreenColor"
+@onready var player: Player = get_parent()
 
 func _ready() -> void:
 	fuel_bar.max_value = THRUSTER_MAX_FUEL
@@ -63,20 +58,31 @@ func _process(delta: float) -> void:
 		if !screen_flashing && !refueling:
 			screen_color.start_flashing()
 			screen_flashing = true
+			
+			print("1")
+			player.player_audio.is_low_fuel = true
+			
 		if thruster_fuel <= 0 && !is_on_ground() && !self_destruct_sequence_initiatied:
-			print("Asdf")
 			screen_color.self_destructing()
 			self_destruct_sequence_initiatied = true
 			self_destruct_timer.start()
 			print(self_destruct_timer.time_left)
+			
 		elif self_destruct_sequence_initiatied && (is_on_ground() || thruster_fuel > 0):
-			print("dsafadsf")
 			screen_color.stop_self_destructing()
 			self_destruct_sequence_initiatied = false
 			self_destruct_timer.stop()
+			
 	elif screen_flashing:
 		screen_color.stop_flashing()
 		screen_flashing = false
+		
+		# This never runs, idk why xavier idk how you do it
+		# so i had to make my own thing for the audio below ts
+		player.player_audio.is_low_fuel = false
+	
+	if refueling || thruster_fuel > 20:
+		player.player_audio.is_low_fuel = false
 	
 	# Count down the jump buffer
 	if just_jumped_time > 0:
