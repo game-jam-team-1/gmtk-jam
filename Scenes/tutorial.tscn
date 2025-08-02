@@ -105,6 +105,21 @@ package_type = 1
 position = Vector2(3083, 742)
 contact_monitor = true
 
+[node name="TimeLabel" parent="Player/UI" index="1"]
+anchors_preset = 0
+
+[node name="FuelBar" parent="Player/UI" index="2"]
+anchor_top = -0.0009259259
+
+[node name="TimeBar" parent="Player/UI" index="3"]
+anchors_preset = 0
+
+[node name="ColorRect" parent="Player/UI" index="6"]
+anchors_preset = 0
+
+[node name="DeathScreen" parent="Player/UI" index="7"]
+anchors_preset = 0
+
 [node name="Santa" type="RigidBody2D" parent="."]
 position = Vector2(2186, 264)
 gravity_scale = 0.0
@@ -149,3 +164,4 @@ texture = ExtResource("10_70gml")
 
 [editable path="Planet"]
 [editable path="Planet3"]
+[editable path="Player"]

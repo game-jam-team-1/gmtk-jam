@@ -30,7 +30,6 @@ func _physics_process(delta: float) -> void:
 	_update_movement_mode()
 	
 	gravity_component.update_gravity_force(delta)
-	print(gravity_component.get_gravitational_force())
 	
 	if player_movement.is_grounded_movement:
 		player_movement._process_grounded_movement(delta)

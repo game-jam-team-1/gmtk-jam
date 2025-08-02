@@ -22,6 +22,8 @@ var thruster_velocity: Vector2 = Vector2.ZERO
 
 var thruster_fuel: float = 100.0
 var screen_flashing: bool = false
+var refueling: bool = false
+var self_destruct_sequence_initiatied: bool = false
 
 var just_jumped: bool = false
 var just_jumped_time: float = 0.0
@@ -49,6 +51,7 @@ var is_thruster_on: bool = false
 
 @onready var thruster_sound: AudioStreamPlayer2D = $"../Sounds/Thruster"
 
+@onready var self_destruct_timer: Timer = $"SelfDestructTimer"
 
 func _ready() -> void:
 	fuel_bar.max_value = THRUSTER_MAX_FUEL
@@ -57,9 +60,20 @@ func _process(delta: float) -> void:
 	fuel_bar.value = thruster_fuel
 	
 	if thruster_fuel <= 20:
-		if !screen_flashing:
+		if !screen_flashing && !refueling:
 			screen_color.start_flashing()
 			screen_flashing = true
+		if thruster_fuel <= 0 && !is_on_ground() && !self_destruct_sequence_initiatied:
+			print("Asdf")
+			screen_color.self_destructing()
+			self_destruct_sequence_initiatied = true
+			self_destruct_timer.start()
+			print(self_destruct_timer.time_left)
+		elif self_destruct_sequence_initiatied && (is_on_ground() || thruster_fuel > 0):
+			print("dsafadsf")
+			screen_color.stop_self_destructing()
+			self_destruct_sequence_initiatied = false
+			self_destruct_timer.stop()
 	elif screen_flashing:
 		screen_color.stop_flashing()
 		screen_flashing = false
@@ -82,6 +96,10 @@ func _process_grounded_movement(delta: float) -> void:
 	if is_on_ground():
 		if planet.refills_fuel && thruster_fuel < THRUSTER_MAX_FUEL:
 			thruster_fuel += REFUEL_RATE * delta
+			refueling = true
+			if screen_flashing:
+				screen_flashing = false
+				screen_color.stop_flashing()
 		
 		jump_velocity = Vector2.ZERO
 		
@@ -96,6 +114,8 @@ func _process_grounded_movement(delta: float) -> void:
 			just_jumped_time = JUST_JUMP_GRACE_PERIOD
 			
 			jump_velocity = Vector2.from_angle(upwards_angle) * JUMP_FORCE
+	else:
+		refueling = false
 	
 	strafe_velocity = Vector2.ZERO
 	
@@ -182,3 +202,7 @@ func set_grounded_movement() -> void:
 func set_thruster_movement() -> void:
 	is_thruster_movement = true
 	is_grounded_movement = false
+
+func self_destruct_timer_timeout() -> void:
+	print("goo boom")
+	Global.player.die()
