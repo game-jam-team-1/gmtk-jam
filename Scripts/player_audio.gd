@@ -3,8 +3,11 @@ extends Node2D
 
 @onready var player: Player = get_parent()
 
-@onready var thruster: AudioStreamPlayer2D = $"Thruster"
-@onready var walk: AudioStreamPlayer2D = $"Walk"
+@onready var thruster: AudioStreamPlayer = $"Thruster"
+@onready var walk: AudioStreamPlayer = $"Walk"
+@onready var jump: AudioStreamPlayer = $"Jump"
+
+var jumped: bool = false
 
 
 func _process(delta: float) -> void:
@@ -20,3 +23,10 @@ func _process(delta: float) -> void:
 		walk.play()
 	if player_movement.grounded_movement_dir == 0 && walk.playing || !player.is_on_ground():
 		walk.stop()
+	
+	if player_movement.just_jumped:
+		jumped = true
+	
+	if jumped && player.is_on_ground():
+		jump.play(0.15)
+		jumped = false

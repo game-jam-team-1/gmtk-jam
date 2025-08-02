@@ -34,7 +34,7 @@ func start() -> void:
 	visible = true
 	$"Container".modulate.a = 0.0
 	get_tree().create_tween().tween_property($"Container", "modulate:a", 1.0, 1.0)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	is_ready = true
 
 func deactivate_main_menu() -> void:
@@ -44,21 +44,21 @@ func deactivate_main_menu() -> void:
 
 # Hey it's a game jam ok ;(
 func on_1_pressed() -> void:
-	if is_ready && levels[0]:
-		deactivate_main_menu()
-		get_parent().add_child(levels[0].instantiate())
+	play_level(0)
 
 func on_2_pressed() -> void:
-	if is_ready && levels[1]:
-		deactivate_main_menu()
-		get_parent().add_child(levels[1].instantiate())
+	play_level(1)
 
 func on_3_pressed() -> void:
-	if is_ready && levels[2]:
-		deactivate_main_menu()
-		get_parent().add_child(levels[2].instantiate())
+	play_level(2)
 
 func on_4_pressed() -> void:
-	if is_ready && levels[3]:
+	play_level(3)
+
+
+func play_level(a: int):
+	if is_ready && levels[a]:
+		$"Click".play()
+		
 		deactivate_main_menu()
-		get_parent().add_child(levels[3].instantiate())
+		get_parent().add_child(levels[a].instantiate())

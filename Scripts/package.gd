@@ -84,8 +84,6 @@ func _physics_process(delta: float) -> void:
 	var planet_center: Vector2 = gravity_component.closest_gravity_area.global_position
 	var upwards_angle: float = planet_center.angle_to_point(global_position)
 	rotation = upwards_angle + PI/2
-	
-	
 
 func _update_rope() -> void:
 	if following_node:

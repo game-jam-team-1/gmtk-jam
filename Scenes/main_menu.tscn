@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djxxe8osn1t8a"]
+[gd_scene load_steps=15 format=3 uid="uid://djxxe8osn1t8a"]
 
 [ext_resource type="Script" uid="uid://dquu1nsh7febk" path="res://Scripts/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="2_1ehe0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/Art/space_background_stars.png" id="3_ce3w2"]
 [ext_resource type="Script" uid="uid://cxragsgncirtb" path="res://Scripts/menu_camera.gd" id="4_ce3w2"]
 [ext_resource type="FontFile" uid="uid://cmd18xd5qilt5" path="res://Assets/Fonts/MedodicaRegular.otf" id="5_n45e2"]
+[ext_resource type="AudioStream" uid="uid://bxaaci6y4dbrm" path="res://Sounds/click.ogg" id="5_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://c4ma6pjv1aefj" path="res://Assets/Art/level-button.png" id="6_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://dnopj3x3l870b" path="res://Assets/Art/level-button-pressed.png" id="7_yhxw7"]
 [ext_resource type="Texture2D" uid="uid://b8xx5123w25xf" path="res://Assets/Art/level-button-locked.png" id="8_trj04"]
@@ -78,6 +79,10 @@ text = "Click here to focus window"
 label_settings = SubResource("LabelSettings_ce3w2")
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="Click" type="AudioStreamPlayer" parent="FocusWindow"]
+stream = ExtResource("5_vr1f0")
+volume_db = -16.0
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 visible = false
@@ -192,6 +197,10 @@ text = "4"
 label_settings = SubResource("LabelSettings_trj04")
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="Click" type="AudioStreamPlayer" parent="MainMenu"]
+stream = ExtResource("5_vr1f0")
+volume_db = -16.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1152, 648)
