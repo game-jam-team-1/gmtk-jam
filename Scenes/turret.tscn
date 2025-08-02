@@ -84,6 +84,7 @@ position = Vector2(0, -78)
 target_position = Vector2(0, -3000)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
+z_index = 1
 position = Vector2(0, -66)
 sprite_frames = SubResource("SpriteFrames_bfgsf")
 animation = &"shoot"
@@ -91,6 +92,7 @@ frame = 5
 frame_progress = 1.0
 
 [node name="TurretBase" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -77)
 texture = ExtResource("3_pulj5")
 

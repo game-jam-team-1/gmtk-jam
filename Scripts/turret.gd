@@ -41,7 +41,6 @@ func _physics_process(delta: float) -> void:
 	_proccess_movement()
 	player_detection(delta)
 	
-	print(aggro_value)
 	if state == STATE.IDLE:
 		idle(delta)
 	else:

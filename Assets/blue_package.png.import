@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbbwu08nxhti0"
-path="res://.godot/imported/space-background-stars.png-ba93fbb555d0d3bbbdd6b12482e05bba.ctex"
+uid="uid://bqen3e7iajfp6"
+path="res://.godot/imported/blue_package.png-10136d8075cba5a6e02c04f1d10ef9aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/space-background-stars.png"
-dest_files=["res://.godot/imported/space-background-stars.png-ba93fbb555d0d3bbbdd6b12482e05bba.ctex"]
+source_file="res://Assets/blue_package.png"
+dest_files=["res://.godot/imported/blue_package.png-10136d8075cba5a6e02c04f1d10ef9aa.ctex"]
 
 [params]
 

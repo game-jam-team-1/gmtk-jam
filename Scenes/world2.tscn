@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://qoa00hhuo3br"]
+
+[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space_background_nebula.png" id="1_8fptb"]
+[ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_jeuw4"]
+[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space_background_stars.png" id="2_o0rqk"]
+[ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="3_jeuw4"]
+[ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/big_blue_planet.png" id="4_exon5"]
+[ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="5_8y0xx"]
+[ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/big_green_planet.png" id="5_o0rqk"]
+
+[node name="World2" type="Node2D"]
+script = ExtResource("1_jeuw4")
+
+[node name="Background" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Parallax1" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundNebula" type="Sprite2D" parent="Background/Parallax1"]
+modulate = Color(0.637843, 0.637843, 0.637843, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("1_8fptb")
+
+[node name="Parallax2" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundStars" type="Sprite2D" parent="Background/Parallax2"]
+modulate = Color(0.811127, 0.811127, 0.811127, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("2_o0rqk")
+
+[node name="Blue" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
+z_index = 1
+position = Vector2(-58, 2514)
+scale = Vector2(4.23341, 4.23341)
+refills_fuel = true
+orbit_planet = NodePath("../Green")
+orbit_speed = 0.0029999999969732016
+
+[node name="Sprite" parent="Blue" index="0"]
+texture = ExtResource("4_exon5")
+
+[node name="Green" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
+z_index = 1
+position = Vector2(2614, 2514)
+scale = Vector2(4.23341, 4.23341)
+refills_fuel = true
+orbit_planet = NodePath("../Blue")
+orbit_speed = 0.0029999999969732016
+
+[node name="Sprite" parent="Green" index="0"]
+texture = ExtResource("5_o0rqk")
+
+[node name="Player" parent="." instance=ExtResource("5_8y0xx")]
+position = Vector2(2, 1736)
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="Planet" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
+position = Vector2(3694, 2435)
+orbit_planet = NodePath("../Green")
+
+[node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
+position = Vector2(-1162, 2472)
+orbit_planet = NodePath("../Blue")
+
+[editable path="Blue"]
+[editable path="Green"]

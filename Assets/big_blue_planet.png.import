@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmcfbka48mc7n"
-path="res://.godot/imported/space-background-nebula.png-ecd3489afc2f32eaf3a5637c3c8cfaa0.ctex"
+uid="uid://dof6g6vr1scyj"
+path="res://.godot/imported/big_blue_planet.png-45ba4cb2fedcb4e42e26ad4f081e1ddb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/space-background-nebula.png"
-dest_files=["res://.godot/imported/space-background-nebula.png-ecd3489afc2f32eaf3a5637c3c8cfaa0.ctex"]
+source_file="res://Assets/big_blue_planet.png"
+dest_files=["res://.godot/imported/big_blue_planet.png-45ba4cb2fedcb4e42e26ad4f081e1ddb.ctex"]
 
 [params]
 
