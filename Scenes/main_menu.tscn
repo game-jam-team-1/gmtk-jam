@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dquu1nsh7febk" path="res://Scripts/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="2_1ehe0"]
-[ext_resource type="Script" path="res://Scripts/focus_window.gd" id="3_16hvj"]
+[ext_resource type="Script" uid="uid://cp1gxunktfkli" path="res://Scripts/focus_window.gd" id="3_16hvj"]
 [ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/Art/space_background_stars.png" id="3_ce3w2"]
 [ext_resource type="Script" uid="uid://cxragsgncirtb" path="res://Scripts/menu_camera.gd" id="4_ce3w2"]
 [ext_resource type="FontFile" uid="uid://cmd18xd5qilt5" path="res://Assets/Fonts/MedodicaRegular.otf" id="5_n45e2"]
 [ext_resource type="Texture2D" uid="uid://c4ma6pjv1aefj" path="res://Assets/Art/level-button.png" id="6_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://dnopj3x3l870b" path="res://Assets/Art/level-button-pressed.png" id="7_yhxw7"]
 [ext_resource type="Texture2D" uid="uid://b8xx5123w25xf" path="res://Assets/Art/level-button-locked.png" id="8_trj04"]
-[ext_resource type="Script" path="res://Scripts/level_select_button.gd" id="8_yhxw7"]
+[ext_resource type="Script" uid="uid://bvmi0nvrjijjc" path="res://Scripts/level_select_button.gd" id="8_yhxw7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ce3w2"]
 font = ExtResource("5_n45e2")

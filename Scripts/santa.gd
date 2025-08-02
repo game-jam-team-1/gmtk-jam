@@ -15,8 +15,8 @@ var player: Player
 
 func _new_year(year: int) -> void:
 	player = $"../Player"
-	var dialog: DialogueBox = player.get_node("UI/DialogBox")
-	dialog.animate_writing_text("It is a new year! Year: " + str(year) + ". Packages: " + str(world.packages_each_round[world.current_round]))
+	var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
+	dialogue.animate_writing_text("It is a new year! Year: " + str(year) + ". Packages: " + str(world.packages_each_round[world.current_round]))
 
 func _ready() -> void:
 	if !is_tutorial:
@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 		world.package_collected()
 		collected_package = true
 		player = $"../Player"
-		var dialogue: DialogueBox = player.get_node("UI/DialogBox")
+		var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
 		dialogue.text_chain([
 			"Good job collecting the package.",
 			"Remember to only bring green packages to green planets, and blue packages to blue planets, and so on.",
@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 	if world.current_round == 2 && !final_dialogue:
 		final_dialogue = true
 		player = $"../Player"
-		var dialogue: DialogueBox = player.get_node("UI/DialogBox")
+		var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
 		dialogue.text_chain([
 			"You show great promise! It is time for you to head out into the galaxy.",
 			"Fairwell!"

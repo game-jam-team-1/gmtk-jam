@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://Assets/Art/player_sheet.png" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://kxqmkedf0r42" path="res://Scripts/player_animation.gd" id="4_3smsa"]
 [ext_resource type="Script" uid="uid://bas5dp26y004j" path="res://Scripts/ScreenColor.gd" id="6_f1ek2"]
-[ext_resource type="Script" path="res://Scripts/player_camera.gd" id="6_pu2lt"]
+[ext_resource type="Script" uid="uid://cjvdl65j2uhyb" path="res://Scripts/player_camera.gd" id="6_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://dxn2cem3kdxyv" path="res://Assets/Art/fuel_bar_over.png" id="8_7dp3o"]
 [ext_resource type="Script" path="res://Scenes/death_screen.gd" id="8_8erm5"]
-[ext_resource type="PackedScene" uid="uid://bn3u3awcc1f84" path="res://Scenes/dialog_box.tscn" id="8_f1ek2"]
-[ext_resource type="Script" path="res://Scripts/PlayerAudio.gd" id="8_tx1dd"]
+[ext_resource type="PackedScene" uid="uid://cso8oa456wo88" path="res://Scenes/dialogue_box.tscn" id="8_f1ek2"]
+[ext_resource type="Script" uid="uid://mdej2yvk32bd" path="res://Scripts/PlayerAudio.gd" id="8_tx1dd"]
 [ext_resource type="AudioStream" uid="uid://cevgucdvjq7qi" path="res://Sounds/pickup.ogg" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://rbc6vwoe1xcb" path="res://Sounds/player_walk.ogg" id="9_gymyn"]
 [ext_resource type="Texture2D" uid="uid://c5jvjdddsgi5m" path="res://Assets/Art/fuel_bar_under.png" id="9_h4iuc"]
@@ -251,7 +251,10 @@ texture_over = ExtResource("8_7dp3o")
 texture_progress = ExtResource("9_h4iuc")
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("8_f1ek2")]
-position = Vector2(969, 990)
+offset_left = 659.0
+offset_top = 910.0
+offset_right = 1259.0
+offset_bottom = 1061.0
 
 [node name="ScreenColor" type="ColorRect" parent="UI"]
 visible = false
