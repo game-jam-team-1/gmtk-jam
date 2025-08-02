@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://Assets/Art/player_sheet.png" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://kxqmkedf0r42" path="res://Scripts/player_animation.gd" id="4_3smsa"]
 [ext_resource type="Script" uid="uid://bas5dp26y004j" path="res://Scripts/ScreenColor.gd" id="6_f1ek2"]
-[ext_resource type="Script" uid="uid://cjvdl65j2uhyb" path="res://Scripts/player_camera.gd" id="6_pu2lt"]
+[ext_resource type="Script" path="res://Scripts/player_camera.gd" id="6_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://dxn2cem3kdxyv" path="res://Assets/Art/fuel_bar_over.png" id="8_7dp3o"]
 [ext_resource type="Script" path="res://Scenes/death_screen.gd" id="8_8erm5"]
 [ext_resource type="PackedScene" uid="uid://cso8oa456wo88" path="res://Scenes/dialogue_box.tscn" id="8_f1ek2"]
@@ -170,6 +170,76 @@ radius = 126.016
 font_size = 24
 font_color = Color(1, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_h4iuc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fd4e3"]
+resource_name = "damaged"
+length = 0.8
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20223157, 0.4029727, 0.60445905, 0.799649),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7dp3o"]
+resource_name = "invincible"
+length = 0.5
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.19999999, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h4iuc"]
+_data = {
+&"RESET": SubResource("Animation_h4iuc"),
+&"damaged": SubResource("Animation_fd4e3"),
+&"invincible": SubResource("Animation_7dp3o")
+}
+
 [node name="Player" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_fj7yv")
 gravity_scale = 0.0
@@ -252,10 +322,7 @@ texture_over = ExtResource("8_7dp3o")
 texture_progress = ExtResource("9_h4iuc")
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("8_f1ek2")]
-offset_left = 659.0
-offset_top = 910.0
-offset_right = 1259.0
-offset_bottom = 1061.0
+position = Vector2(1020, 978)
 
 [node name="ScreenColor" type="ColorRect" parent="UI"]
 visible = false
@@ -349,6 +416,11 @@ pitch_scale = 1.98
 stream = ExtResource("15_h4iuc")
 volume_db = -6.203
 pitch_scale = 1.35
+
+[node name="DamagedAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h4iuc")
+}
 
 [node name="Arrow" type="Node2D" parent="."]
 

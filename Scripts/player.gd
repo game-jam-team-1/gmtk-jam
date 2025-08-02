@@ -1,9 +1,23 @@
 class_name Player
 extends RigidBody2D
 
+enum DamagedState {
+	NORMAL,
+	INVINCIBLE,
+	DAMAGED,
+}
+
+var invincible_timer: SceneTreeTimer
+var damaged_timer: SceneTreeTimer
+
+var invincible_time: float = 1.0
+var damaged_time: float = 5.0
+
 var collected_packages: int = 0
 
 var duplicated_balls: Array
+
+var damaged_state: DamagedState 
 
 var sending_package_depot: PackageDepot
 var sending_packages_to_depot: bool = false
@@ -55,6 +69,14 @@ func _update_movement_mode() -> void:
 
 ## BAd
 func _process_death() -> void:
+	if damaged_state == DamagedState.INVINCIBLE && invincible_timer.time_left == 0:
+		$DamagedAnimations.play("damaged")
+		damaged_state = DamagedState.DAMAGED
+		damaged_timer = get_tree().create_timer(damaged_time)
+	if damaged_state == DamagedState.DAMAGED && damaged_timer.time_left == 0:
+		$DamagedAnimations.play("RESET")
+		damaged_state = DamagedState.NORMAL
+	
 	var potential_killers: Array[Node2D]
 	
 	for body in get_colliding_bodies():
@@ -63,7 +85,12 @@ func _process_death() -> void:
 		potential_killers.append(area)
 	for node in potential_killers:
 		if (node.has_method("kills_on_collision") && node.kills_on_collision()):
-			die()
+			if damaged_state == DamagedState.DAMAGED:
+				die()
+			if damaged_state == DamagedState.NORMAL:
+				$DamagedAnimations.play("invincible")
+				damaged_state = DamagedState.INVINCIBLE
+				invincible_timer = get_tree().create_timer(invincible_time)
 
 func _process_packages() -> void:
 	var closest_package: Package

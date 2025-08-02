@@ -26,10 +26,10 @@ func package_collected() -> void:
 		packages_this_round = 0
 		time_left = 24
 		current_round += 1
-		new_year.emit(current_round)
 		if current_round >= rounds:
 			complete_level()
 			game_finished.emit()
+		new_year.emit(current_round)
 
 func _process(delta: float) -> void:
 	if freeze_time:
