@@ -46,7 +46,6 @@ func _process(delta: float) -> void:
 				"Ho ho ho! I am santa.\n\nPress space to continue the dialog.",
 				"You can jump by pressing W, and high jump by pressing Shift+W.",
 				"Your job is to collect presents and deliver them to children all around the galaxy.",
-				"You can press E to collect packages.",
 				"It is now time for you to leave the planet! Find a package and then bring it back to me.",
 			])
 

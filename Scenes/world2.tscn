@@ -16,6 +16,7 @@ script = ExtResource("1_jeuw4")
 level_number = 2
 rounds = 2
 packages_each_round = Array[int]([2, 2])
+time_each_round = Array[float]([1440.0, 1440.0])
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -100
