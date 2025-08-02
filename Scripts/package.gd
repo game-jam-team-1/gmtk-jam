@@ -18,6 +18,7 @@ var following_node: Node2D
 var spawned_in: bool = false
 var parent_offset_pos: Vector2
 
+var collected: bool = false
 
 @onready var raycasts: Array[RayCast2D] = [
 	$"Raycasts/RayCast1",
@@ -73,17 +74,19 @@ func _physics_process(delta: float) -> void:
 	if !gravity_component.closest_gravity_area:
 		return
 	
-	if gravity_component.closest_gravity_area.planet.planet_type == package_type:
+	if gravity_component.closest_gravity_area.planet.planet_type == package_type && !collected:
 		get_parent().get_parent().package_collected()
+
 		$"Dropoff".play()
 		await get_tree().create_timer(0.2).timeout
-		queue_free()
+
+		following_node = gravity_component.closest_gravity_area.planet
+		collision_mask = 0
+		collected = true
 	
 	var planet_center: Vector2 = gravity_component.closest_gravity_area.global_position
 	var upwards_angle: float = planet_center.angle_to_point(global_position)
 	rotation = upwards_angle + PI/2
-	
-	
 
 func _update_rope() -> void:
 	if following_node:

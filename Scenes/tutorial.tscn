@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://djc3m70hpnbf4"]
+[gd_scene load_steps=15 format=3 uid="uid://djc3m70hpnbf4"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_feyax"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/Art/big_green_planet.png" id="5_on4kn"]
 [ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/Art/big_blue_planet.png" id="6_8va2t"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="8_h2ono"]
+[ext_resource type="AudioStream" uid="uid://rbc6vwoe1xcb" path="res://Sounds/Player/walk.ogg" id="9_8va2t"]
 [ext_resource type="PackedScene" uid="uid://b7nvpr65unuoi" path="res://Scenes/santa.tscn" id="9_on4kn"]
+[ext_resource type="AudioStream" uid="uid://bomcpoukyqa3b" path="res://Sounds/Player/pickup.ogg" id="10_8mnmb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2ono"]
 radius = 197.2347
@@ -101,6 +103,18 @@ package_type = 1
 [node name="Player" parent="." instance=ExtResource("4_i6t4g")]
 position = Vector2(3083, 742)
 contact_monitor = true
+
+[node name="Walk" parent="Player/Audio" index="0"]
+stream = ExtResource("9_8va2t")
+volume_db = -32.311
+pitch_scale = 2.17
+
+[node name="Thruster" parent="Player/Audio" index="1"]
+stream = null
+volume_db = 0.0
+
+[node name="Pickup" parent="Player/Audio" index="2"]
+stream = ExtResource("10_8mnmb")
 
 [node name="Santa" parent="." instance=ExtResource("9_on4kn")]
 position = Vector2(2186, 264)

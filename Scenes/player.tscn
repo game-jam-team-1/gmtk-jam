@@ -323,10 +323,7 @@ texture_over = ExtResource("8_7dp3o")
 texture_progress = ExtResource("9_h4iuc")
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("8_f1ek2")]
-offset_left = 630.0
-offset_top = 904.0
-offset_right = 1230.0
-offset_bottom = 1055.0
+position = Vector2(965, 981)
 
 [node name="ScreenColor" type="ColorRect" parent="UI"]
 visible = false

@@ -1,5 +1,5 @@
 class_name DialogueBox
-extends Control
+extends Node2D
 
 signal finished
 
