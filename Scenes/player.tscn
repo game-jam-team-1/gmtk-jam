@@ -1,6 +1,5 @@
 [gd_scene load_steps=36 format=3 uid="uid://cdxanxha8yc48"]
 
-[ext_resource type="Script" uid="uid://c86i4sgfg7tpf" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://bub0fyvm5xhx4" path="res://Scripts/player_movement.gd" id="2_x3wgy"]
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="3_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bs0nmcq3yreug" path="res://Assets/Art/player_sheet.png" id="3_6t5aa"]
@@ -10,13 +9,109 @@
 [ext_resource type="Texture2D" uid="uid://dxn2cem3kdxyv" path="res://Assets/Art/fuel_bar_over.png" id="8_7dp3o"]
 [ext_resource type="Script" path="res://Scenes/death_screen.gd" id="8_8erm5"]
 [ext_resource type="PackedScene" uid="uid://cso8oa456wo88" path="res://Scenes/dialogue_box.tscn" id="8_f1ek2"]
-[ext_resource type="Script" uid="uid://mdej2yvk32bd" path="res://Scripts/PlayerAudio.gd" id="8_tx1dd"]
+[ext_resource type="Script" uid="uid://mdej2yvk32bd" path="res://Scripts/player_audio.gd" id="8_tx1dd"]
 [ext_resource type="AudioStream" uid="uid://cevgucdvjq7qi" path="res://Sounds/pickup.ogg" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://rbc6vwoe1xcb" path="res://Sounds/player_walk.ogg" id="9_gymyn"]
 [ext_resource type="Texture2D" uid="uid://c5jvjdddsgi5m" path="res://Assets/Art/fuel_bar_under.png" id="9_h4iuc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
 friction = 0.0
+
+[sub_resource type="GDScript" id="GDScript_ukyrk"]
+script/source = "class_name Player
+extends RigidBody2D
+
+var collected_packages: int = 0
+
+var duplicated_balls: Array
+
+var sending_package_depot: PackageDepot
+var sending_packages_to_depot: bool = false
+
+@onready var gravity_component: GravityComponent = $\"PlayerMovement/GravityComponent\"
+@onready var large_detection_area: Area2D = $\"LargeDetectionArea\"
+@onready var fuel_bar: TextureProgressBar = $\"UI/FuelBar\"
+@onready var player_movement: PlayerMovement = $\"PlayerMovement\"
+@onready var player_animation: PlayerAnimation = $\"PlayerAnimation\"
+@onready var world: World = get_parent()
+
+
+func _ready() -> void:
+	player_movement.is_grounded_movement = true
+	#Global.player = self
+
+func _process(delta: float) -> void:
+	$UI/TimeBar.value = world.time_left
+
+func _physics_process(delta: float) -> void:
+	_process_packages()
+	
+	_update_movement_mode()
+	
+	gravity_component.update_gravity_force(delta)
+	
+	if player_movement.is_grounded_movement:
+		player_movement._process_grounded_movement(delta)
+	
+	if player_movement.is_thruster_movement:
+		player_movement._process_thruster_movement(delta)
+	
+	_process_death()
+
+func _update_movement_mode() -> void:
+	var grav_area: GravityArea = gravity_component.closest_gravity_area
+	
+	if grav_area != null:
+		var distance = gravity_component.get_distance_to_gravity_area(grav_area)
+		
+		if player_movement.is_thruster_movement && distance < 100:
+			player_movement.set_grounded_movement()
+		
+	else:
+		player_movement.set_thruster_movement()
+
+## BAd
+func _process_death() -> void:
+	var potential_killers: Array[Node2D]
+	
+	for body in get_colliding_bodies():
+		potential_killers.append(body)
+	for area in $PlayerMovement/GravityComponent.get_overlapping_areas():
+		potential_killers.append(area)
+	for node in potential_killers:
+		if (node.has_method(\"kills_on_collision\") && node.kills_on_collision()):
+			die()
+
+func _process_packages() -> void:
+	var closest_package: Package
+	for area in large_detection_area.get_overlapping_areas():
+		if area.name == \"PackageArea\" && area.get_parent().spawned_in:
+			closest_package = area.get_parent()
+			break
+	
+	if !closest_package || closest_package.following_node:
+		return
+	
+	if collected_packages < 100:
+		collected_packages += 1
+		closest_package.get_grabbed(self)
+
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	var planet_velocity: Vector2 = Vector2.ZERO
+	
+	if gravity_component.closest_gravity_area && is_on_ground():
+		planet_velocity = gravity_component.closest_gravity_area.planet.velocity
+	
+	linear_velocity = player_movement.get_velocity() + planet_velocity
+
+func is_on_ground() -> bool:
+	return player_movement.is_on_ground()
+
+func die():
+	print(\"you died\")
+	$\"UI/DeathScreen\".visible = true
+	get_tree().paused = true
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]
 size = Vector2(107, 184)
@@ -173,7 +268,7 @@ font_color = Color(1, 0, 0, 1)
 physics_material_override = SubResource("PhysicsMaterial_fj7yv")
 gravity_scale = 0.0
 lock_rotation = true
-script = ExtResource("1_v0iea")
+script = SubResource("GDScript_ukyrk")
 
 [node name="PlayerMovement" type="Node2D" parent="."]
 script = ExtResource("2_x3wgy")
@@ -344,6 +439,11 @@ pitch_scale = 0.88
 
 [node name="Pickup" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("9_f1ek2")
+
+[node name="Arrow" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Arrow"]
+polygon = PackedVector2Array(1073, 22, 1073, -31, 1133, -2)
 
 [connection signal="timeout" from="PlayerMovement/SelfDestructTimer" to="PlayerMovement" method="self_destruct_timer_timeout"]
 [connection signal="button_up" from="UI/DeathScreen/Restart" to="UI/DeathScreen" method="_on_restart_button_up"]
