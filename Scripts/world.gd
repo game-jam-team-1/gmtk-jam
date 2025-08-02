@@ -49,7 +49,8 @@ func _process(delta: float) -> void:
 
 func complete_level() -> void:
 	queue_free()
-	get_parent().get_node("MainMenu").level_unlock_state.set(level_number + 1, true)
+	if level_number < 3:
+		get_parent().get_node("MainMenu").level_unlock_state.set(level_number + 1, true)
 	get_parent().get_node("MainMenu").visible = true
 	get_parent().get_node("Camera2D").enabled = true
 	get_parent().get_node("Background").visible = true
