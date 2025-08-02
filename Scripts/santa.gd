@@ -9,6 +9,9 @@ var player: Player
 @onready var detection_area: Area2D = $"PlayerDetectionArea"
 @onready var world: World = get_parent()
 
+func _finished() -> void:
+	get_parent().complete_level()
+
 func _process(delta: float) -> void:
 	if world.packages_this_round > 0 && !collected_package:
 		collected_package = true
@@ -16,8 +19,11 @@ func _process(delta: float) -> void:
 		var dialog: DialogBox = player.get_node("UI/DialogBox")
 		dialog.text_chain([
 			"Good job collecting the package.",
-			"Remember to only bring green packages to green planets, and blue packages to blue planets, and so on."
+			"Remember to only bring green packages to green planets, and blue packages to blue planets, and so on.",
+			"Each present contains many other presents, and the santas of each planet will help deliver one to every child.",
+			"It is time for you to head out into the galaxy! Good luck!"
 		])
+		dialog.finished.connect(_finished)
 	
 	for area in $PlayerDetectionArea.get_overlapping_areas():
 		if area.get_parent() is Player && !met_santa:

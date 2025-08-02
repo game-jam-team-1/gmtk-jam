@@ -18,7 +18,9 @@ var level_unlock_state: Array[bool] = [
 ]
 
 @onready var levels = [
-	load("uid://pqhd4r2ifve")
+	preload("res://Scenes/tutorial.tscn"),
+	preload("res://Scenes/world.tscn"),
+	preload("res://Scenes/world2.tscn"),
 ]
 
 func _process(delta: float) -> void:
@@ -35,20 +37,28 @@ func start() -> void:
 	await get_tree().create_timer(1.0).timeout
 	is_ready = true
 
+func deactivate_main_menu() -> void:
+	visible = false
+	get_parent().get_node("Camera2D").enabled = false
+	get_parent().get_node("Background").visible = false
 
 # Hey it's a game jam ok ;(
 func on_1_pressed() -> void:
 	if is_ready && levels[0]:
-		get_tree().change_scene_to_packed(levels[0])
+		deactivate_main_menu()
+		get_parent().add_child(levels[0].instantiate())
 
 func on_2_pressed() -> void:
 	if is_ready && levels[1]:
-		get_tree().change_scene_to_packed(levels[1])
+		deactivate_main_menu()
+		get_parent().add_child(levels[1].instantiate())
 
 func on_3_pressed() -> void:
 	if is_ready && levels[2]:
-		get_tree().change_scene_to_packed(levels[2])
+		deactivate_main_menu()
+		get_parent().add_child(levels[2].instantiate())
 
 func on_4_pressed() -> void:
 	if is_ready && levels[3]:
-		get_tree().change_scene_to_packed(levels[3])
+		deactivate_main_menu()
+		get_parent().add_child(levels[3].instantiate())

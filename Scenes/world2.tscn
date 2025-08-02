@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci0lv83o8cndd"]
+[gd_scene load_steps=11 format=3 uid="uid://1p5fxqvcld2h"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_8fptb"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_jeuw4"]
@@ -7,9 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/Art/big_blue_planet.png" id="4_exon5"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="5_8y0xx"]
 [ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/Art/big_green_planet.png" id="5_o0rqk"]
+[ext_resource type="PackedScene" uid="uid://60gkfls6gjjg" path="res://Scenes/crawler_enemy.tscn" id="8_exon5"]
+[ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="9_8y0xx"]
+[ext_resource type="PackedScene" uid="uid://bdnjjis5flvtj" path="res://Scenes/turret.tscn" id="10_0aor2"]
 
 [node name="World2" type="Node2D"]
 script = ExtResource("1_jeuw4")
+level_number = 2
+rounds = 2
+packages_each_round = Array[int]([2, 2])
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -100
@@ -41,23 +47,52 @@ texture = ExtResource("2_o0rqk")
 z_index = 1
 position = Vector2(-58, 2514)
 scale = Vector2(4.23341, 4.23341)
-refills_fuel = true
+planet_type = 2
 orbit_planet = NodePath("../Green")
 orbit_speed = 0.0029999999969732
 
 [node name="Sprite" parent="Blue" index="0"]
 texture = ExtResource("4_exon5")
 
+[node name="CrawlerEnemy" parent="Blue" instance=ExtResource("8_exon5")]
+position = Vector2(178.10703, 14.645386)
+scale = Vector2(0.2362162, 0.2362162)
+
+[node name="CrawlerEnemy2" parent="Blue" instance=ExtResource("8_exon5")]
+position = Vector2(-179.99673, 10.393494)
+scale = Vector2(0.2362162, 0.2362162)
+
+[node name="CrawlerEnemy5" parent="Blue" instance=ExtResource("8_exon5")]
+position = Vector2(3.779459, 183.30377)
+scale = Vector2(0.2362162, 0.2362162)
+
 [node name="Green" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
 z_index = 1
 position = Vector2(2614, 2514)
 scale = Vector2(4.23341, 4.23341)
+planet_type = 1
 refills_fuel = true
 orbit_planet = NodePath("../Blue")
 orbit_speed = 0.0029999999969732
 
 [node name="Sprite" parent="Green" index="0"]
 texture = ExtResource("5_o0rqk")
+
+[node name="CrawlerEnemy3" parent="Green" instance=ExtResource("8_exon5")]
+position = Vector2(-177.3984, 3.77948)
+scale = Vector2(0.2362162, 0.2362162)
+
+[node name="CrawlerEnemy4" parent="Green" instance=ExtResource("8_exon5")]
+position = Vector2(178.5794, 7.086487)
+scale = Vector2(0.2362162, 0.2362162)
+
+[node name="CrawlerEnemy6" parent="Green" instance=ExtResource("8_exon5")]
+position = Vector2(-6.6140747, -162.75296)
+scale = Vector2(0.2362162, 0.2362162)
+
+[node name="CrawlerEnemy7" parent="Green" instance=ExtResource("8_exon5")]
+position = Vector2(7.558899, 186.84698)
+scale = Vector2(0.2362162, 0.2362162)
 
 [node name="Player" parent="." instance=ExtResource("5_8y0xx")]
 position = Vector2(2, 1736)
@@ -68,9 +103,33 @@ max_contacts_reported = 1
 position = Vector2(3694, 2435)
 orbit_planet = NodePath("../Green")
 
+[node name="Turret2" parent="Planet" instance=ExtResource("10_0aor2")]
+position = Vector2(23, -159)
+
+[node name="Package2" parent="Planet" instance=ExtResource("9_8y0xx")]
+position = Vector2(259, 51)
+package_type = 1
+
+[node name="Package3" parent="Planet" instance=ExtResource("9_8y0xx")]
+position = Vector2(259, 51)
+package_type = 2
+spawn_round = 1
+
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
 position = Vector2(-1162, 2472)
 orbit_planet = NodePath("../Blue")
+
+[node name="Turret" parent="Planet2" instance=ExtResource("10_0aor2")]
+position = Vector2(-9, 242)
+
+[node name="Package" parent="Planet2" instance=ExtResource("9_8y0xx")]
+position = Vector2(3, -194)
+package_type = 2
+
+[node name="Package2" parent="Planet2" instance=ExtResource("9_8y0xx")]
+position = Vector2(3, -194)
+package_type = 1
+spawn_round = 1
 
 [editable path="Blue"]
 [editable path="Green"]

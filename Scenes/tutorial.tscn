@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cmdo04ji5483p"]
+[gd_scene load_steps=15 format=3 uid="uid://djc3m70hpnbf4"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_feyax"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]

@@ -1,6 +1,8 @@
 class_name DialogBox
 extends Node2D
 
+signal finished
+
 var is_writing_text: bool = false
 var writing_text: String
 var queue: Array[String]
@@ -24,6 +26,7 @@ func _process(delta: float) -> void:
 			index = writing_text.length()
 		elif queue.is_empty():
 			visible = false
+			finished.emit()
 		else:
 			text_chain(queue)
 	

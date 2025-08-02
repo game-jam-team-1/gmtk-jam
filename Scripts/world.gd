@@ -1,6 +1,7 @@
 class_name World
 extends Node2D
 
+@export var level_number: int
 @export var rounds: int
 
 @export var packages_each_round: Array[int]
@@ -25,6 +26,7 @@ func package_collected() -> void:
 		current_round += 1
 		new_year.emit(current_round)
 		if current_round >= rounds:
+			complete_level()
 			game_finished.emit()
 
 func _process(delta: float) -> void:
@@ -32,3 +34,10 @@ func _process(delta: float) -> void:
 	
 	if time_left <= 0:
 		print("Timeout! You lose")
+
+func complete_level() -> void:
+	queue_free()
+	get_parent().get_node("MainMenu").level_unlock_state.set(level_number + 1, true)
+	get_parent().get_node("MainMenu").visible = true
+	get_parent().get_node("Camera2D").enabled = true
+	get_parent().get_node("Background").visible = true
