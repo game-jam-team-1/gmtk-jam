@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpgm8pf4sxga8"]
+[gd_scene load_steps=10 format=3 uid="uid://bpgm8pf4sxga8"]
 
 [ext_resource type="Script" uid="uid://dwfprdl306fpk" path="res://Scripts/package.gd" id="1_gkk3b"]
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="2_wvags"]
 [ext_resource type="Texture2D" uid="uid://coaxubw1xq4xc" path="res://Assets/Art/purple_package.png" id="3_8o66u"]
+[ext_resource type="Texture2D" uid="uid://i6qojyxiema8" path="res://Assets/Art/rope.png" id="4_cijxl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkk3b"]
 friction = 0.0
@@ -27,12 +28,42 @@ lock_rotation = true
 custom_integrator = true
 script = ExtResource("1_gkk3b")
 
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -10
+points = PackedVector2Array(-1, 0, -2, 242)
+width = 32.0
+texture = ExtResource("4_cijxl")
+texture_mode = 1
+
+[node name="SmallPackage" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2, 2)
+texture = ExtResource("3_8o66u")
+region_enabled = true
+region_rect = Rect2(0, 96, 97, 96)
+
+[node name="MediumPackage" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(3, 2)
+texture = ExtResource("3_8o66u")
+region_enabled = true
+region_rect = Rect2(192.04384, 96.20928, 191.95082, 95.76594)
+
+[node name="LargePackage" type="Sprite2D" parent="."]
+position = Vector2(3, -46)
+texture = ExtResource("3_8o66u")
+region_enabled = true
+region_rect = Rect2(383.58643, 0, 192.41357, 192)
+
 [node name="CollisionShapeSmall" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_8o66u")
 disabled = true
 
 [node name="CollisionShapeMedium" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(3, 2)
 shape = SubResource("RectangleShape2D_gkk3b")
 disabled = true
@@ -64,23 +95,3 @@ metadata/_custom_type_script = "uid://bpfjf8wccyltd"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PackageArea"]
 shape = SubResource("CircleShape2D_gkk3b")
 debug_color = Color(0.478431, 0.588235, 0, 0.305882)
-
-[node name="SmallPackage" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(2, 2)
-texture = ExtResource("3_8o66u")
-region_enabled = true
-region_rect = Rect2(0, 96, 97, 96)
-
-[node name="MediumPackage" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(3, 2)
-texture = ExtResource("3_8o66u")
-region_enabled = true
-region_rect = Rect2(192.04384, 96.20928, 191.95082, 95.76594)
-
-[node name="LargePackage" type="Sprite2D" parent="."]
-position = Vector2(3, -46)
-texture = ExtResource("3_8o66u")
-region_enabled = true
-region_rect = Rect2(383.58643, 0, 192.41357, 192)

@@ -18,7 +18,7 @@ var sending_packages_to_depot: bool = false
 
 func _ready() -> void:
 	player_movement.is_grounded_movement = true
-	Global.Player = self
+	Global.player = self
 
 func _process(_delta: float) -> void:
 	$UI/TimeBar.value = int(world.time_left / 60.0)
