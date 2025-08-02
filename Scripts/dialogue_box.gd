@@ -8,6 +8,9 @@ var writing_text: String
 var queue: Array[String]
 var index: int = 0
 
+func _ready() -> void:
+	visible = false
+
 func animate_writing_text(text: String) -> void:
 	index = 0
 	is_writing_text = true
@@ -24,7 +27,7 @@ func text_chain(chain: Array[String]) -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("dismiss_dialogue"):
 		if is_writing_text:
-			index = writing_text.length()
+			finish_writing_immediately()
 		elif queue.is_empty():
 			visible = false
 			finished.emit()
@@ -42,3 +45,9 @@ func _process(delta: float) -> void:
 		return
 	
 	$Label.text = writing_text.substr(0, index)
+
+
+func finish_writing_immediately():
+	index = writing_text.length() + 1
+	$Label.text = writing_text
+	is_writing_text = false

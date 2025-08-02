@@ -15,8 +15,8 @@ var player: Player
 
 func _new_year(year: int) -> void:
 	player = $"../Player"
-	var dialog: DialogueBox = player.get_node("UI/DialogueBox")
-	dialog.animate_writing_text("It is a new year! Year: " + str(year) + ". Packages: " + str(world.packages_each_round[world.current_round]))
+	var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
+	dialogue.animate_writing_text("It is a new year! Year: " + str(year) + ". Packages: " + str(world.packages_each_round[world.current_round]))
 
 func _ready() -> void:
 	if !is_tutorial:
@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
 			met_santa = true
 			var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
 			dialogue.text_chain([
-				"Ho ho ho! I am santa.\n\nPress space to continue the dialog.",
+				"Ho ho ho! I am santa.\n\nPress space to continue the dialogue.",
 				"You can jump by pressing W, and high jump by pressing Shift+W.",
 				"Your job is to collect presents and deliver them to children all around the galaxy, all within 24 hours.",
 				"It is now time for you to leave the planet! Find a package and then bring it back to me.",

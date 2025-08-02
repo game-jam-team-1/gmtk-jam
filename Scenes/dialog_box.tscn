@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn3u3awcc1f84"]
+[gd_scene load_steps=3 format=3 uid="uid://dnq50eub3d1xe"]
 
-[ext_resource type="Script" uid="uid://c87h8gcct6tj8" path="res://Scripts/dialog_box.gd" id="1_twcdb"]
+[ext_resource type="Script" path="res://Scripts/dialog_box.gd" id="1_twcdb"]
 [ext_resource type="Texture2D" uid="uid://bfwrqrm3545sm" path="res://Assets/Art/santa_profile.png" id="2_sqs0f"]
 
 [node name="DialogBox" type="Node2D"]

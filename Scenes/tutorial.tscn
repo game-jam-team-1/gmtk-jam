@@ -73,7 +73,7 @@ scale = Vector2(5, 5)
 planet_type = 2
 refills_fuel = true
 orbit_planet = NodePath("../Planet")
-orbit_speed = 0.0010000000038417056
+orbit_speed = 0.0010000000038417
 
 [node name="Sprite" parent="Planet3" index="0"]
 texture = ExtResource("6_8va2t")
