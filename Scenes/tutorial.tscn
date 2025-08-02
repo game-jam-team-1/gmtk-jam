@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djc3m70hpnbf4"]
+[gd_scene load_steps=13 format=3 uid="uid://djc3m70hpnbf4"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_feyax"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]
@@ -7,29 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="4_i6t4g"]
 [ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/Art/big_green_planet.png" id="5_on4kn"]
 [ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/Art/big_blue_planet.png" id="6_8va2t"]
-[ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="6_p1f1o"]
-[ext_resource type="Script" uid="uid://c3rx758kdf3x7" path="res://Scripts/santa.gd" id="6_ys4pu"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="8_h2ono"]
-[ext_resource type="Texture2D" uid="uid://qo7bl4lt3g8c" path="res://Assets/Art/santa.png" id="10_70gml"]
+[ext_resource type="PackedScene" uid="uid://b7nvpr65unuoi" path="res://Scenes/santa.tscn" id="9_on4kn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2ono"]
-radius = 204.3055
+radius = 197.2347
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1f1o"]
-size = Vector2(192, 346)
+[sub_resource type="CircleShape2D" id="CircleShape2D_8va2t"]
+radius = 244.1199
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ys4pu"]
-radius = 213.03755
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p1f1o"]
-radius = 99.0
-height = 311.31494
+[sub_resource type="CircleShape2D" id="CircleShape2D_8mnmb"]
+radius = 297.1519
 
 [node name="Tutorial" type="Node2D"]
 script = ExtResource("1_p8jf4")
 rounds = 3
 packages_each_round = Array[int]([2, 1, 1])
-time_each_round = Array[float]([2880.0, 600.0, 1440.0])
 
 [node name="Background" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -86,7 +79,7 @@ orbit_speed = 0.0010000000038417056
 texture = ExtResource("6_8va2t")
 
 [node name="CollisionShape2D" parent="Planet3/Area2D" index="0"]
-shape = SubResource("CircleShape2D_h2ono")
+shape = SubResource("CircleShape2D_8va2t")
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
 position = Vector2(4794, 4401)
@@ -95,6 +88,9 @@ planet_type = 4
 refills_fuel = true
 orbit_planet = NodePath("../Planet")
 orbit_speed = 0.0029999999969732
+
+[node name="CollisionShape2D" parent="Planet2/Area2D" index="0"]
+shape = SubResource("CircleShape2D_8mnmb")
 
 [node name="Package" parent="Planet2" instance=ExtResource("8_h2ono")]
 position = Vector2(162, 125)
@@ -105,63 +101,11 @@ package_type = 1
 position = Vector2(3083, 742)
 contact_monitor = true
 
-[node name="TimeLabel" parent="Player/UI" index="1"]
-anchors_preset = 0
-
-[node name="FuelBar" parent="Player/UI" index="2"]
-anchor_top = -0.0009259259
-
-[node name="TimeBar" parent="Player/UI" index="3"]
-anchors_preset = 0
-
-[node name="ColorRect" parent="Player/UI" index="6"]
-anchors_preset = 0
-
-[node name="DeathScreen" parent="Player/UI" index="7"]
-anchors_preset = 0
-
-[node name="Santa" type="RigidBody2D" parent="."]
+[node name="Santa" parent="." instance=ExtResource("9_on4kn")]
 position = Vector2(2186, 264)
-gravity_scale = 0.0
-lock_rotation = true
-custom_integrator = true
-contact_monitor = true
-script = ExtResource("6_ys4pu")
-
-[node name="GravityComponent" type="Area2D" parent="Santa" node_paths=PackedStringArray("parent")]
-position = Vector2(5, 33)
-script = ExtResource("6_p1f1o")
-parent = NodePath("..")
-metadata/_custom_type_script = "uid://bpfjf8wccyltd"
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Santa/GravityComponent"]
-position = Vector2(-9, -49)
-shape = SubResource("RectangleShape2D_p1f1o")
-debug_color = Color(0.47843137, 0.5882353, 0, 0.30588236)
-metadata/_edit_lock_ = true
-
-[node name="PlayerDetectionArea" type="Area2D" parent="Santa"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Santa/PlayerDetectionArea"]
-position = Vector2(-9, -15)
-shape = SubResource("CircleShape2D_ys4pu")
-debug_color = Color(0.8392157, 0.3647059, 0.31764707, 0.41960785)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Santa"]
-position = Vector2(-5, 10.342529)
-shape = SubResource("CapsuleShape2D_p1f1o")
-metadata/_edit_lock_ = true
-
-[node name="RayCast2D" type="RayCast2D" parent="Santa"]
-position = Vector2(-5, 132.34253)
-target_position = Vector2(0, 41)
-metadata/_edit_lock_ = true
-
-[node name="Santa2" type="Sprite2D" parent="Santa"]
-position = Vector2(-2, -3)
-texture = ExtResource("10_70gml")
+is_tutorial = true
 
 [editable path="Planet"]
 [editable path="Planet3"]
+[editable path="Planet2"]
 [editable path="Player"]

@@ -1,6 +1,8 @@
 class_name Santa
 extends RigidBody2D
 
+@export var is_tutorial: bool = false
+
 var met_santa: bool = false
 var collected_package: bool = false
 var final_dialog: bool = false
@@ -11,11 +13,27 @@ var player: Player
 @onready var detection_area: Area2D = $"PlayerDetectionArea"
 @onready var world: World = get_parent()
 
+func _new_year(year: int) -> void:
+	player = $"../Player"
+	var dialog: DialogBox = player.get_node("UI/DialogBox")
+	dialog.animate_writing_text("It is a new year! Year: " + str(year) + ". Packages: " + str(world.packages_each_round[world.current_round]))
+
+func _ready() -> void:
+	if !is_tutorial:
+		world.new_year.connect(_new_year)
+		return
+	
+	world.freeze_time = true
+
 func _finished() -> void:
 	world.package_collected()
 
 func _process(delta: float) -> void:
+	if !is_tutorial:
+		return
+	
 	if world.packages_this_round > 0 && !collected_package:
+		world.freeze_time = false
 		world.package_collected()
 		collected_package = true
 		player = $"../Player"
@@ -45,7 +63,7 @@ func _process(delta: float) -> void:
 			dialog.text_chain([
 				"Ho ho ho! I am santa.\n\nPress space to continue the dialog.",
 				"You can jump by pressing W, and high jump by pressing Shift+W.",
-				"Your job is to collect presents and deliver them to children all around the galaxy.",
+				"Your job is to collect presents and deliver them to children all around the galaxy, all within 24 hours.",
 				"It is now time for you to leave the planet! Find a package and then bring it back to me.",
 			])
 
@@ -60,8 +78,10 @@ func _physics_process(delta: float) -> void:
 	rotation = upwards_angle + PI/2
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	linear_velocity = gravity_component.get_gravitational_force()
+	if !gravity_component.closest_gravity_area:
+		return
+	
+	linear_velocity = gravity_component.get_gravitational_force() + gravity_component.closest_gravity_area.planet.constant_linear_velocity
 
 func is_on_ground() -> bool:
-	print($RayCast2D.is_colliding())
 	return $RayCast2D.is_colliding()

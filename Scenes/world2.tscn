@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://1p5fxqvcld2h"]
+[gd_scene load_steps=15 format=3 uid="uid://1p5fxqvcld2h"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_8fptb"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_jeuw4"]
@@ -10,13 +10,22 @@
 [ext_resource type="PackedScene" uid="uid://60gkfls6gjjg" path="res://Scenes/crawler_enemy.tscn" id="8_exon5"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="9_8y0xx"]
 [ext_resource type="PackedScene" uid="uid://bdnjjis5flvtj" path="res://Scenes/turret.tscn" id="10_0aor2"]
+[ext_resource type="PackedScene" uid="uid://b7nvpr65unuoi" path="res://Scenes/santa.tscn" id="11_kyu1k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kyu1k"]
+radius = 158.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_keswu"]
+radius = 369.2289
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w78nr"]
+radius = 334.2529
 
 [node name="World2" type="Node2D"]
 script = ExtResource("1_jeuw4")
 level_number = 2
 rounds = 2
 packages_each_round = Array[int]([2, 2])
-time_each_round = Array[float]([1440.0, 1440.0])
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -100
@@ -44,32 +53,31 @@ position = Vector2(896, 512)
 scale = Vector2(2, 2)
 texture = ExtResource("2_o0rqk")
 
-[node name="Blue" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
+[node name="Blue" parent="." instance=ExtResource("3_jeuw4")]
 z_index = 1
 position = Vector2(-58, 2514)
 scale = Vector2(4.23341, 4.23341)
 planet_type = 2
-orbit_planet = NodePath("../Green")
 orbit_speed = 0.0029999999969732
 
 [node name="Sprite" parent="Blue" index="0"]
 texture = ExtResource("4_exon5")
 
 [node name="CrawlerEnemy" parent="Blue" instance=ExtResource("8_exon5")]
-position = Vector2(178.10703, 14.645386)
+position = Vector2(166.76865, 14.645386)
 scale = Vector2(0.2362162, 0.2362162)
 
 [node name="CrawlerEnemy2" parent="Blue" instance=ExtResource("8_exon5")]
-position = Vector2(-179.99673, 10.393494)
+position = Vector2(-169.83957, 10.393555)
 scale = Vector2(0.2362162, 0.2362162)
 
 [node name="CrawlerEnemy5" parent="Blue" instance=ExtResource("8_exon5")]
-position = Vector2(3.779459, 183.30377)
+position = Vector2(3.779457, 175.74463)
 scale = Vector2(0.2362162, 0.2362162)
 
 [node name="Green" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
 z_index = 1
-position = Vector2(2614, 2514)
+position = Vector2(3942, 2514)
 scale = Vector2(4.23341, 4.23341)
 planet_type = 1
 refills_fuel = true
@@ -96,13 +104,19 @@ position = Vector2(7.558899, 186.84698)
 scale = Vector2(0.2362162, 0.2362162)
 
 [node name="Player" parent="." instance=ExtResource("5_8y0xx")]
-position = Vector2(2, 1736)
+position = Vector2(2, 1776)
 contact_monitor = true
 max_contacts_reported = 1
 
 [node name="Planet" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
-position = Vector2(3694, 2435)
+position = Vector2(5254, 2435)
 orbit_planet = NodePath("../Green")
+
+[node name="CollisionShape2D" parent="Planet" index="1"]
+shape = SubResource("CircleShape2D_kyu1k")
+
+[node name="CollisionShape2D" parent="Planet/Area2D" index="0"]
+shape = SubResource("CircleShape2D_keswu")
 
 [node name="Turret2" parent="Planet" instance=ExtResource("10_0aor2")]
 position = Vector2(23, -159)
@@ -117,8 +131,11 @@ package_type = 2
 spawn_round = 1
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
-position = Vector2(-1162, 2472)
+position = Vector2(-1298, 2472)
 orbit_planet = NodePath("../Blue")
+
+[node name="CollisionShape2D" parent="Planet2/Area2D" index="0"]
+shape = SubResource("CircleShape2D_w78nr")
 
 [node name="Turret" parent="Planet2" instance=ExtResource("10_0aor2")]
 position = Vector2(-9, 242)
@@ -132,5 +149,15 @@ position = Vector2(3, -194)
 package_type = 1
 spawn_round = 1
 
+[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
+position = Vector2(1896, 2493)
+orbit_planet = NodePath("../Blue")
+orbit_speed = 0.0010000000038417056
+
+[node name="Santa" parent="." instance=ExtResource("11_kyu1k")]
+position = Vector2(1901, 2852)
+
 [editable path="Blue"]
 [editable path="Green"]
+[editable path="Planet"]
+[editable path="Planet2"]

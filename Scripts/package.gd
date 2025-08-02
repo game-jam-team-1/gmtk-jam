@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 	gravity_component.update_gravity_force(delta)
 	
 	if following_node && global_position.distance_to(following_node.global_position) > 200:
-		global_position = lerp(global_position, following_node.global_position, 0.01)
+		global_position = lerp(global_position, following_node.global_position, 0.02)
 	
 	if !gravity_component.closest_gravity_area:
 		return

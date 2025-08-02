@@ -20,9 +20,8 @@ func _ready() -> void:
 	player_movement.is_grounded_movement = true
 	Global.player = self
 
-func _process(_delta: float) -> void:
-	$UI/TimeBar.value = int(world.time_left / 60.0)
-	$UI/TimeLabel.text = "Year: " + str(world.current_round) + " | Hour: " + str(24 - int(world.time_left / 60.0)) + " | Presents: " + str(world.packages_this_round) + "/" + str(world.packages_each_round[world.current_round])
+func _process(delta: float) -> void:
+	$UI/TimeBar.value = world.time_left
 
 func _physics_process(delta: float) -> void:
 	_process_packages()

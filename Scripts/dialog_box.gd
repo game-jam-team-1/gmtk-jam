@@ -9,6 +9,7 @@ var queue: Array[String]
 var index: int = 0
 
 func animate_writing_text(text: String) -> void:
+	index = 0
 	is_writing_text = true
 	visible = true
 	writing_text = text
