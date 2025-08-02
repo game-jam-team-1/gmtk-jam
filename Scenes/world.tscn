@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://60gkfls6gjjg" path="res://Scenes/crawler_enemy.tscn" id="3_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://bd886phkg1kv6" path="res://Assets/big_purple_planet.png" id="5_ikia7"]
+[ext_resource type="Texture2D" uid="uid://bd886phkg1kv6" path="res://Assets/Art/big_purple_planet.png" id="5_ikia7"]
 [ext_resource type="PackedScene" uid="uid://bdnjjis5flvtj" path="res://Scenes/turret.tscn" id="6_7yui6"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="6_k7acu"]
-[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space_background_nebula.png" id="8_5v1tr"]
-[ext_resource type="Texture2D" uid="uid://cr2vbgdm27plv" path="res://Assets/big_orange_planet.png" id="8_7yui6"]
-[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space_background_stars.png" id="9_0fj1v"]
-[ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/big_blue_planet.png" id="9_c5t2i"]
+[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="8_5v1tr"]
+[ext_resource type="Texture2D" uid="uid://cr2vbgdm27plv" path="res://Assets/Art/big_orange_planet.png" id="8_7yui6"]
+[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/Art/space_background_stars.png" id="9_0fj1v"]
+[ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/Art/big_blue_planet.png" id="9_c5t2i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikia7"]
 radius = 293.6818

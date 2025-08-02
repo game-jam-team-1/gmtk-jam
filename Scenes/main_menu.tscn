@@ -1,36 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://djxxe8osn1t8a"]
+[gd_scene load_steps=11 format=3 uid="uid://djxxe8osn1t8a"]
 
 [ext_resource type="Script" uid="uid://dquu1nsh7febk" path="res://Scripts/main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="2_1ehe0"]
-[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space-background-stars.png" id="3_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="2_1ehe0"]
+[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/Art/space_background_stars.png" id="3_ce3w2"]
 [ext_resource type="Script" uid="uid://cxragsgncirtb" path="res://Scripts/menu_camera.gd" id="4_ce3w2"]
+[ext_resource type="FontFile" uid="uid://cmd18xd5qilt5" path="res://Assets/Fonts/MedodicaRegular.otf" id="5_n45e2"]
+[ext_resource type="Texture2D" uid="uid://c4ma6pjv1aefj" path="res://Assets/Art/level-button.png" id="6_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://dnopj3x3l870b" path="res://Assets/Art/level-button-pressed.png" id="7_yhxw7"]
+[ext_resource type="Script" uid="uid://bvmi0nvrjijjc" path="res://Scripts/level_select_button.gd" id="8_yhxw7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ce3w2"]
+font = ExtResource("5_n45e2")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_trj04"]
+font = ExtResource("5_n45e2")
+font_size = 250
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_06t4h")
-
-[node name="Parallax1" type="Parallax2D" parent="."]
-z_index = -1
-scroll_scale = Vector2(0.1, 0.1)
-repeat_size = Vector2(3584, 2048)
-repeat_times = 3
-
-[node name="SpaceBackgroundNebula" type="Sprite2D" parent="Parallax1"]
-modulate = Color(0.637843, 0.637843, 0.637843, 1)
-position = Vector2(896, 512)
-scale = Vector2(2, 2)
-texture = ExtResource("2_1ehe0")
-
-[node name="Parallax2" type="Parallax2D" parent="."]
-z_index = -1
-scroll_scale = Vector2(0.2, 0.2)
-repeat_size = Vector2(3584, 2048)
-repeat_times = 3
-
-[node name="SpaceBackgroundStars" type="Sprite2D" parent="Parallax2"]
-modulate = Color(0.811127, 0.811127, 0.811127, 1)
-position = Vector2(896, 512)
-scale = Vector2(2, 2)
-texture = ExtResource("3_ce3w2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1152, 648)
@@ -38,20 +26,73 @@ zoom = Vector2(0.5, 0.5)
 script = ExtResource("4_ce3w2")
 speed = 300.0
 
-[node name="Title" type="Label" parent="Camera2D"]
-offset_left = -1067.0
-offset_top = -244.0
-offset_right = -364.0
-offset_bottom = -39.0
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Parallax1" type="Parallax2D" parent="Background"]
+z_index = -1
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundNebula" type="Sprite2D" parent="Background/Parallax1"]
+modulate = Color(0.637843, 0.637843, 0.637843, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("2_1ehe0")
+
+[node name="Parallax2" type="Parallax2D" parent="Background"]
+z_index = -1
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundStars" type="Sprite2D" parent="Background/Parallax2"]
+modulate = Color(0.811127, 0.811127, 0.811127, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("3_ce3w2")
+
+[node name="FocusWindow" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="FocusWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="FocusWindow"]
+offset_top = 450.0
+offset_right = 1920.0
+offset_bottom = 550.0
+text = "Click here to focus window"
+label_settings = SubResource("LabelSettings_ce3w2")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="MainMenu" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="MainMenu"]
+offset_top = 106.0
+offset_right = 1920.0
+offset_bottom = 357.0
 theme_override_font_sizes/font_size = 150
-text = "Title Here"
+text = "Solar Santa"
+label_settings = SubResource("LabelSettings_trj04")
+horizontal_alignment = 1
 
-[node name="Play" type="Button" parent="Camera2D"]
-offset_left = -72.0
-offset_top = -367.0
-offset_right = 655.0
-offset_bottom = -202.0
-theme_override_font_sizes/font_size = 80
-text = "Play"
+[node name="LevelButton" type="Sprite2D" parent="MainMenu"]
+position = Vector2(283, 799)
+texture = ExtResource("6_cp0ys")
 
-[connection signal="button_up" from="Camera2D/Play" to="." method="_on_play_button_up"]
+[node name="TextureButton" type="TextureButton" parent="MainMenu"]
+offset_left = 574.0
+offset_top = 523.0
+offset_right = 894.0
+offset_bottom = 843.0
+texture_normal = ExtResource("6_cp0ys")
+texture_pressed = ExtResource("7_yhxw7")
+script = ExtResource("8_yhxw7")

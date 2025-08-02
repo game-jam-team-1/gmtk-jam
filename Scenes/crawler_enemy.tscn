@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://60gkfls6gjjg"]
 
 [ext_resource type="Script" uid="uid://dma6d0r2m4r8l" path="res://Scripts/crawler_enemy.gd" id="1_bkh62"]
-[ext_resource type="Texture2D" uid="uid://vdqsaytnjbpi" path="res://Assets/bug-sheet.png" id="2_vyai1"]
+[ext_resource type="Texture2D" uid="uid://vdqsaytnjbpi" path="res://Assets/Art/bug_sheet.png" id="2_vyai1"]
 [ext_resource type="AudioStream" uid="uid://bxaaci6y4dbrm" path="res://Sounds/bug_walk_1.ogg" id="3_m33pl"]
 [ext_resource type="AudioStream" uid="uid://dyphclowmx0ii" path="res://Sounds/bug_walk_2.ogg" id="4_j7klq"]
 
