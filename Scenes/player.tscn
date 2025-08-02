@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://Scripts/player_camera.gd" id="6_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://dxn2cem3kdxyv" path="res://Assets/Art/fuel_bar_over.png" id="8_7dp3o"]
 [ext_resource type="Script" path="res://Scenes/death_screen.gd" id="8_8erm5"]
-[ext_resource type="PackedScene" uid="uid://dnq50eub3d1xe" path="res://Scenes/dialog_box.tscn" id="8_f1ek2"]
-[ext_resource type="Script" path="res://Scripts/player_audio.gd" id="8_tx1dd"]
+[ext_resource type="PackedScene" uid="uid://dnq50eub3d1xe" path="res://Scenes/dialogue_box.tscn" id="8_f1ek2"]
+[ext_resource type="Script" uid="uid://mdej2yvk32bd" path="res://Scripts/player_audio.gd" id="8_tx1dd"]
 [ext_resource type="AudioStream" uid="uid://cevgucdvjq7qi" path="res://Sounds/pickup.ogg" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://rbc6vwoe1xcb" path="res://Sounds/player_walk.ogg" id="9_gymyn"]
 [ext_resource type="Texture2D" uid="uid://c5jvjdddsgi5m" path="res://Assets/Art/fuel_bar_under.png" id="9_h4iuc"]
@@ -321,7 +321,7 @@ texture_over = ExtResource("8_7dp3o")
 texture_progress = ExtResource("9_h4iuc")
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("8_f1ek2")]
-position = Vector2(1020, 978)
+position = Vector2(940, 978)
 
 [node name="ScreenColor" type="ColorRect" parent="UI"]
 visible = false
