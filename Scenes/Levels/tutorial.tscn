@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://djc3m70hpnbf4"]
+[gd_scene load_steps=13 format=3 uid="uid://djc3m70hpnbf4"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_feyax"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]
@@ -8,18 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/Art/big_green_planet.png" id="5_on4kn"]
 [ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/Art/big_blue_planet.png" id="6_8va2t"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="8_h2ono"]
-[ext_resource type="AudioStream" uid="uid://rbc6vwoe1xcb" path="res://Sounds/Player/walk.ogg" id="9_8va2t"]
 [ext_resource type="PackedScene" uid="uid://b7nvpr65unuoi" path="res://Scenes/santa.tscn" id="9_on4kn"]
-[ext_resource type="AudioStream" uid="uid://bomcpoukyqa3b" path="res://Sounds/Player/pickup.ogg" id="10_8mnmb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2ono"]
 radius = 197.2347
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8va2t"]
-radius = 244.1199
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_8mnmb"]
 radius = 297.1519
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8va2t"]
+radius = 244.1199
 
 [node name="Tutorial" type="Node2D"]
 script = ExtResource("1_p8jf4")
@@ -52,44 +50,30 @@ position = Vector2(896, 512)
 scale = Vector2(2, 2)
 texture = ExtResource("2_omtrn")
 
-[node name="Planet" parent="." instance=ExtResource("3_omtrn")]
+[node name="Planet1" parent="." instance=ExtResource("3_omtrn")]
 position = Vector2(2157, 2151)
 scale = Vector2(10, 10)
 planet_type = 1
 refills_fuel = true
 
-[node name="Sprite" parent="Planet" index="0"]
+[node name="Sprite" parent="Planet1" index="0"]
 texture = ExtResource("5_on4kn")
 
-[node name="CollisionShape2D" parent="Planet/Area2D" index="0"]
+[node name="CollisionShape2D" parent="Planet1/Area2D" index="0"]
 shape = SubResource("CircleShape2D_h2ono")
 
-[node name="Package" parent="Planet" instance=ExtResource("8_h2ono")]
-position = Vector2(37.199997, -161.29999)
+[node name="Package" parent="Planet1" instance=ExtResource("8_h2ono")]
+position = Vector2(108.2, -132.40001)
 scale = Vector2(0.099999994, 0.099999994)
 package_type = 2
 spawn_round = 1
-
-[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
-position = Vector2(7509.0005, 2151)
-scale = Vector2(5, 5)
-planet_type = 2
-refills_fuel = true
-orbit_planet = NodePath("../Planet")
-orbit_speed = 0.0010000000038417
-
-[node name="Sprite" parent="Planet3" index="0"]
-texture = ExtResource("6_8va2t")
-
-[node name="CollisionShape2D" parent="Planet3/Area2D" index="0"]
-shape = SubResource("CircleShape2D_8va2t")
 
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
 position = Vector2(4794, 4401)
 scale = Vector2(2, 2)
 planet_type = 4
 refills_fuel = true
-orbit_planet = NodePath("../Planet")
+orbit_planet = NodePath("../Planet1")
 orbit_speed = 0.0029999999969732
 
 [node name="CollisionShape2D" parent="Planet2/Area2D" index="0"]
@@ -100,27 +84,28 @@ position = Vector2(162, 125)
 scale = Vector2(0.5, 0.5)
 package_type = 1
 
+[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
+position = Vector2(7509.0005, 2151)
+scale = Vector2(5, 5)
+planet_type = 2
+refills_fuel = true
+orbit_planet = NodePath("../Planet1")
+orbit_speed = 0.0010000000038417
+
+[node name="Sprite" parent="Planet3" index="0"]
+texture = ExtResource("6_8va2t")
+
+[node name="CollisionShape2D" parent="Planet3/Area2D" index="0"]
+shape = SubResource("CircleShape2D_8va2t")
+
 [node name="Player" parent="." instance=ExtResource("4_i6t4g")]
-position = Vector2(3083, 742)
+position = Vector2(1473, 717)
 contact_monitor = true
 
-[node name="Walk" parent="Player/Audio" index="0"]
-stream = ExtResource("9_8va2t")
-volume_db = -32.311
-pitch_scale = 2.17
-
-[node name="Thruster" parent="Player/Audio" index="1"]
-stream = null
-volume_db = 0.0
-
-[node name="Pickup" parent="Player/Audio" index="2"]
-stream = ExtResource("10_8mnmb")
-
 [node name="Santa" parent="." instance=ExtResource("9_on4kn")]
-position = Vector2(2186, 264)
+position = Vector2(2228, 380)
 is_tutorial = true
 
-[editable path="Planet"]
-[editable path="Planet3"]
+[editable path="Planet1"]
 [editable path="Planet2"]
-[editable path="Player"]
+[editable path="Planet3"]

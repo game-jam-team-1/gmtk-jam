@@ -1,0 +1,191 @@
+[gd_scene load_steps=14 format=3 uid="uid://b83h32cs6bw8c"]
+
+[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_jwpnw"]
+[ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_wlbe4"]
+[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/Art/space_background_stars.png" id="2_5oy68"]
+[ext_resource type="PackedScene" uid="uid://b7nvpr65unuoi" path="res://Scenes/santa.tscn" id="3_vfl4p"]
+[ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="4_wlbe4"]
+[ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="5_i6bqf"]
+[ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="6_n80jh"]
+[ext_resource type="Texture2D" uid="uid://cr2vbgdm27plv" path="res://Assets/Art/big_orange_planet.png" id="7_q21to"]
+[ext_resource type="PackedScene" uid="uid://bdnjjis5flvtj" path="res://Scenes/turret.tscn" id="8_nqbrd"]
+[ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/Art/big_green_planet.png" id="9_n80jh"]
+[ext_resource type="Texture2D" uid="uid://bd886phkg1kv6" path="res://Assets/Art/big_purple_planet.png" id="10_q21to"]
+[ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/Art/big_blue_planet.png" id="11_nqbrd"]
+[ext_resource type="PackedScene" uid="uid://60gkfls6gjjg" path="res://Scenes/crawler_enemy.tscn" id="13_nqbrd"]
+
+[node name="Level3" type="Node2D"]
+script = ExtResource("1_wlbe4")
+level_number = 3
+rounds = 1
+packages_each_round = Array[int]([2, 2, 2, 2])
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -100
+metadata/_edit_lock_ = true
+
+[node name="Parallax1" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundNebula" type="Sprite2D" parent="Background/Parallax1"]
+modulate = Color(0.637843, 0.637843, 0.637843, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("1_jwpnw")
+
+[node name="Parallax2" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(3584, 2048)
+repeat_times = 3
+
+[node name="SpaceBackgroundStars" type="Sprite2D" parent="Background/Parallax2"]
+modulate = Color(0.811127, 0.811127, 0.811127, 1)
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+texture = ExtResource("2_5oy68")
+
+[node name="Santa" parent="." instance=ExtResource("3_vfl4p")]
+position = Vector2(131, 1478)
+
+[node name="Player" parent="." instance=ExtResource("4_wlbe4")]
+position = Vector2(1949, 1530)
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="Planet1" parent="." instance=ExtResource("5_i6bqf")]
+position = Vector2(123, 2112)
+scale = Vector2(3, 3)
+planet_type = 4
+refills_fuel = true
+
+[node name="Turret" parent="Planet1" instance=ExtResource("8_nqbrd")]
+position = Vector2(-168, -128.00003)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Turret2" parent="Planet1" instance=ExtResource("8_nqbrd")]
+position = Vector2(167.66667, -116.66668)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Turret3" parent="Planet1" instance=ExtResource("8_nqbrd")]
+position = Vector2(-164.66667, 152.66666)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Turret4" parent="Planet1" instance=ExtResource("8_nqbrd")]
+position = Vector2(182.66667, 149.66664)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("5_i6bqf")]
+position = Vector2(1846, 2832)
+scale = Vector2(2, 2)
+orbit_planet = NodePath("../Planet1")
+orbit_speed = 0.005000000004656613
+
+[node name="Sprite" parent="Planet2" index="0"]
+texture = ExtResource("7_q21to")
+
+[node name="Package" parent="Planet2" instance=ExtResource("6_n80jh")]
+position = Vector2(-923, -1416)
+scale = Vector2(0.5, 0.5)
+package_type = 1
+spawn_round = 1
+
+[node name="Package2" parent="Planet2" instance=ExtResource("6_n80jh")]
+position = Vector2(-923, -1416)
+scale = Vector2(0.5, 0.5)
+package_type = 1
+spawn_round = 1
+
+[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("5_i6bqf")]
+position = Vector2(-1530, 1303)
+scale = Vector2(2, 2)
+planet_type = 1
+orbit_planet = NodePath("../Planet1")
+orbit_speed = 0.005000000004656613
+
+[node name="Sprite" parent="Planet3" index="0"]
+texture = ExtResource("9_n80jh")
+
+[node name="Package" parent="Planet3" instance=ExtResource("6_n80jh")]
+position = Vector2(212, -18.5)
+scale = Vector2(0.5, 0.5)
+
+[node name="Package2" parent="Planet3" instance=ExtResource("6_n80jh")]
+position = Vector2(-207, -16.5)
+scale = Vector2(0.5, 0.5)
+
+[node name="Planet4" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("5_i6bqf")]
+position = Vector2(-1046, 3794)
+scale = Vector2(2, 2)
+planet_type = 1
+orbit_planet = NodePath("../Planet1")
+orbit_speed = 0.005000000004656613
+
+[node name="Sprite" parent="Planet4" index="0"]
+texture = ExtResource("10_q21to")
+
+[node name="Package" parent="Planet4" instance=ExtResource("6_n80jh")]
+position = Vector2(2.5, -211)
+scale = Vector2(0.5, 0.5)
+package_type = 2
+spawn_round = 2
+
+[node name="Package2" parent="Planet4" instance=ExtResource("6_n80jh")]
+position = Vector2(7, 231.5)
+scale = Vector2(0.5, 0.5)
+package_type = 2
+spawn_round = 2
+
+[node name="Planet5" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("5_i6bqf")]
+position = Vector2(1339, 386)
+scale = Vector2(2, 2)
+planet_type = 1
+orbit_planet = NodePath("../Planet1")
+orbit_speed = 0.005000000004656613
+
+[node name="Sprite" parent="Planet5" index="0"]
+texture = ExtResource("11_nqbrd")
+
+[node name="Package" parent="Planet5" instance=ExtResource("6_n80jh")]
+position = Vector2(-9, 227)
+scale = Vector2(0.5, 0.5)
+package_type = 3
+spawn_round = 3
+
+[node name="Package2" parent="Planet5" instance=ExtResource("6_n80jh")]
+position = Vector2(1.5, -191)
+scale = Vector2(0.5, 0.5)
+package_type = 3
+spawn_round = 3
+
+[node name="Crawlers" type="Node2D" parent="."]
+
+[node name="CrawlerEnemy" parent="Crawlers" instance=ExtResource("13_nqbrd")]
+position = Vector2(-1533, 974)
+
+[node name="CrawlerEnemy2" parent="Crawlers" instance=ExtResource("13_nqbrd")]
+position = Vector2(-1533, 1715)
+
+[node name="CrawlerEnemy3" parent="Crawlers" instance=ExtResource("13_nqbrd")]
+position = Vector2(926, 401)
+
+[node name="CrawlerEnemy4" parent="Crawlers" instance=ExtResource("13_nqbrd")]
+position = Vector2(1747, 403)
+
+[node name="CrawlerEnemy5" parent="Crawlers" instance=ExtResource("13_nqbrd")]
+position = Vector2(1847, 2474)
+
+[node name="CrawlerEnemy6" parent="Crawlers" instance=ExtResource("13_nqbrd")]
+position = Vector2(1849, 3281)
+
+[node name="CrawlerEnemy7" parent="Crawlers" instance=ExtResource("13_nqbrd")]
+position = Vector2(-631, 3813)
+
+[node name="CrawlerEnemy8" parent="Crawlers" instance=ExtResource("13_nqbrd")]
+position = Vector2(-1456, 3827)
+
+[editable path="Planet2"]
+[editable path="Planet3"]
+[editable path="Planet4"]
+[editable path="Planet5"]
