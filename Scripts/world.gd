@@ -5,11 +5,12 @@ extends Node2D
 @export var rounds: int
 
 @export var packages_each_round: Array[int]
+@export var time_each_round: Array[float]
+
+@onready var time_left: float = time_each_round[0]
 
 var current_round: int
 var packages_this_round: int
-
-var time_left: float = 24 * 60
 
 signal new_year(round: int)
 signal game_finished()
@@ -22,7 +23,7 @@ func package_collected() -> void:
 	packages_this_round += 1
 	if packages_this_round >= packages_each_round[current_round]:
 		packages_this_round = 0
-		time_left = 24 * 60
+		time_left = time_each_round[current_round]
 		current_round += 1
 		new_year.emit(current_round)
 		if current_round >= rounds:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://djc3m70hpnbf4"]
+[gd_scene load_steps=16 format=3 uid="uid://djc3m70hpnbf4"]
 
 [ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_feyax"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_p8jf4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="3_omtrn"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="4_i6t4g"]
 [ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/Art/big_green_planet.png" id="5_on4kn"]
+[ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/Art/big_blue_planet.png" id="6_8va2t"]
 [ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="6_p1f1o"]
 [ext_resource type="Script" uid="uid://c3rx758kdf3x7" path="res://Scripts/santa.gd" id="6_ys4pu"]
 [ext_resource type="PackedScene" uid="uid://bpgm8pf4sxga8" path="res://Scenes/package.tscn" id="8_h2ono"]
@@ -26,8 +27,9 @@ height = 311.31494
 
 [node name="Tutorial" type="Node2D"]
 script = ExtResource("1_p8jf4")
-rounds = 1
-packages_each_round = Array[int]([2])
+rounds = 3
+packages_each_round = Array[int]([2, 1, 1])
+time_each_round = Array[float]([2880.0, 600.0, 1440.0])
 
 [node name="Background" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -66,8 +68,28 @@ texture = ExtResource("5_on4kn")
 [node name="CollisionShape2D" parent="Planet/Area2D" index="0"]
 shape = SubResource("CircleShape2D_h2ono")
 
+[node name="Package" parent="Planet" instance=ExtResource("8_h2ono")]
+position = Vector2(37.199997, -161.29999)
+scale = Vector2(0.099999994, 0.099999994)
+package_type = 2
+spawn_round = 1
+
+[node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
+position = Vector2(7509.0005, 2151)
+scale = Vector2(5, 5)
+planet_type = 2
+refills_fuel = true
+orbit_planet = NodePath("../Planet")
+orbit_speed = 0.0010000000038417056
+
+[node name="Sprite" parent="Planet3" index="0"]
+texture = ExtResource("6_8va2t")
+
+[node name="CollisionShape2D" parent="Planet3/Area2D" index="0"]
+shape = SubResource("CircleShape2D_h2ono")
+
 [node name="Planet2" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_omtrn")]
-position = Vector2(3942, 3903)
+position = Vector2(4794, 4401)
 scale = Vector2(2, 2)
 planet_type = 4
 refills_fuel = true
@@ -80,8 +102,23 @@ scale = Vector2(0.5, 0.5)
 package_type = 1
 
 [node name="Player" parent="." instance=ExtResource("4_i6t4g")]
-position = Vector2(3651, 1520)
+position = Vector2(3083, 742)
 contact_monitor = true
+
+[node name="TimeLabel" parent="Player/UI" index="1"]
+anchors_preset = 0
+
+[node name="FuelBar" parent="Player/UI" index="2"]
+anchor_top = -0.0009259259
+
+[node name="TimeBar" parent="Player/UI" index="3"]
+anchors_preset = 0
+
+[node name="ColorRect" parent="Player/UI" index="6"]
+anchors_preset = 0
+
+[node name="DeathScreen" parent="Player/UI" index="7"]
+anchors_preset = 0
 
 [node name="Santa" type="RigidBody2D" parent="."]
 position = Vector2(2186, 264)
@@ -126,3 +163,5 @@ position = Vector2(-2, -3)
 texture = ExtResource("10_70gml")
 
 [editable path="Planet"]
+[editable path="Planet3"]
+[editable path="Player"]

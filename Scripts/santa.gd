@@ -3,6 +3,8 @@ extends RigidBody2D
 
 var met_santa: bool = false
 var collected_package: bool = false
+var final_dialog: bool = false
+
 var player: Player
 
 @onready var gravity_component: GravityComponent = $"GravityComponent"
@@ -10,10 +12,11 @@ var player: Player
 @onready var world: World = get_parent()
 
 func _finished() -> void:
-	get_parent().complete_level()
+	world.package_collected()
 
 func _process(delta: float) -> void:
 	if world.packages_this_round > 0 && !collected_package:
+		world.package_collected()
 		collected_package = true
 		player = $"../Player"
 		var dialog: DialogBox = player.get_node("UI/DialogBox")
@@ -21,7 +24,16 @@ func _process(delta: float) -> void:
 			"Good job collecting the package.",
 			"Remember to only bring green packages to green planets, and blue packages to blue planets, and so on.",
 			"Each present contains many other presents, and the santas of each planet will help deliver one to every child.",
-			"It is time for you to head out into the galaxy! Good luck!"
+			"Bring this blue present to the blue planet."
+		])
+	
+	if world.current_round == 2 && !final_dialog:
+		final_dialog = true
+		player = $"../Player"
+		var dialog: DialogBox = player.get_node("UI/DialogBox")
+		dialog.text_chain([
+			"You show great promise! It is time for you to head out into the galaxy.",
+			"Fairwell!"
 		])
 		dialog.finished.connect(_finished)
 	
@@ -34,7 +46,6 @@ func _process(delta: float) -> void:
 				"Ho ho ho! I am santa.\n\nPress space to continue the dialog.",
 				"You can jump by pressing W, and high jump by pressing Shift+W.",
 				"Your job is to collect presents and deliver them to children all around the galaxy.",
-				"You can press E to collect packages.",
 				"It is now time for you to leave the planet! Find a package and then bring it back to me.",
 			])
 
