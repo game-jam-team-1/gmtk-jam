@@ -1,5 +1,5 @@
-class_name DialogBox
-extends Node2D
+class_name DialogueBox
+extends Control
 
 signal finished
 
@@ -21,7 +21,7 @@ func text_chain(chain: Array[String]) -> void:
 	queue = chain
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("dismiss_dialog"):
+	if Input.is_action_just_pressed("dismiss_dialogue"):
 		if is_writing_text:
 			index = writing_text.length()
 		elif queue.is_empty():

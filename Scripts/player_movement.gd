@@ -41,7 +41,7 @@ var is_thruster_on: bool = false
 	$"FloorCasts/RayCast3",
 ]
 
-@onready var fuel_bar: ProgressBar = $"../UI/FuelBar"
+@onready var fuel_bar: TextureProgressBar = $"../UI/FuelBar"
 
 @onready var screen_color: ScreenColor = $"../UI/ScreenColor"
 

@@ -10,7 +10,7 @@ var sending_packages_to_depot: bool = false
 
 @onready var gravity_component: GravityComponent = $"PlayerMovement/GravityComponent"
 @onready var large_detection_area: Area2D = $"LargeDetectionArea"
-@onready var fuel_bar: ProgressBar = $"UI/FuelBar"
+@onready var fuel_bar: TextureProgressBar = $"UI/FuelBar"
 @onready var player_movement: PlayerMovement = $"PlayerMovement"
 @onready var player_animation: PlayerAnimation = $"PlayerAnimation"
 @onready var world: World = get_parent()
