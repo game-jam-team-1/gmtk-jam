@@ -155,7 +155,8 @@ orbit_planet = NodePath("../Blue")
 orbit_speed = 0.001
 
 [node name="Santa" parent="." instance=ExtResource("11_kyu1k")]
-position = Vector2(1901, 2852)
+position = Vector2(480, 1879)
+rotation = 0.6195919
 
 [editable path="Blue"]
 [editable path="Green"]

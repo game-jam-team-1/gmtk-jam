@@ -182,7 +182,8 @@ texture = SubResource("CompressedTexture2D_7yui6")
 position = Vector2(3751, 935)
 
 [node name="Santa" parent="." instance=ExtResource("12_7yui6")]
-position = Vector2(1338, 990)
+position = Vector2(1285, 998)
+rotation = 0.6370452
 
 [editable path="Planet"]
 [editable path="Planet2"]

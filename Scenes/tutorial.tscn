@@ -103,7 +103,7 @@ position = Vector2(3083, 742)
 contact_monitor = true
 
 [node name="Santa" parent="." instance=ExtResource("9_on4kn")]
-position = Vector2(2186, 264)
+position = Vector2(2163, 405)
 is_tutorial = true
 
 [editable path="Planet"]
