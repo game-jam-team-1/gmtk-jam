@@ -31,12 +31,14 @@ func update_gravity_force(delta: float) -> void:
 	if not parent.has_method("is_on_ground"):
 		printerr("Parent doesn't have method 'is_on_ground', returning")
 		return
-
+	
+	var planet_center: Vector2 = closest_gravity_area.global_position
+	var gravity_dir: float = planet_center.angle_to_point(global_position) + PI
+	
 	if parent.is_on_ground():
-		gravitational_force = Vector2.ZERO
+		gravitational_force = Vector2.from_angle(gravity_dir) * 10 * delta * 60
 	else:
-		var planet_center: Vector2 = closest_gravity_area.global_position
-		var gravity_dir: float = planet_center.angle_to_point(global_position) + PI
+		
 		gravitational_force += Vector2.from_angle(gravity_dir) * closest_gravity_area.accel * delta * 60
 
 

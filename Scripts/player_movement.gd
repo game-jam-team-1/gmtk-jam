@@ -171,7 +171,7 @@ func get_velocity() -> Vector2:
 		vel += gravity_component.get_gravitational_force()
 	
 	if is_thruster_movement:
-		vel += gravity_component.get_gravitational_force() * 0.3
+		vel += gravity_component.get_gravitational_force() * 0.05
 	
 	return vel
 
