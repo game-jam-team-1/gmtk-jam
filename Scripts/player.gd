@@ -21,6 +21,7 @@ func _ready() -> void:
 	Global.Player = self
 
 func _process(_delta: float) -> void:
+	$UI/TimeBar.value = int(world.time_left / 60.0)
 	$UI/TimeLabel.text = "Year: " + str(world.current_round) + " | Hour: " + str(24 - int(world.time_left / 60.0)) + " | Presents: " + str(world.packages_this_round) + "/" + str(world.packages_each_round[world.current_round])
 
 func _physics_process(delta: float) -> void:

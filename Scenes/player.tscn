@@ -292,6 +292,7 @@ offset_left = 421.0
 offset_top = 996.0
 offset_right = 926.0
 offset_bottom = 1058.0
+max_value = 24.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 

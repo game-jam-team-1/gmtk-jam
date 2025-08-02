@@ -28,7 +28,7 @@ func package_collected() -> void:
 			game_finished.emit()
 
 func _process(delta: float) -> void:
-	time_left -= 15 * delta
+	time_left -= 10 * delta
 	
 	if time_left <= 0:
 		print("Timeout! You lose")
