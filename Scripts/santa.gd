@@ -5,7 +5,7 @@ extends RigidBody2D
 
 var met_santa: bool = false
 var collected_package: bool = false
-var final_dialog: bool = false
+var final_dialogue: bool = false
 
 var player: Player
 
@@ -15,7 +15,7 @@ var player: Player
 
 func _new_year(year: int) -> void:
 	player = $"../Player"
-	var dialog: DialogBox = player.get_node("UI/DialogBox")
+	var dialog: DialogueBox = player.get_node("UI/DialogBox")
 	dialog.animate_writing_text("It is a new year! Year: " + str(year) + ". Packages: " + str(world.packages_each_round[world.current_round]))
 
 func _ready() -> void:
@@ -37,30 +37,30 @@ func _process(delta: float) -> void:
 		world.package_collected()
 		collected_package = true
 		player = $"../Player"
-		var dialog: DialogBox = player.get_node("UI/DialogBox")
-		dialog.text_chain([
+		var dialogue: DialogueBox = player.get_node("UI/DialogBox")
+		dialogue.text_chain([
 			"Good job collecting the package.",
 			"Remember to only bring green packages to green planets, and blue packages to blue planets, and so on.",
 			"Each present contains many other presents, and the santas of each planet will help deliver one to every child.",
 			"Bring this blue present to the blue planet."
 		])
 	
-	if world.current_round == 2 && !final_dialog:
-		final_dialog = true
+	if world.current_round == 2 && !final_dialogue:
+		final_dialogue = true
 		player = $"../Player"
-		var dialog: DialogBox = player.get_node("UI/DialogBox")
-		dialog.text_chain([
+		var dialogue: DialogueBox = player.get_node("UI/DialogBox")
+		dialogue.text_chain([
 			"You show great promise! It is time for you to head out into the galaxy.",
 			"Fairwell!"
 		])
-		dialog.finished.connect(_finished)
+		dialogue.finished.connect(_finished)
 	
 	for area in $PlayerDetectionArea.get_overlapping_areas():
 		if area.get_parent() is Player && !met_santa:
 			player = area.get_parent()
 			met_santa = true
-			var dialog: DialogBox = player.get_node("UI/DialogBox")
-			dialog.text_chain([
+			var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
+			dialogue.text_chain([
 				"Ho ho ho! I am santa.\n\nPress space to continue the dialog.",
 				"You can jump by pressing W, and high jump by pressing Shift+W.",
 				"Your job is to collect presents and deliver them to children all around the galaxy, all within 24 hours.",
