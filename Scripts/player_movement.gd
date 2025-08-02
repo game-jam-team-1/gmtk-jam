@@ -21,6 +21,7 @@ var jump_velocity: Vector2 = Vector2.ZERO
 var thruster_velocity: Vector2 = Vector2.ZERO
 
 var thruster_fuel: float = 100.0
+var screen_flashing: bool = false
 
 var just_jumped: bool = false
 var just_jumped_time: float = 0.0
@@ -42,6 +43,8 @@ var is_thruster_on: bool = false
 
 @onready var fuel_bar: ProgressBar = $"../UI/FuelBar"
 
+@onready var screen_color: ScreenColor = $"../UI/ScreenColor"
+
 @onready var player: Player = get_parent()
 
 
@@ -49,8 +52,15 @@ func _ready() -> void:
 	fuel_bar.max_value = THRUSTER_MAX_FUEL
 
 func _process(delta: float) -> void:
-	
 	fuel_bar.value = thruster_fuel
+	
+	if thruster_fuel <= 20:
+		if !screen_flashing:
+			screen_color.start_flashing()
+			screen_flashing = true
+	elif screen_flashing:
+		screen_color.stop_flashing()
+		screen_flashing = false
 	
 	# Count down the jump buffer
 	if just_jumped_time > 0:

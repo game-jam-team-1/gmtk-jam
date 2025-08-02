@@ -7,9 +7,15 @@ enum STATE {
 	AGGRO,
 }
 
+
 const AGGRO_THRESHOLD: float = 1.0
 const MAX_AGGRO: float = 3.0
 const MAX_BARREL_ROTATION: float = PI/2
+
+
+@export var bullet_speed: float = 1500.0 # pixels per second
+@export var bullet_frequency: float = 1.25 # bullet per second
+
 
 var planet_velocity = Vector2.ZERO
 var gravity_velocity = Vector2.ZERO
@@ -17,6 +23,7 @@ var state: STATE = STATE.IDLE
 var aggro_value: float = 0.0
 var rotation_direction = 1
 var center_rotation = global_rotation
+
 
 @onready var ground_raycast: RayCast2D = $"GroundRaycast"
 @onready var player_raycast: RayCast2D = $"Pivot/PlayerRaycast"
@@ -27,9 +34,6 @@ var center_rotation = global_rotation
 @onready var bullet = preload("uid://de75elo7ykf0g")
 
 @onready var bullet_shoot_timer: SceneTreeTimer = get_tree().create_timer(1.0 / bullet_frequency)
-
-@export var bullet_speed: float = 1500.0 # pixels per second
-@export var bullet_frequency: float = 1.5 # bullet per second
 
 
 func _ready() -> void:
