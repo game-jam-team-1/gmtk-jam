@@ -16,10 +16,10 @@
 radius = 158.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_keswu"]
-radius = 369.2289
+radius = 369.229
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w78nr"]
-radius = 334.2529
+radius = 334.253
 
 [node name="World2" type="Node2D"]
 script = ExtResource("1_jeuw4")
@@ -58,22 +58,22 @@ z_index = 1
 position = Vector2(-58, 2514)
 scale = Vector2(4.23341, 4.23341)
 planet_type = 2
-orbit_speed = 0.0029999999969732
+orbit_speed = 0.003
 
 [node name="Sprite" parent="Blue" index="0"]
 texture = ExtResource("4_exon5")
 
 [node name="CrawlerEnemy" parent="Blue" instance=ExtResource("8_exon5")]
-position = Vector2(166.76865, 14.645386)
-scale = Vector2(0.2362162, 0.2362162)
+position = Vector2(166.769, 14.6454)
+scale = Vector2(0.236216, 0.236216)
 
 [node name="CrawlerEnemy2" parent="Blue" instance=ExtResource("8_exon5")]
-position = Vector2(-169.83957, 10.393555)
-scale = Vector2(0.2362162, 0.2362162)
+position = Vector2(-169.84, 10.3936)
+scale = Vector2(0.236216, 0.236216)
 
 [node name="CrawlerEnemy5" parent="Blue" instance=ExtResource("8_exon5")]
-position = Vector2(3.779457, 175.74463)
-scale = Vector2(0.2362162, 0.2362162)
+position = Vector2(3.77946, 175.745)
+scale = Vector2(0.236216, 0.236216)
 
 [node name="Green" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
 z_index = 1
@@ -82,26 +82,26 @@ scale = Vector2(4.23341, 4.23341)
 planet_type = 1
 refills_fuel = true
 orbit_planet = NodePath("../Blue")
-orbit_speed = 0.0029999999969732
+orbit_speed = 0.003
 
 [node name="Sprite" parent="Green" index="0"]
 texture = ExtResource("5_o0rqk")
 
 [node name="CrawlerEnemy3" parent="Green" instance=ExtResource("8_exon5")]
-position = Vector2(-177.3984, 3.77948)
-scale = Vector2(0.2362162, 0.2362162)
+position = Vector2(-177.398, 3.77948)
+scale = Vector2(0.236216, 0.236216)
 
 [node name="CrawlerEnemy4" parent="Green" instance=ExtResource("8_exon5")]
-position = Vector2(178.5794, 7.086487)
-scale = Vector2(0.2362162, 0.2362162)
+position = Vector2(178.579, 7.08649)
+scale = Vector2(0.236216, 0.236216)
 
 [node name="CrawlerEnemy6" parent="Green" instance=ExtResource("8_exon5")]
-position = Vector2(-6.6140747, -162.75296)
-scale = Vector2(0.2362162, 0.2362162)
+position = Vector2(-6.61407, -162.753)
+scale = Vector2(0.236216, 0.236216)
 
 [node name="CrawlerEnemy7" parent="Green" instance=ExtResource("8_exon5")]
-position = Vector2(7.558899, 186.84698)
-scale = Vector2(0.2362162, 0.2362162)
+position = Vector2(7.5589, 186.847)
+scale = Vector2(0.236216, 0.236216)
 
 [node name="Player" parent="." instance=ExtResource("5_8y0xx")]
 position = Vector2(2, 1776)
@@ -152,7 +152,7 @@ spawn_round = 1
 [node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
 position = Vector2(1896, 2493)
 orbit_planet = NodePath("../Blue")
-orbit_speed = 0.0010000000038417056
+orbit_speed = 0.001
 
 [node name="Santa" parent="." instance=ExtResource("11_kyu1k")]
 position = Vector2(1901, 2852)
