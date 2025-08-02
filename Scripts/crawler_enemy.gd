@@ -18,6 +18,8 @@ var spin_rate: float = 1
 @onready var ground_raycast = $"GroundRaycast"
 @onready var animations: AnimatedSprite2D = $"AnimatedSprite2D"
 
+@onready var sound_timer: Timer = $"SoundTimer"
+var sound_index: int = 1
 
 func _ready() -> void:
 	if clockwise:
@@ -31,6 +33,17 @@ func _ready() -> void:
 	_process_gravity_area()
 	if closest_gravity_area == null:
 		spin_rate = randi_range(-5,5)
+	
+	sound_timer.timeout.connect(_on_sound_timer_done)
+
+
+func _on_sound_timer_done() -> void:
+	if sound_index == 1:
+		$"Click1".play()
+		sound_index = 2
+	if sound_index == 2:
+		$"Click2".play()
+		sound_index = 1
 
 
 func _physics_process(delta: float) -> void:
@@ -52,6 +65,7 @@ func _physics_process(delta: float) -> void:
 		spin_rate += delta * randf_range(-1, 1)
 		rotation += delta * direction * spin_rate
 		crawl_velocity = drift_direction
+
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var planet_velocity: Vector2 = Vector2.ZERO

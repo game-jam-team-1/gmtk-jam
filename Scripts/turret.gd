@@ -22,6 +22,7 @@ var center_rotation = global_rotation
 @onready var player_raycast: RayCast2D = $"Pivot/PlayerRaycast"
 @onready var pivot: Node2D = $"Pivot"
 
+@onready var shoot_sound: AudioStreamPlayer2D = $"Shoot"
 @onready var shaft_animation: AnimatedSprite2D = $"Pivot/AnimatedSprite2D"
 
 @onready var bullet = preload("uid://de75elo7ykf0g")
@@ -101,6 +102,7 @@ func shooting():
 		add_child(new_bullet)
 		
 		shaft_animation.play("shoot")
+		shoot_sound.play(0.15)
 		
 		
 		new_bullet.setup(pivot.global_position, Vector2.from_angle(pivot.rotation - PI / 2.0), bullet_speed)

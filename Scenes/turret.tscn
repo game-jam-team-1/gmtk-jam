@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdnjjis5flvtj"]
+[gd_scene load_steps=14 format=3 uid="uid://bdnjjis5flvtj"]
 
 [ext_resource type="Script" uid="uid://cbq7qrqn7b77c" path="res://Scripts/turret.gd" id="1_fcprl"]
 [ext_resource type="Texture2D" uid="uid://d0nha0prp1q8v" path="res://Assets/turret-shaft-sheet.png" id="2_6spbj"]
 [ext_resource type="Texture2D" uid="uid://bgwxe38veq3v3" path="res://Assets/turret-base.png" id="3_pulj5"]
+[ext_resource type="AudioStream" uid="uid://dh1bkj50m2hh3" path="res://Sounds/shoot.mp3" id="4_pulj5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pulj5"]
 atlas = ExtResource("2_6spbj")
@@ -101,3 +102,7 @@ target_position = Vector2(0, 30)
 position = Vector2(0, -42)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_fcprl")
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_pulj5")
+pitch_scale = 1.12
