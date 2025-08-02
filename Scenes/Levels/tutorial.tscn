@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://b7nvpr65unuoi" path="res://Scenes/santa.tscn" id="9_on4kn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2ono"]
-radius = 197.2347
+radius = 197.235
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8mnmb"]
-radius = 297.1519
+radius = 297.152
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8va2t"]
 radius = 244.1199

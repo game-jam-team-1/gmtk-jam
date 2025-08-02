@@ -32,6 +32,8 @@ func _process(delta: float) -> void:
 			buttons[i].disabled = true
 
 func start() -> void:
+	Global.main_menu = self
+	
 	visible = true
 	$"Container".modulate.a = 0.0
 	get_tree().create_tween().tween_property($"Container", "modulate:a", 1.0, 1.0)
@@ -42,6 +44,11 @@ func deactivate_main_menu() -> void:
 	visible = false
 	get_parent().get_node("Camera2D").enabled = false
 	get_parent().get_node("Background").visible = false
+
+func activate_main_menu() -> void:
+	visible = true
+	get_parent().get_node("Camera2D").enabled = true
+	get_parent().get_node("Background").visible = true
 
 # Hey it's a game jam ok ;(
 func on_1_pressed() -> void:
@@ -62,4 +69,7 @@ func play_level(a: int):
 		$"Click".play()
 		
 		deactivate_main_menu()
-		get_parent().add_child(levels[a].instantiate())
+		Global.current_level = a
+		var level: Node = levels[a].instantiate()
+		get_parent().add_child(level)
+		Global.current_level_root = level
