@@ -76,6 +76,7 @@ collision_mask = 2
 mass = 1000.0
 gravity_scale = 0.0
 script = ExtResource("1_fcprl")
+bullet_speed = 800.0
 
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2(0, -78)

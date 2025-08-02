@@ -13,11 +13,16 @@ var sending_packages_to_depot: bool = false
 @onready var fuel_bar: ProgressBar = $"UI/FuelBar"
 @onready var player_movement: PlayerMovement = $"PlayerMovement"
 @onready var player_animation: PlayerAnimation = $"PlayerAnimation"
+@onready var world: World = get_parent()
 
 
 func _ready() -> void:
 	player_movement.is_grounded_movement = true
 	Global.Player = self
+
+func _process(_delta: float) -> void:
+	$UI/TimeBar.value = int(world.time_left / 60.0)
+	$UI/TimeLabel.text = "Year: " + str(world.current_round) + " | Hour: " + str(24 - int(world.time_left / 60.0)) + " | Presents: " + str(world.packages_this_round) + "/" + str(world.packages_each_round[world.current_round])
 
 func _physics_process(delta: float) -> void:
 	_process_packages()
@@ -60,13 +65,14 @@ func _process_death() -> void:
 func _process_packages() -> void:
 	var closest_package: Package
 	for area in large_detection_area.get_overlapping_areas():
-		if area.name == "PackageArea" && !closest_package:
+		if area.name == "PackageArea" && area.get_parent().spawned_in:
 			closest_package = area.get_parent()
+			break
 	
 	if !closest_package || closest_package.following_node:
 		return
 	
-	if collected_packages < 3:
+	if collected_packages < 100:
 		collected_packages += 1
 		closest_package.get_grabbed(self)
 
