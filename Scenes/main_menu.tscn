@@ -1,36 +1,197 @@
-[gd_scene load_steps=5 format=3 uid="uid://djxxe8osn1t8a"]
+[gd_scene load_steps=14 format=3 uid="uid://djxxe8osn1t8a"]
 
 [ext_resource type="Script" uid="uid://dquu1nsh7febk" path="res://Scripts/main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space-background-nebula.png" id="2_1ehe0"]
-[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space-background-stars.png" id="3_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="2_1ehe0"]
+[ext_resource type="Script" uid="uid://cp1gxunktfkli" path="res://Scripts/focus_window.gd" id="3_16hvj"]
+[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/Art/space_background_stars.png" id="3_ce3w2"]
 [ext_resource type="Script" uid="uid://cxragsgncirtb" path="res://Scripts/menu_camera.gd" id="4_ce3w2"]
+[ext_resource type="FontFile" uid="uid://cmd18xd5qilt5" path="res://Assets/Fonts/MedodicaRegular.otf" id="5_n45e2"]
+[ext_resource type="Texture2D" uid="uid://c4ma6pjv1aefj" path="res://Assets/Art/level-button.png" id="6_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://dnopj3x3l870b" path="res://Assets/Art/level-button-pressed.png" id="7_yhxw7"]
+[ext_resource type="Texture2D" uid="uid://b8xx5123w25xf" path="res://Assets/Art/level-button-locked.png" id="8_trj04"]
+[ext_resource type="Script" uid="uid://bvmi0nvrjijjc" path="res://Scripts/level_select_button.gd" id="8_yhxw7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ce3w2"]
+font = ExtResource("5_n45e2")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_trj04"]
+font = ExtResource("5_n45e2")
+font_size = 250
+
+[sub_resource type="LabelSettings" id="LabelSettings_16hvj"]
+font = ExtResource("5_n45e2")
+font_size = 150
 
 [node name="MainMenu" type="Node2D"]
-script = ExtResource("1_06t4h")
 
-[node name="Parallax1" type="Parallax2D" parent="."]
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Parallax1" type="Parallax2D" parent="Background"]
 z_index = -1
 scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(3584, 2048)
 repeat_times = 3
 
-[node name="SpaceBackgroundNebula" type="Sprite2D" parent="Parallax1"]
+[node name="SpaceBackgroundNebula" type="Sprite2D" parent="Background/Parallax1"]
 modulate = Color(0.637843, 0.637843, 0.637843, 1)
 position = Vector2(896, 512)
 scale = Vector2(2, 2)
 texture = ExtResource("2_1ehe0")
 
-[node name="Parallax2" type="Parallax2D" parent="."]
+[node name="Parallax2" type="Parallax2D" parent="Background"]
 z_index = -1
 scroll_scale = Vector2(0.2, 0.2)
 repeat_size = Vector2(3584, 2048)
 repeat_times = 3
 
-[node name="SpaceBackgroundStars" type="Sprite2D" parent="Parallax2"]
+[node name="SpaceBackgroundStars" type="Sprite2D" parent="Background/Parallax2"]
 modulate = Color(0.811127, 0.811127, 0.811127, 1)
 position = Vector2(896, 512)
 scale = Vector2(2, 2)
 texture = ExtResource("3_ce3w2")
+
+[node name="FocusWindow" type="CanvasLayer" parent="."]
+script = ExtResource("3_16hvj")
+
+[node name="ColorRect" type="ColorRect" parent="FocusWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Button" type="Button" parent="FocusWindow"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="FocusWindow"]
+offset_top = 450.0
+offset_right = 1920.0
+offset_bottom = 550.0
+text = "Click here to focus window"
+label_settings = SubResource("LabelSettings_ce3w2")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="MainMenu" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("1_06t4h")
+
+[node name="Container" type="Node2D" parent="MainMenu"]
+
+[node name="Title" type="Label" parent="MainMenu/Container"]
+offset_top = 106.0
+offset_right = 1920.0
+offset_bottom = 357.0
+theme_override_font_sizes/font_size = 150
+text = "Solar Santa"
+label_settings = SubResource("LabelSettings_trj04")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Title2" type="Label" parent="MainMenu/Container"]
+offset_top = 452.0
+offset_right = 1920.0
+offset_bottom = 703.0
+theme_override_font_sizes/font_size = 150
+text = "Levels:"
+label_settings = SubResource("LabelSettings_16hvj")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/Container"]
+offset_left = 128.0
+offset_top = 620.0
+offset_right = 1768.0
+offset_bottom = 940.0
+theme_override_constants/separation = 120
+metadata/_edit_lock_ = true
+
+[node name="1" type="TextureButton" parent="MainMenu/Container/HBoxContainer"]
+layout_mode = 2
+keep_pressed_outside = true
+texture_normal = ExtResource("6_cp0ys")
+texture_pressed = ExtResource("7_yhxw7")
+texture_disabled = ExtResource("8_trj04")
+script = ExtResource("8_yhxw7")
+
+[node name="1" type="Label" parent="MainMenu/Container/HBoxContainer/1"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 33.0
+offset_right = 263.0
+offset_bottom = 284.0
+theme_override_font_sizes/font_size = 150
+text = "1"
+label_settings = SubResource("LabelSettings_trj04")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="2" type="TextureButton" parent="MainMenu/Container/HBoxContainer"]
+layout_mode = 2
+keep_pressed_outside = true
+texture_normal = ExtResource("6_cp0ys")
+texture_pressed = ExtResource("7_yhxw7")
+texture_disabled = ExtResource("8_trj04")
+script = ExtResource("8_yhxw7")
+
+[node name="2" type="Label" parent="MainMenu/Container/HBoxContainer/2"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 33.0
+offset_right = 263.0
+offset_bottom = 284.0
+theme_override_font_sizes/font_size = 150
+text = "2"
+label_settings = SubResource("LabelSettings_trj04")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="3" type="TextureButton" parent="MainMenu/Container/HBoxContainer"]
+layout_mode = 2
+keep_pressed_outside = true
+texture_normal = ExtResource("6_cp0ys")
+texture_pressed = ExtResource("7_yhxw7")
+texture_disabled = ExtResource("8_trj04")
+script = ExtResource("8_yhxw7")
+
+[node name="3" type="Label" parent="MainMenu/Container/HBoxContainer/3"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 33.0
+offset_right = 263.0
+offset_bottom = 284.0
+theme_override_font_sizes/font_size = 150
+text = "3"
+label_settings = SubResource("LabelSettings_trj04")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="4" type="TextureButton" parent="MainMenu/Container/HBoxContainer"]
+layout_mode = 2
+keep_pressed_outside = true
+texture_normal = ExtResource("6_cp0ys")
+texture_pressed = ExtResource("7_yhxw7")
+texture_disabled = ExtResource("8_trj04")
+script = ExtResource("8_yhxw7")
+
+[node name="4" type="Label" parent="MainMenu/Container/HBoxContainer/4"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 33.0
+offset_right = 263.0
+offset_bottom = 284.0
+theme_override_font_sizes/font_size = 150
+text = "4"
+label_settings = SubResource("LabelSettings_trj04")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1152, 648)
@@ -38,20 +199,8 @@ zoom = Vector2(0.5, 0.5)
 script = ExtResource("4_ce3w2")
 speed = 300.0
 
-[node name="Title" type="Label" parent="Camera2D"]
-offset_left = -1067.0
-offset_top = -244.0
-offset_right = -364.0
-offset_bottom = -39.0
-theme_override_font_sizes/font_size = 150
-text = "Title Here"
-
-[node name="Play" type="Button" parent="Camera2D"]
-offset_left = -72.0
-offset_top = -367.0
-offset_right = 655.0
-offset_bottom = -202.0
-theme_override_font_sizes/font_size = 80
-text = "Play"
-
-[connection signal="button_up" from="Camera2D/Play" to="." method="_on_play_button_up"]
+[connection signal="pressed" from="FocusWindow/Button" to="FocusWindow" method="on_mouse_down"]
+[connection signal="pressed" from="MainMenu/Container/HBoxContainer/1" to="MainMenu" method="on_1_pressed"]
+[connection signal="pressed" from="MainMenu/Container/HBoxContainer/2" to="MainMenu" method="on_2_pressed"]
+[connection signal="pressed" from="MainMenu/Container/HBoxContainer/3" to="MainMenu" method="on_3_pressed"]
+[connection signal="pressed" from="MainMenu/Container/HBoxContainer/4" to="MainMenu" method="on_4_pressed"]

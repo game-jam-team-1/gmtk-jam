@@ -15,7 +15,8 @@ func _process(delta: float) -> void:
 		player = $"../Player"
 		var dialog: DialogBox = player.get_node("UI/DialogBox")
 		dialog.text_chain([
-			"Good job collecting the package. You can now bring it back here."
+			"Good job collecting the package.",
+			"Remember to only bring green packages to green planets, and blue packages to blue planets, and so on."
 		])
 	
 	for area in $PlayerDetectionArea.get_overlapping_areas():

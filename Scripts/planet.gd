@@ -6,6 +6,7 @@ enum PlanetType {
 	GREEN,
 	BLUE,
 	PURPLE,
+	GRAY,
 }
 
 @export var planet_type: PlanetType

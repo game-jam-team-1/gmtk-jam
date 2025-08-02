@@ -1,3 +1,4 @@
+class_name Turret
 extends RigidBody2D
 
 
@@ -29,6 +30,7 @@ var center_rotation = global_rotation
 @onready var player_raycast: RayCast2D = $"Pivot/PlayerRaycast"
 @onready var pivot: Node2D = $"Pivot"
 
+@onready var shoot_sound: AudioStreamPlayer2D = $"Shoot"
 @onready var shaft_animation: AnimatedSprite2D = $"Pivot/AnimatedSprite2D"
 
 @onready var bullet = preload("uid://de75elo7ykf0g")
@@ -66,7 +68,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 
 func player_detection(delta: float):
-	if player_raycast.get_collider() == Global.Player:
+	if player_raycast.get_collider() is Player:
 		if state == STATE.IDLE:
 			state = STATE.TARGETING
 		elif state == STATE.TARGETING:
@@ -104,6 +106,7 @@ func shooting():
 		add_child(new_bullet)
 		
 		shaft_animation.play("shoot")
+		shoot_sound.play(0.15)
 		
 		
 		new_bullet.setup(pivot.global_position, Vector2.from_angle(pivot.rotation - PI / 2.0), bullet_speed)

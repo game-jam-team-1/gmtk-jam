@@ -47,6 +47,8 @@ var is_thruster_on: bool = false
 
 @onready var player: Player = get_parent()
 
+@onready var thruster_sound: AudioStreamPlayer2D = $"../Sounds/Thruster"
+
 
 func _ready() -> void:
 	fuel_bar.max_value = THRUSTER_MAX_FUEL
@@ -113,6 +115,8 @@ func _process_grounded_movement(delta: float) -> void:
 
 
 func _process_thruster_movement(delta: float) -> void:
+	grounded_movement_dir = 0
+	
 	var angle_to_mouse: float = global_position.angle_to_point(get_global_mouse_position())
 	player.rotation = angle_to_mouse + PI/2
 	

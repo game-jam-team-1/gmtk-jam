@@ -8,7 +8,15 @@ extends RigidBody2D
 
 @onready var gravity_component: GravityComponent = $"PackageArea"
 
+@onready var red_package: Texture2D = preload("uid://cy1infg5mxchj")
+@onready var blue_package: Texture2D = preload("uid://bqen3e7iajfp6")
+@onready var green_package: Texture2D = preload("uid://vwl1gr3o022k")
+@onready var purple_package: Texture2D = preload("uid://coaxubw1xq4xc")
+
 var following_node: Node2D
+
+var spawned_in: bool = false
+var parent_offset_pos: Vector2
 
 @onready var raycasts: Array[RayCast2D] = [
 	$"Raycasts/RayCast1",
@@ -20,18 +28,42 @@ var following_node: Node2D
 func _ready() -> void:
 	$LargePackage.visible = false
 	
+	var sprite_using: Sprite2D
+	
 	var type: int = randi_range(1, 3)
 	if type == 1:
-		$SmallPackage.visible = true
+		sprite_using = $SmallPackage
 		$CollisionShapeSmall.disabled = false
 	if type == 2:
-		$MediumPackage.visible = true
+		sprite_using = $MediumPackage
 		$CollisionShapeMedium.disabled = false
 	if type == 3:
-		$LargePackage.visible = true
+		sprite_using = $LargePackage
 		$CollisionShapeLarge.disabled = false
+	
+	sprite_using.visible = true
+	if package_type == Planet.PlanetType.ORANGE:
+		sprite_using.texture = red_package
+	elif package_type == Planet.PlanetType.GREEN:
+		sprite_using.texture = green_package
+	elif package_type == Planet.PlanetType.BLUE:
+		sprite_using.texture = blue_package
+	
+	parent_offset_pos = global_position - get_parent().global_position
 
 func _physics_process(delta: float) -> void:
+	if !spawned_in:
+		if get_parent().get_parent().current_round >= spawn_round:
+			spawned_in = true
+		
+		collision_layer = 0
+		visible = false
+		global_position = get_parent().global_position + parent_offset_pos
+		return
+	else:
+		collision_layer = 1
+		visible = true
+	
 	gravity_component.update_gravity_force(delta)
 	
 	if following_node && global_position.distance_to(following_node.global_position) > 200:
@@ -39,6 +71,10 @@ func _physics_process(delta: float) -> void:
 	
 	if !gravity_component.closest_gravity_area:
 		return
+	
+	if gravity_component.closest_gravity_area.planet.planet_type == package_type:
+		get_parent().get_parent().package_collected()
+		queue_free()
 	
 	var planet_center: Vector2 = gravity_component.closest_gravity_area.global_position
 	var upwards_angle: float = planet_center.angle_to_point(global_position)
