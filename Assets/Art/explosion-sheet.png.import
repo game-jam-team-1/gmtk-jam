@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6a1payfpigp0"
-path="res://.godot/imported/big_green_planet.png-62ab3a5996d0b37bc9a4b0a9811baff2.ctex"
+uid="uid://bl80ypnpgdrmw"
+path="res://.godot/imported/explosion-sheet.png-277d6f0c9957df45022daac62fd2e812.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/big_green_planet.png"
-dest_files=["res://.godot/imported/big_green_planet.png-62ab3a5996d0b37bc9a4b0a9811baff2.ctex"]
+source_file="res://Assets/Art/explosion-sheet.png"
+dest_files=["res://.godot/imported/explosion-sheet.png-277d6f0c9957df45022daac62fd2e812.ctex"]
 
 [params]
 

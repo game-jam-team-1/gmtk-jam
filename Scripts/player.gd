@@ -119,6 +119,8 @@ func is_on_ground() -> bool:
 	return player_movement.is_on_ground()
 
 func die():
-	print("you died")
-	$"UI/DeathScreen".visible = true
+	player_animation.die()
+	$"UI/ScreenColor".flashing = false
 	get_tree().paused = true
+	await get_tree().create_timer(.5).timeout
+	$"UI/DeathScreen".visible = true
