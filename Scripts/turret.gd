@@ -95,7 +95,7 @@ func idle(delta):
 
 
 func target():
-	pivot.rotation = clamp(normalize_angle((pivot.global_position - Global.Player.global_position).angle() - PI/2 - global_rotation), -MAX_BARREL_ROTATION, MAX_BARREL_ROTATION)
+	pivot.rotation = clamp(normalize_angle((pivot.global_position - Global.player.global_position).angle() - PI/2 - global_rotation), -MAX_BARREL_ROTATION, MAX_BARREL_ROTATION)
 
 
 func shooting():

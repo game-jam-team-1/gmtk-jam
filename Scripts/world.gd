@@ -17,7 +17,7 @@ func _ready() -> void:
 	new_year.emit(0)
 
 func package_collected() -> void:
-	Global.Player.collected_packages -= 1
+	Global.player.collected_packages -= 1
 	packages_this_round += 1
 	if packages_this_round >= packages_each_round[current_round]:
 		packages_this_round = 0

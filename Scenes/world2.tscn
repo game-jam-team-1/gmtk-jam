@@ -1,17 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://qoa00hhuo3br"]
+[gd_scene load_steps=8 format=3 uid="uid://ci0lv83o8cndd"]
 
-[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/space_background_nebula.png" id="1_8fptb"]
+[ext_resource type="Texture2D" uid="uid://dmcfbka48mc7n" path="res://Assets/Art/space_background_nebula.png" id="1_8fptb"]
 [ext_resource type="Script" uid="uid://dms8fp2vbs2mc" path="res://Scripts/world.gd" id="1_jeuw4"]
-[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/space_background_stars.png" id="2_o0rqk"]
+[ext_resource type="Texture2D" uid="uid://dbbwu08nxhti0" path="res://Assets/Art/space_background_stars.png" id="2_o0rqk"]
 [ext_resource type="PackedScene" uid="uid://dkjf56v3yfohb" path="res://Scenes/planet.tscn" id="3_jeuw4"]
-[ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/big_blue_planet.png" id="4_exon5"]
+[ext_resource type="Texture2D" uid="uid://dof6g6vr1scyj" path="res://Assets/Art/big_blue_planet.png" id="4_exon5"]
 [ext_resource type="PackedScene" uid="uid://cdxanxha8yc48" path="res://Scenes/player.tscn" id="5_8y0xx"]
-[ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/big_green_planet.png" id="5_o0rqk"]
+[ext_resource type="Texture2D" uid="uid://6a1payfpigp0" path="res://Assets/Art/big_green_planet.png" id="5_o0rqk"]
 
 [node name="World2" type="Node2D"]
 script = ExtResource("1_jeuw4")
 
 [node name="Background" type="Node2D" parent="."]
+z_index = -100
 metadata/_edit_lock_ = true
 
 [node name="Parallax1" type="Parallax2D" parent="Background"]
@@ -42,7 +43,7 @@ position = Vector2(-58, 2514)
 scale = Vector2(4.23341, 4.23341)
 refills_fuel = true
 orbit_planet = NodePath("../Green")
-orbit_speed = 0.0029999999969732016
+orbit_speed = 0.0029999999969732
 
 [node name="Sprite" parent="Blue" index="0"]
 texture = ExtResource("4_exon5")
@@ -53,7 +54,7 @@ position = Vector2(2614, 2514)
 scale = Vector2(4.23341, 4.23341)
 refills_fuel = true
 orbit_planet = NodePath("../Blue")
-orbit_speed = 0.0029999999969732016
+orbit_speed = 0.0029999999969732
 
 [node name="Sprite" parent="Green" index="0"]
 texture = ExtResource("5_o0rqk")
