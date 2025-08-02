@@ -152,7 +152,7 @@ spawn_round = 1
 [node name="Planet3" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("3_jeuw4")]
 position = Vector2(1896, 2493)
 orbit_planet = NodePath("../Blue")
-orbit_speed = 0.0010000000038417056
+orbit_speed = 0.0010000000038417
 
 [node name="Santa" parent="." instance=ExtResource("11_kyu1k")]
 position = Vector2(1901, 2852)
