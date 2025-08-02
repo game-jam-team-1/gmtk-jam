@@ -29,6 +29,7 @@ func package_collected() -> void:
 		if current_round >= rounds:
 			complete_level()
 			game_finished.emit()
+			return
 		new_year.emit(current_round)
 
 func _process(delta: float) -> void:

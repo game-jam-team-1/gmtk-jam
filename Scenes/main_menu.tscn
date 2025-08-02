@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c4ma6pjv1aefj" path="res://Assets/Art/level-button.png" id="6_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://dnopj3x3l870b" path="res://Assets/Art/level-button-pressed.png" id="7_yhxw7"]
 [ext_resource type="Texture2D" uid="uid://b8xx5123w25xf" path="res://Assets/Art/level-button-locked.png" id="8_trj04"]
-[ext_resource type="Script" uid="uid://bvmi0nvrjijjc" path="res://Scripts/level_select_button.gd" id="8_yhxw7"]
+[ext_resource type="Script" path="res://Scripts/level_select_button.gd" id="8_yhxw7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ce3w2"]
 font = ExtResource("5_n45e2")
