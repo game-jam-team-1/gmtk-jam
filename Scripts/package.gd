@@ -109,6 +109,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	else:
 		linear_velocity = Vector2.ZERO
 	
+	angular_velocity *= 0.98
+	
 	_update_rope()
 
 func get_grabbed(following: Node2D) -> void:
