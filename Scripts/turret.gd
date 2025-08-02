@@ -1,3 +1,4 @@
+class_name Turret
 extends RigidBody2D
 
 
@@ -63,7 +64,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 
 func player_detection(delta: float):
-	if player_raycast.get_collider() == Global.Player:
+	if player_raycast.get_collider() is Player:
 		if state == STATE.IDLE:
 			state = STATE.TARGETING
 		elif state == STATE.TARGETING:

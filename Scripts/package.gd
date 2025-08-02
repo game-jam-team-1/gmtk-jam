@@ -15,6 +15,9 @@ extends RigidBody2D
 
 var following_node: Node2D
 
+var spawned_in: bool = false
+var parent_offset_pos: Vector2
+
 @onready var raycasts: Array[RayCast2D] = [
 	$"Raycasts/RayCast1",
 	$"Raycasts/RayCast2",
@@ -45,8 +48,22 @@ func _ready() -> void:
 		sprite_using.texture = green_package
 	elif package_type == Planet.PlanetType.BLUE:
 		sprite_using.texture = blue_package
+	
+	parent_offset_pos = global_position - get_parent().global_position
 
 func _physics_process(delta: float) -> void:
+	if !spawned_in:
+		if get_parent().get_parent().current_round >= spawn_round:
+			spawned_in = true
+		
+		collision_layer = 0
+		visible = false
+		global_position = get_parent().global_position + parent_offset_pos
+		return
+	else:
+		collision_layer = 1
+		visible = true
+	
 	gravity_component.update_gravity_force(delta)
 	
 	if following_node && global_position.distance_to(following_node.global_position) > 200:
