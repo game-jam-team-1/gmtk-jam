@@ -18,6 +18,8 @@ var following_node: Node2D
 var spawned_in: bool = false
 var parent_offset_pos: Vector2
 
+var follow_speed: float = 0.02
+
 var collected: bool = false
 
 @onready var raycasts: Array[RayCast2D] = [
@@ -69,27 +71,30 @@ func _physics_process(delta: float) -> void:
 	gravity_component.update_gravity_force(delta)
 	
 	if following_node && global_position.distance_to(following_node.global_position) > 200:
-		global_position = lerp(global_position, following_node.global_position, 0.02)
+		global_position = lerp(global_position, following_node.global_position, follow_speed)
 	
 	if !gravity_component.closest_gravity_area:
 		return
 	
 	if gravity_component.closest_gravity_area.planet.planet_type == package_type && !collected:
 		get_parent().get_parent().package_collected()
+		collected = true
+		following_node = gravity_component.closest_gravity_area.planet
+		collision_mask = 0
+		collision_layer = 0
+		follow_speed = 0.05
 
 		$"Dropoff".play()
 		await get_tree().create_timer(0.2).timeout
-
-		following_node = gravity_component.closest_gravity_area.planet
-		collision_mask = 0
-		collected = true
+		
+		queue_free()
 	
 	var planet_center: Vector2 = gravity_component.closest_gravity_area.global_position
 	var upwards_angle: float = planet_center.angle_to_point(global_position)
 	rotation = upwards_angle + PI/2
 
 func _update_rope() -> void:
-	if following_node:
+	if following_node && !collected:
 		$"Line2D".visible = true
 		$"Line2D".points[0] = global_position
 		$"Line2D".points[1] = Global.player.global_position

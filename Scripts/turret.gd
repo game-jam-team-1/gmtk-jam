@@ -30,7 +30,7 @@ var center_rotation = global_rotation
 @onready var player_raycast: RayCast2D = $"Pivot/PlayerRaycast"
 @onready var pivot: Node2D = $"Pivot"
 
-@onready var shoot_sound: AudioStreamPlayer2D = $"Shoot"
+@onready var shoot_sound: AudioStreamPlayer = $"Shoot"
 @onready var shaft_animation: AnimatedSprite2D = $"Pivot/AnimatedSprite2D"
 
 @onready var bullet = preload("uid://de75elo7ykf0g")
