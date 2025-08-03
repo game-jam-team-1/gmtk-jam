@@ -83,7 +83,7 @@ bullet_frequency = 0.75
 position = Vector2(0, -78)
 
 [node name="PlayerRaycast" type="RayCast2D" parent="Pivot"]
-target_position = Vector2(0, -3000)
+target_position = Vector2(0, -2000)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
 z_index = 1

@@ -7,10 +7,10 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_tlprh"]
 font = ExtResource("3_hg80k")
-font_size = 30
-font_color = Color(0.047058824, 0.03137255, 0.16470589, 1)
+font_size = 28
+font_color = Color(0.0470588, 0.0313726, 0.164706, 1)
 outline_size = 2
-outline_color = Color(0.047058824, 0.03137255, 0.16470589, 1)
+outline_color = Color(0.0470588, 0.0313726, 0.164706, 1)
 
 [node name="DialogBox" type="Node2D"]
 script = ExtResource("1_kyvu4")
@@ -21,7 +21,7 @@ offset_left = -300.0
 offset_top = -75.0
 offset_right = 300.0
 offset_bottom = 75.0
-color = Color(0.44313726, 0.15686275, 0.20784314, 1)
+color = Color(0.443137, 0.156863, 0.207843, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="."]
@@ -30,7 +30,7 @@ offset_left = -290.0
 offset_top = -65.0
 offset_right = 290.0
 offset_bottom = 65.0
-color = Color(0.78039217, 0.96862745, 0.9490196, 1)
+color = Color(0.780392, 0.968627, 0.94902, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -40,10 +40,11 @@ scale = Vector2(0.68, 0.68)
 texture = ExtResource("2_tlprh")
 
 [node name="Label" type="Label" parent="."]
+texture_filter = 1
 offset_left = -157.0
-offset_top = -57.0
+offset_top = -59.0
 offset_right = 278.0
-offset_bottom = 57.0
+offset_bottom = 62.0
 text = "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah"
 label_settings = SubResource("LabelSettings_tlprh")
 autowrap_mode = 2

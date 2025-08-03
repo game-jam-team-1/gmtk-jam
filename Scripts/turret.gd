@@ -14,7 +14,7 @@ const MAX_AGGRO: float = 3.0
 const MAX_BARREL_ROTATION: float = PI/2
 
 
-@export var bullet_speed: float = 1500.0 # pixels per second
+@export var bullet_speed: float = 2500.0 # pixels per second
 @export var bullet_frequency: float = 1.25 # bullet per second
 
 
@@ -109,7 +109,7 @@ func shooting():
 		shoot_sound.play(0.15)
 		
 		
-		new_bullet.setup(pivot.global_position, Vector2.from_angle(pivot.rotation - PI / 2.0), bullet_speed)
+		new_bullet.setup(pivot.global_position, Vector2.from_angle(pivot.global_rotation - PI/2), bullet_speed)
 
 
 func is_on_ground() -> bool:

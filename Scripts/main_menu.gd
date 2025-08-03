@@ -19,8 +19,8 @@ var level_unlock_state: Array[bool] = [
 
 @onready var levels = [
 	preload("res://Scenes/tutorial.tscn"),
-	preload("res://Scenes/world.tscn"),
 	preload("res://Scenes/world2.tscn"),
+	preload("res://Scenes/world.tscn"),
 ]
 
 func _process(delta: float) -> void:
@@ -68,7 +68,7 @@ func play_level(a: int):
 		$"Click".play()
 		
 		deactivate_main_menu()
-		Global.current_level = a
 		var level: Node = levels[a].instantiate()
 		get_parent().add_child(level)
+		Global.current_level = a
 		Global.current_level_root = level

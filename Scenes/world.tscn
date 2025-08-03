@@ -14,16 +14,16 @@
 [ext_resource type="PackedScene" uid="uid://b7nvpr65unuoi" path="res://Scenes/santa.tscn" id="12_7yui6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikia7"]
-radius = 293.6818
+radius = 293.682
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7yui6"]
 radius = 551.381
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c5t2i"]
-radius = 463.38147
+radius = 463.381
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e0ngr"]
-radius = 1255.6663
+radius = 1255.67
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7yui6"]
 
@@ -150,20 +150,20 @@ refills_fuel = true
 texture = ExtResource("9_c5t2i")
 
 [node name="Package3" parent="Planet4" instance=ExtResource("6_k7acu")]
-position = Vector2(-189.6816, 3.0708008)
-scale = Vector2(0.2551135, 0.2551135)
+position = Vector2(-189.682, 3.0708)
+scale = Vector2(0.255114, 0.255114)
 package_type = 3
 spawn_round = 1
 
 [node name="Package4" parent="Planet4" instance=ExtResource("6_k7acu")]
-position = Vector2(188.26436, 6.141609)
-scale = Vector2(0.2551135, 0.2551135)
+position = Vector2(188.264, 6.14161)
+scale = Vector2(0.255114, 0.255114)
 package_type = 3
 spawn_round = 2
 
 [node name="Package5" parent="Planet4" instance=ExtResource("6_k7acu")]
-position = Vector2(174.79993, 74.4081)
-scale = Vector2(0.2551135, 0.2551135)
+position = Vector2(174.8, 74.4081)
+scale = Vector2(0.255114, 0.255114)
 package_type = 3
 spawn_round = 2
 

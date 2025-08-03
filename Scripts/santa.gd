@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 		$"Bells".play()
 		dialogue.text_chain([
 			"Good job, you collected the package.",
-			"Remember to only bring packages to their corresponding planets. Green packages go to green planets, blue packages go to blue planets, and so on.",
+			"Remember to only bring packages to their corresponding planets. Green packages go to green planets, blue packages to blue planets, and so on.",
 			"Each present contains many other presents, and the santas of each planet will help deliver one to every child.",
 			"Bring this blue present to the blue planet."
 		])
@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 		var dialogue: DialogueBox = player.get_node("UI/DialogueBox")
 		$"Bells".play()
 		dialogue.text_chain([
-			"You show great promise! It is time for you to head out into the galaxy.",
+			"You show great promise! It is time for you to head out into the galaxy and deliver packages to children all across the cosmos!",
 			"Fairwell!"
 		])
 		dialogue.finished.connect(_finished)
