@@ -17,7 +17,7 @@
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_wlbe4")
 level_number = 3
-rounds = 1
+rounds = 4
 packages_each_round = Array[int]([2, 2, 2, 2])
 
 [node name="Background" type="Node2D" parent="."]
@@ -80,7 +80,7 @@ scale = Vector2(0.33333334, 0.33333334)
 position = Vector2(1846, 2832)
 scale = Vector2(2, 2)
 orbit_planet = NodePath("../Planet1")
-orbit_speed = 0.005000000004656613
+orbit_speed = 0.00500000000465661
 
 [node name="Sprite" parent="Planet2" index="0"]
 texture = ExtResource("7_q21to")
@@ -102,7 +102,7 @@ position = Vector2(-1530, 1303)
 scale = Vector2(2, 2)
 planet_type = 1
 orbit_planet = NodePath("../Planet1")
-orbit_speed = 0.005000000004656613
+orbit_speed = 0.00500000000465661
 
 [node name="Sprite" parent="Planet3" index="0"]
 texture = ExtResource("9_n80jh")
@@ -120,7 +120,7 @@ position = Vector2(-1046, 3794)
 scale = Vector2(2, 2)
 planet_type = 1
 orbit_planet = NodePath("../Planet1")
-orbit_speed = 0.005000000004656613
+orbit_speed = 0.00500000000465661
 
 [node name="Sprite" parent="Planet4" index="0"]
 texture = ExtResource("10_q21to")
@@ -142,7 +142,7 @@ position = Vector2(1339, 386)
 scale = Vector2(2, 2)
 planet_type = 1
 orbit_planet = NodePath("../Planet1")
-orbit_speed = 0.005000000004656613
+orbit_speed = 0.00500000000465661
 
 [node name="Sprite" parent="Planet5" index="0"]
 texture = ExtResource("11_nqbrd")

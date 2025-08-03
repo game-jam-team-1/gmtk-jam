@@ -8,6 +8,8 @@ func _on_restart_button_up() -> void:
 	self.visible = false
 	get_tree().paused = false
 	Global.current_level_root.queue_free()
+	print(Global.current_level)
+	Global.main_menu.is_ready = true
 	Global.main_menu.play_level(Global.current_level)
 
 func _on_menu_button_up() -> void:

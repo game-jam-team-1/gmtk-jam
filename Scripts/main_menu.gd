@@ -69,7 +69,7 @@ func play_level(a: int):
 		$"Click".play()
 		
 		deactivate_main_menu()
-		Global.current_level = a
 		var level: Node = levels[a].instantiate()
 		get_parent().add_child(level)
+		Global.current_level = a
 		Global.current_level_root = level

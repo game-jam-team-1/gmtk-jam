@@ -7,10 +7,10 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_tlprh"]
 font = ExtResource("3_hg80k")
-font_size = 30
-font_color = Color(0.047058824, 0.03137255, 0.16470589, 1)
+font_size = 28
+font_color = Color(0.0470588, 0.0313726, 0.164706, 1)
 outline_size = 2
-outline_color = Color(0.047058824, 0.03137255, 0.16470589, 1)
+outline_color = Color(0.0470588, 0.0313726, 0.164706, 1)
 
 [node name="DialogBox" type="Node2D"]
 script = ExtResource("1_kyvu4")
