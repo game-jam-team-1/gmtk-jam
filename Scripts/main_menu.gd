@@ -27,6 +27,9 @@ func _process(delta: float) -> void:
 func start() -> void:
 	Global.main_menu = self
 	
+	if Global.first_load:
+		Global.first_load = false
+	
 	visible = true
 	$"Container".modulate.a = 0.0
 	get_tree().create_tween().tween_property($"Container", "modulate:a", 1.0, 1.0)

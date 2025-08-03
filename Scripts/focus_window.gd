@@ -9,9 +9,13 @@ func _ready() -> void:
 	start()
 
 func start() -> void:
-	$"Label".modulate.a = 0.0
-	get_tree().create_tween().tween_property($"Label", "modulate:a", 1.0, 1.0)
-	await get_tree().create_timer(1.0).timeout
+	if Global.first_load:
+		$"Label".modulate.a = 0.0
+		get_tree().create_tween().tween_property($"Label", "modulate:a", 1.0, 1.0)
+		await get_tree().create_timer(1.0).timeout
+	else:
+		visible = false
+		main_menu.start()
 
 func on_mouse_down() -> void:
 	if !clicked:
