@@ -71,11 +71,13 @@ target_position = Vector2(0, 19)
 
 [node name="Click1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_m33pl")
-volume_db = -20.0
+volume_db = -25.0
+max_distance = 1000.0
 
 [node name="Click2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_j7klq")
-volume_db = -20.0
+volume_db = -25.0
+max_distance = 1000.0
 
 [node name="SoundTimer" type="Timer" parent="."]
 wait_time = 0.3

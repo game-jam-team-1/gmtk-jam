@@ -50,7 +50,7 @@ texture = ExtResource("2_5oy68")
 position = Vector2(131, 1478)
 
 [node name="Player" parent="." instance=ExtResource("4_wlbe4")]
-position = Vector2(1949, 1530)
+position = Vector2(-1791, 1458)
 contact_monitor = true
 max_contacts_reported = 1
 
@@ -86,13 +86,13 @@ orbit_speed = 0.00500000000465661
 texture = ExtResource("7_q21to")
 
 [node name="Package" parent="Planet2" instance=ExtResource("6_n80jh")]
-position = Vector2(-923, -1416)
+position = Vector2(-202, 2)
 scale = Vector2(0.5, 0.5)
 package_type = 1
 spawn_round = 1
 
 [node name="Package2" parent="Planet2" instance=ExtResource("6_n80jh")]
-position = Vector2(-923, -1416)
+position = Vector2(203, 5.5)
 scale = Vector2(0.5, 0.5)
 package_type = 1
 spawn_round = 1
@@ -118,7 +118,7 @@ scale = Vector2(0.5, 0.5)
 [node name="Planet4" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("5_i6bqf")]
 position = Vector2(-1046, 3794)
 scale = Vector2(2, 2)
-planet_type = 1
+planet_type = 3
 orbit_planet = NodePath("../Planet1")
 orbit_speed = 0.00500000000465661
 
@@ -140,7 +140,7 @@ spawn_round = 2
 [node name="Planet5" parent="." node_paths=PackedStringArray("orbit_planet") instance=ExtResource("5_i6bqf")]
 position = Vector2(1339, 386)
 scale = Vector2(2, 2)
-planet_type = 1
+planet_type = 2
 orbit_planet = NodePath("../Planet1")
 orbit_speed = 0.00500000000465661
 

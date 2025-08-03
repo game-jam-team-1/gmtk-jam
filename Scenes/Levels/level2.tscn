@@ -58,6 +58,7 @@ z_index = 1
 position = Vector2(-58, 2514)
 scale = Vector2(4.23341, 4.23341)
 planet_type = 2
+refills_fuel = true
 orbit_speed = 0.003
 
 [node name="Sprite" parent="Blue" index="0"]
@@ -150,8 +151,7 @@ orbit_planet = NodePath("../Blue")
 orbit_speed = 0.001
 
 [node name="Santa" parent="." instance=ExtResource("11_kyu1k")]
-position = Vector2(480, 1879)
-rotation = 0.6195919
+position = Vector2(1901, 2169)
 
 [node name="Player" parent="." instance=ExtResource("5_8y0xx")]
 position = Vector2(2, 1776)

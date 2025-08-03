@@ -20,6 +20,16 @@ signal game_finished()
 
 func _ready() -> void:
 	new_year.emit(0)
+	
+	match level_number:
+		0:
+			BackgroundMusic.play_tutorial()
+		1:
+			BackgroundMusic.play_level1()
+		2:
+			BackgroundMusic.play_level2()
+		3:
+			BackgroundMusic.play_level3()
 
 func package_collected() -> void:
 	Global.player.collected_packages -= 1
