@@ -18,9 +18,10 @@ var level_unlock_state: Array[bool] = [
 ]
 
 @onready var levels = [
-	preload("res://Scenes/tutorial.tscn"),
-	preload("res://Scenes/world2.tscn"),
-	preload("res://Scenes/world.tscn"),
+	preload("res://Scenes/Levels/tutorial.tscn"),
+	preload("res://Scenes/Levels/level1.tscn"),
+	preload("res://Scenes/Levels/level2.tscn"),
+	preload("res://Scenes/Levels/level3.tscn")
 ]
 
 func _process(delta: float) -> void:

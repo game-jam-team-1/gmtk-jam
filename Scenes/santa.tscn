@@ -1,12 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7nvpr65unuoi"]
+[gd_scene load_steps=6 format=3 uid="uid://b7nvpr65unuoi"]
 
 [ext_resource type="Script" uid="uid://c3rx758kdf3x7" path="res://Scripts/santa.gd" id="1_apxct"]
-[ext_resource type="Script" uid="uid://bpfjf8wccyltd" path="res://Scripts/gravity_component.gd" id="2_mux0t"]
 [ext_resource type="Texture2D" uid="uid://qo7bl4lt3g8c" path="res://Assets/Art/santa.png" id="3_auslg"]
 [ext_resource type="AudioStream" uid="uid://b5dcwraddgirk" path="res://Sounds/Santa/bells.ogg" id="4_mux0t"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1f1o"]
-size = Vector2(192, 346)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ys4pu"]
 radius = 213.03755
@@ -16,24 +12,11 @@ radius = 99.0
 height = 311.31494
 
 [node name="Santa" type="RigidBody2D"]
+mass = 10.0
 gravity_scale = 0.0
-lock_rotation = true
 custom_integrator = true
 contact_monitor = true
 script = ExtResource("1_apxct")
-
-[node name="GravityComponent" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
-position = Vector2(5, 33)
-script = ExtResource("2_mux0t")
-parent = NodePath("..")
-metadata/_custom_type_script = "uid://bpfjf8wccyltd"
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityComponent"]
-position = Vector2(-9, -49)
-shape = SubResource("RectangleShape2D_p1f1o")
-debug_color = Color(0.47843137, 0.5882353, 0, 0.30588236)
-metadata/_edit_lock_ = true
 
 [node name="PlayerDetectionArea" type="Area2D" parent="."]
 

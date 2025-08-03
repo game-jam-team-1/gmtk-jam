@@ -36,14 +36,21 @@ func _process(delta: float) -> void:
 	if freeze_time:
 		return
 	
-	time_left -= delta / 5.0
+	time_left -= delta / 4.0
+	
+	if time_left <= 5 && time_left >= 4.9:
+		$Player/UI/DialogueBox.animate_writing_text("Ho ho ho! You have 3 hours remaining. Make it snappy!")
+	
+	if time_left <= 2.0 && time_left >= 1.9:
+		$Player/UI/DialogueBox.animate_writing_text("The children are all crying. I am very disappointed in you")
 	
 	if time_left <= 0:
-		print("Timeout! You lose")
+		Global.player.die()
 
 func complete_level() -> void:
 	queue_free()
-	get_parent().get_node("MainMenu").level_unlock_state.set(level_number + 1, true)
+	if level_number < 3:
+		get_parent().get_node("MainMenu").level_unlock_state.set(level_number + 1, true)
 	get_parent().get_node("MainMenu").visible = true
 	get_parent().get_node("Camera2D").enabled = true
 	get_parent().get_node("Background").visible = true
