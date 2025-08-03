@@ -25,7 +25,6 @@ var sending_packages_to_depot: bool = false
 @onready var gravity_component: GravityComponent = $"PlayerMovement/GravityComponent"
 @onready var large_detection_area: Area2D = $"LargeDetectionArea"
 @onready var fuel_bar: TextureProgressBar = $"UI/FuelBar"
-@onready var arrow: Node2D = $"Arrow"
 
 @onready var player_movement: PlayerMovement = $"PlayerMovement"
 @onready var player_animation: PlayerAnimation = $"PlayerAnimation"
@@ -39,7 +38,15 @@ func _ready() -> void:
 	Global.player = self
 
 func _process(delta: float) -> void:
-	$UI/TimeBar.value = world.time_left
+	var clock = $"UI/Clock"
+	var total_minutes = int(world.time_left * 60)
+
+	var hours = total_minutes / 60
+	var minutes = total_minutes % 60
+
+	clock.text = "%02d:%02d" % [hours, minutes]
+
+
 
 func _physics_process(delta: float) -> void:
 	_process_packages()
