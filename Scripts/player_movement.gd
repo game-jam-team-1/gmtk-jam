@@ -59,14 +59,12 @@ func _process(delta: float) -> void:
 			screen_color.start_flashing()
 			screen_flashing = true
 			
-			print("1")
 			player.player_audio.is_low_fuel = true
 			
 		if thruster_fuel <= 0 && !is_on_ground() && !self_destruct_sequence_initiatied:
 			screen_color.self_destructing()
 			self_destruct_sequence_initiatied = true
 			self_destruct_timer.start()
-			print(self_destruct_timer.time_left)
 			
 		elif self_destruct_sequence_initiatied && (is_on_ground() || thruster_fuel > 0):
 			screen_color.stop_self_destructing()
@@ -210,5 +208,4 @@ func set_thruster_movement() -> void:
 	is_grounded_movement = false
 
 func self_destruct_timer_timeout() -> void:
-	print("goo boom")
 	Global.player.die()

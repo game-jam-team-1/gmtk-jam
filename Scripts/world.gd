@@ -8,6 +8,8 @@ extends Node2D
 
 @onready var time_left: float = 24
 
+@onready var menu: String = "res://Scenes/main_menu.tscn"
+
 var current_round: int
 var packages_this_round: int
 
@@ -50,7 +52,5 @@ func _process(delta: float) -> void:
 func complete_level() -> void:
 	queue_free()
 	if level_number < 3:
-		get_parent().get_node("MainMenu").level_unlock_state.set(level_number + 1, true)
-	get_parent().get_node("MainMenu").visible = true
-	get_parent().get_node("Camera2D").enabled = true
-	get_parent().get_node("Background").visible = true
+		Global.level_unlock_state.set(level_number + 1, true)
+		get_tree().change_scene_to_file(menu)

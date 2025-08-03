@@ -3,13 +3,6 @@ extends CanvasLayer
 
 var is_ready: bool = false
 
-var level_unlock_state: Array[bool] = [
-	true,
-	false,
-	false,
-	false,
-]
-
 @onready var buttons: Array[TextureButton] = [
 	$"Container/HBoxContainer/1",
 	$"Container/HBoxContainer/2",
@@ -17,7 +10,7 @@ var level_unlock_state: Array[bool] = [
 	$"Container/HBoxContainer/4",
 ]
 
-@onready var levels = [
+@onready var levels: Array[Resource] = [
 	preload("res://Scenes/Levels/tutorial.tscn"),
 	preload("res://Scenes/Levels/level1.tscn"),
 	preload("res://Scenes/Levels/level2.tscn"),
@@ -26,7 +19,7 @@ var level_unlock_state: Array[bool] = [
 
 func _process(delta: float) -> void:
 	for i in range(buttons.size()):
-		if level_unlock_state[i]:
+		if Global.level_unlock_state[i]:
 			buttons[i].disabled = false
 		else:
 			buttons[i].disabled = true
@@ -39,16 +32,6 @@ func start() -> void:
 	get_tree().create_tween().tween_property($"Container", "modulate:a", 1.0, 1.0)
 	await get_tree().create_timer(0.5).timeout
 	is_ready = true
-
-func deactivate_main_menu() -> void:
-	visible = false
-	get_parent().get_node("Camera2D").enabled = false
-	get_parent().get_node("Background").visible = false
-
-func activate_main_menu() -> void:
-	visible = true
-	get_parent().get_node("Camera2D").enabled = true
-	get_parent().get_node("Background").visible = true
 
 # Hey it's a game jam ok ;(
 func on_1_pressed() -> void:
@@ -67,9 +50,5 @@ func on_4_pressed() -> void:
 func play_level(a: int):
 	if is_ready && levels[a]:
 		$"Click".play()
-		
-		deactivate_main_menu()
-		var level: Node = levels[a].instantiate()
-		get_parent().add_child(level)
-		Global.current_level = a
-		Global.current_level_root = level
+		Global.current_level_index = a
+		get_tree().change_scene_to_packed(levels[a])

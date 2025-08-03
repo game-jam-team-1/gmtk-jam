@@ -85,7 +85,8 @@ func _physics_process(delta: float) -> void:
 		follow_speed = 0.05
 
 		$"Dropoff".play()
-		await get_tree().create_timer(0.2).timeout
+		if get_tree():
+			await get_tree().create_timer(0.2).timeout
 		
 		queue_free()
 	
